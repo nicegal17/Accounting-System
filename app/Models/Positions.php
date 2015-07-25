@@ -7,9 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Positions extends Model {
 
-	public function createPosition(){
-		$result = DB::insert('INSERT INTO tbl_position(posName) VALUES (?)',
-			[$data['posName']]);
+	public static function createPosition($data){
+		$result = DB::insert('INSERT INTO tbl_position(posName) VALUES (?)',array($data['posName']));
 
 		if($result){
 			$results['success'] = 'true';
