@@ -27,29 +27,33 @@ Route::any('/main/{path?}', function(){
 
 
 Route::group(['prefix' => 'api/v1'],function(){
-	// http://localhost:8000/api
-	/*Route::group(['prefix' => 'v1'],function(){ //Include dapat ug version # pra ma trace kung unsay version imong API
-		// http://localhost:8000/api/v1
-		Route::get('users','Controller@getAllUsers'); // http://localhost:8000/api/v1/users GET
-	});*/
-	Route::get('employees','Controller@getEmployees'); // http://localhost:8000/api/v1/users GET
- 	Route::get('employees/{id}','Controller@getPosID'); // http://localhost:8000/api/v1/users GET
- 	Route::post('employees','Controller@createEmployee'); // http://localhost:8000/api/v1/users POST
+
+ 	Route::group(['prefix' => 'employees'],function(){
+		Route::get('/','Controller@getEmployees');
+ 		Route::post('/','Controller@createEmployee');
+ 		Route::get('/{id}','Controller@getPosID');
+	});
+
 	// Route::get('users/roles/{id}','Controller@getAllGroups'); // http://localhost:8000/api/v1/users GET
-	
-	
 	// Route::put('users/{id}','Controller@getAllUsers'); // http://localhost:8000/api/v1/users PUT
 	// Route::delete('users/{id}','Controller@getAllUsers'); // http://localhost:8000/api/v1/users DELETE
 
- 	Route::post('position','Controller@createPosition'); 
-	Route::get('position','Controller@getPosition'); 
 
-	Route::post('branches', 'Controller@createBranch');
-	Route::get('branches', 'Controller@getBranches');
-	Route::get('branches/{id}', 'Controller@getBranchByID');
-	Route::put('branches/{id}', 'Controller@updateBranch');
-	Route::get('branches/{data}', 'Controller@searchBranch');
-	Route::delete('branches/{id}', 'Controller@deleteBranch');
+	Route::group(['prefix' => 'position'],function(){
+		Route::get('/','Controller@getPosition');
+		Route::post('/','Controller@createPosition');
+	});
+
+
+	Route::group(['prefix' => 'branches'],function(){
+		Route::get('/','Controller@getBranches');
+		Route::post('/','Controller@createBranch');
+		Route::get('/{id}', 'Controller@getBranchByID');
+		Route::put('/{id}', 'Controller@updateBranch');
+		Route::get('/{data}', 'Controller@searchBranch');
+		Route::delete('/{id}', 'Controller@deleteBranch');
+	});
+
 
 	Route::get('banks','Controller@getBanks'); 
 	Route::get('accounts','Controller@getAccountNo'); 

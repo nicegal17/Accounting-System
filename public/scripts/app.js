@@ -12,10 +12,6 @@ var config = function($stateProvider, $urlRouterProvider, $locationProvider) {
             templateUrl: 'templates/employee.html',
             controller:'employeectrl'
         })
-        .state('position', {
-        	url:'/main/position',
-        	templateUrl:'templates/position.html'
-        })
         .state('branch', {
             url:'/main/branch',
             templateUrl:'templates/branch.html',

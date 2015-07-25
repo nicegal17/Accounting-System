@@ -2,7 +2,6 @@
 
 angular.module('accounting')
     .factory('BranchFactory', function($http, $q) {
-        var abouts = {};
 
         return {
             getBranches: function(callback) {

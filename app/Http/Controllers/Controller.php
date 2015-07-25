@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Employees; // e Inherit daun nmu ang imong gusto nga model sa controller
 use App\Models\Branches;
 use App\Models\CheckDisbursements;
+use App\Models\Positions;
 
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller as BaseController;
@@ -64,12 +65,9 @@ class Controller extends BaseController{
 		return response()->json($data);
 	}
 
-	// public function searchBranch(){
-	// 	$data = Branches::searchBranches();
-	// 	return response()->json($data);
-	// }
+
 	//Position
-	public function createPosition(){
+	public function createPosition(Request $request){
 		$input = $request->all();
 		$data = Positions::createPosition($input);
 		return response()->json($data);

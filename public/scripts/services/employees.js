@@ -2,9 +2,8 @@
 
 angular.module('accounting')
     .factory('EmployeeFactory', function($http, $q) {
-        var abouts = {};
-        return {
 
+        return {
             createEmployee: function(data, callback) {
                 var cb = callback || angular.noop;
                 var deferred = $q.defer();

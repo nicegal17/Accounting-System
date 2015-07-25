@@ -31,7 +31,7 @@
   <body ng-app="accounting">
 
     <!-- mao ning  nav bar sa bootstrap nga g.himong directive nako pra pwede ma reuse sa ubang page -->
-    <nav-bar></nav-bar>
+    <nav-bar ng-controller="headerCtrl"></nav-bar>
 
     <!-- Dri e render sa angular ang mga views nga naa sa templates -->
     <div id="wrapper">
@@ -73,11 +73,13 @@
     <script src ="scripts/controllers/employeectrl.js"></script>
     <script src ="scripts/controllers/branchctrl.js"></script>
     <script src ="scripts/controllers/cdvctrl.js"></script>
+    <script src ="scripts/controllers/positionctrl.js"></script>
     <!-- Angular Directives -->
     <script src ="scripts/directives/header.js"></script>
     <!-- Angular Services -->
     <script src ="scripts/services/employees.js"></script>
     <script src ="scripts/services/branches.js"></script>
     <script src ="scripts/services/cdv.js"></script>
+    <script src ="scripts/services/positions.js"></script>
   </body>
 </html>
