@@ -1,9 +1,10 @@
 body {
-  padding-top: 50px;
+    padding-top: 50px;
 }
+
 .starter-template {
-  padding: 40px 15px;
-  text-align: center;
+    padding: 40px 15px;
+    text-align: center;
 }
 
 #wrapper {
@@ -15,18 +16,22 @@ body {
     padding: 5px 15px;
 }
 
-#combo{
-	right: 10px;
+#combo {
+    right: 10px;
 }
 
 .full button span {
     background-color: limegreen;
     border-radius: 32px;
     color: black;
-  }
+}
 
- .partially button span {
+.partially button span {
     background-color: orange;
     border-radius: 32px;
     color: black;
-  }
+}
+
+.table-sortable tbody tr {
+    cursor: move;
+}

@@ -1,5 +1,5 @@
 <div class="row">
-    <div class="col-lg-6 col-md-8">
+    <div class="col-lg-5 col-md-8">
         <div class="panel panel-primary">
             <div class="panel-heading">Prepare: Check Disbursement Entry</div>
             <div class="panel-body">
@@ -48,8 +48,15 @@
                         </div>
                     </div>
                 </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-10 col-md-8">
+        <div class="panel panel-primary">
+            <div class="panel-heading">Prepare: Account Entry</div>
+            <div class="panel-body">
                 <form>
-                    <div class="scrollable-area">
+                    <!-- <div class="scrollable-area">
                         <table id="tbl_subject" class="table table-hover table-responsive">
                             <thead>
                                 <tr>
@@ -61,21 +68,35 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <th>
-                                    <select ng-model="CDV.acctTitle" class="form-control">
-                                        <option ng-repeat="acctTitle in acctTitles" value="{{acctTitle.idAcctTitle}}">{{acctTitle.acctTitle}}</option>
-                                    </select>
-                                </th>
-                                <th>
-                                    <div class="text-right">
-                                        <a class="btn btn-primary btn-xs">
-                                            <i class="fa fa-pencil"></i>
-                                        </a>
-                                        <a class="btn btn-danger btn-xs">
-                                            <i class="fa fa-trash"></i>
-                                        </a>
-                                    </div>
-                                </th>
+                                <tr>
+                                    <td>
+                                        <select ng-model="CDV.acctTitle" class="form-control">
+                                            <option ng-repeat="acctTitle in acctTitles" value="{{acctTitle.idAcctTitle}}">{{acctTitle.acctTitle}}</option>
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" id="inputName" ng-model="CDV.DB" placeholder="0.00">
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" id="inputName" ng-model="CDV.CR" placeholder="0.00">
+                                        </div>
+                                    </td>
+                                    <th>
+                                        <td>
+                                            <div class="text-right">
+                                                <a class="btn btn-primary btn-xs">
+                                                    <i class="fa fa-pencil"></i>
+                                                </a>
+                                                <a class="btn btn-danger btn-xs">
+                                                    <i class="fa fa-trash"></i>
+                                                </a>
+                                            </div>
+                                        </td>
+                                    </th>
+                                </tr>
                             </tbody>
                         </table>
                         <div id="pagination" cellspacing="0"></div>
@@ -84,9 +105,42 @@
                     <div class="form-group">
                         <label for="inputName">Particular</label>
                         <input type="text" class="form-control" id="inputName" ng-model="user.empName" placeholder="Employee fullname">
-                    </div>
+                    </div> -->
+                    <div class="container">
+                        <div class="row clearfix">
+                            <div class="col-md-12 column">
+                                <table class="table table-bordered table-hover" id="tab_logic">
+                                    <thead>
+                                        <tr>
+                                            <th class="text-center">#</th>
+                                            <th class="text-center">Account Title</th>
+                                            <th class="text-center">Debit</th>
+                                            <th class="text-center">Credit</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr id='addr0'>
+                                            <td>1</td>
+                                            <td>
+                                                <select ng-model="CDV.acctTitle" class="form-control">
+                                                    <option ng-repeat="acctTitle in acctTitles" value="{{acctTitle.idAcctTitle}}">{{acctTitle.acctTitle}}</option>
+                                                </select>
+                                            </td>
+                                            <td>
+                                                 <input type="text" class="form-control" id="inputName" ng-model="CDV.DB" placeholder="0.00">
+                                            </td>
+                                            <td>
+                                                 <input type="text" class="form-control" id="inputName" ng-model="CDV.CR" placeholder="0.00">
+                                            </td>
+                                        </tr>
+                                        <tr id='addr1'></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <a id="add_row" class="btn btn-default pull-left">Add Row</a><a id='delete_row' class="pull-right btn btn-default">Delete Row</a>
                 </form>
+                </div>
             </div>
         </div>
     </div>
-</div>

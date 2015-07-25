@@ -65,6 +65,16 @@
              return '';
          };
 
+         $scope.addRow = function() {
+             $scope.inserted = {
+                 id: $scope.users.length + 1,
+                 name: '',
+                 status: null,
+                 group: null
+             };
+             $scope.users.push($scope.inserted);
+         };
+
          function init() {
              $scope.CheckDisbursements = {};
              $scope.CDV = {};
