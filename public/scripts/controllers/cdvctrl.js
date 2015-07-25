@@ -65,14 +65,18 @@
              return '';
          };
 
+          $scope.row = [
+                {acctTitle:'Land && Equipment', DB:'100.00',CR:'100.00'}
+            ];
+
          $scope.addRow = function() {
-             $scope.inserted = {
-                 id: $scope.users.length + 1,
-                 name: '',
-                 status: null,
-                 group: null
+             var acctEntry = {
+                acctTitle:$scope.acctTitle,
+                DB:$scope.DB,
+                CR:$scope.CR,
              };
-             $scope.users.push($scope.inserted);
+
+             $scope.row.push(acctEntry);
          };
 
          function init() {
