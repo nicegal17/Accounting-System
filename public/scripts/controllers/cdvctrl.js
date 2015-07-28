@@ -65,18 +65,40 @@
              return '';
          };
 
-          $scope.row = [
-                {acctTitle:'Land && Equipment', DB:'100.00',CR:'100.00'}
-            ];
+         $scope.row = {
+             entries: [{
+                 acctTitle: '',
+                 DB: '',
+                 CR: ''
+             }]
+         };
 
          $scope.addRow = function() {
-             var acctEntry = {
-                acctTitle:$scope.acctTitle,
-                DB:$scope.DB,
-                CR:$scope.CR,
-             };
+             $scope.row.entries.push({
+                 acctTitle: '',
+                 DB: '',
+                 CR: ''
+             });
+         };
 
-             $scope.row.push(acctEntry);
+         $scope.removeRow = function(index) {
+             $scope.row.entries.splice(index, 1);
+         };
+
+         $scope.total = function() {
+             var total = 0;
+             angular.forEach($scope.row.entries, function(entry) {
+                 total += entry.DB + entry.CR;
+                 
+             })
+             return total;
+         };
+
+          $scope.saveCDVEntries = function() {
+             console.log('cdv: ', $scope.cdv);
+             CDVFactory.createCDV($scope.cdv).then(function(data) {
+                 console.log('data: ', data);
+             });
          };
 
          function init() {

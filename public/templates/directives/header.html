@@ -27,13 +27,15 @@
                     <ul class="dropdown-menu">
                         <li><a href="#">Write Check</a></li>
                         <li class="divider"></li>
-                        <li><a href="/main/checkDisbursement">Check Disbursement Voucher</a></li>
-                        <!-- <ul class="dropdown-menu">
-                                <li><a href="#">Prepare</a></li>
-                                <li><a href="#">Approve</a></li>
-                                <li><a href="#">Audit</a></li>
+                        <li class="dropdown-submenu">
+                            <a tabindex="-1" href="#">Check Disbursement Voucher</a>
+                            <ul class="dropdown-menu">
+                                <li><a tabindex="-1" href="/main/checkDisbursement">Prepare</a></li>
+                                <li><a ng-click="openAppCDV()" href="">Approve</a></li>
+                                <li><a ng-click="openAudCDV()" href="#">Audit</a></li>
                                 <li><a href="#">Search</a></li>
-                            </ul> -->
+                            </ul>
+                        </li>
                         <li><a href="/main/checkDisburesement">Journal Voucher</a></li>
                         <li><a href="#">Accounts Payable Voucher</a></li>
                         <li><a href="#">Update Accounting</a></li>

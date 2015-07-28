@@ -26,5 +26,25 @@ angular
             });
         };
 
+        $scope.openAppCDV = function() {
+            console.log('asdasda');
+            var modalInstance = $modal.open({
+                animation: true,
+                templateUrl: '/templates/modals/appCDV.html',
+                controller: 'appCDVctrl',
+                size: 'lg'
+            });
+        };
+
+        $scope.openAudCDV = function() {
+            console.log('asdasda');
+            var modalInstance = $modal.open({
+                animation: true,
+                templateUrl: '/templates/modals/audCDV.html',
+                controller: 'audCDVctrl',
+                size: 'lg'
+            });
+        };
+
         init();
     });

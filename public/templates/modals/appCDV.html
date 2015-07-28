@@ -1,0 +1,76 @@
+<div ng-controller="appCDVctrl">
+    <div class="modal-header">
+        <h3 class="modal-title">Approve Check Disbursement Voucher</h3>
+    </div>
+    <div class="modal-body">
+        <div class="panel panel-primary">
+            <div class="panel-body">
+                <form>
+                    <div class="form-group">
+                        <label for="inputName">CDV #</label>
+                        <select ng-model="employee.position" class="form-control" id ="textBoxes">
+                            <option ng-repeat="position in positions" value="{{position.idPosition}}">{{position.posName}}</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputSlug">Date</label>
+                        <input type="text" class="form-control" id="inputSlug" ng-model="employee.empAddress" placeholder="Date" ng-disabled="isDisable">
+                    </div>
+                    <div class="form-group">
+                        <label for="inputSlug">CDV No.</label>
+                        <input type="text" class="form-control" id="inputSlug" ng-model="employee.empAddress" placeholder="CDV No." ng-disabled="isDisable">
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="panel panel-primary">
+            <div class="panel-heading">Check Disbursement Voucher</div>
+            <div class="scrollable-area">
+                <table class="table table-bordered table-hover" id="tab_logic">
+                    <thead>
+                        <tr>
+                            <th class="text-center">Account Title</th>
+                            <th class="text-center">Debit</th>
+                            <th class="text-center">Credit</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="entry in row.entries">
+                            <td>
+                                <input type="number" class="form-control" ng-model="entry.DB" placeholder="0.00">
+                            </td>
+                            <td>
+                                <input type="number" class="form-control" ng-model="entry.DB" placeholder="0.00">
+                            </td>
+                            <td>
+                                <input type="number" class="form-control" ng-model="entry.CR" placeholder="0.00">
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputSlug">Particular</label>
+            <input type="text" class="form-control" id="inputSlug" ng-model="employee.empAddress" placeholder="Particulars" ng-disabled="isDisable">
+        </div>
+        <hr>
+        <div class="form-group">
+            <label for="inputSlug">Prepared By</label>
+            <input type="text" class="form-control" id="inputSlug" ng-model="employee.empAddress" placeholder="Prepared By" ng-disabled="isDisable">
+        </div>
+        <div class="form-group">
+            <label for="inputSlug">Approved By</label>
+            <input type="text" class="form-control" id="inputSlug" ng-model="employee.empAddress" placeholder="Approved By" ng-disabled="isDisable">
+        </div>
+        <div class="form-group">
+            <label for="inputSlug">Audited By</label>
+            <input type="text" class="form-control" id="inputSlug" ng-model="employee.empAddress" placeholder="Audited By" ng-disabled="isDisable">
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-save" ng-click="cancel()">Approve</button>
+        <button class="btn btn-danger" ng-click="cancel()">Deny</button>
+        <button class="btn btn-danger" ng-click="close()">Close</button>
+    </div>
+</div>

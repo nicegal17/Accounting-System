@@ -54,6 +54,23 @@ angular.module('accounting')
                 }.bind(this));
 
                 return deferred.promise;
-            }   
+            },
+
+            createCDV: function(data, callback) {
+                var cb = callback || angular.noop;
+                var deferred = $q.defer();
+                $http.post('/api/v1/CDV', data)
+                    .success(function(data) {
+                        console.log('data: ', data);
+                        deferred.resolve(data);
+                        return cb();
+                    })
+                    .error(function(err) {
+                        deferred.reject(err);
+                        return cb(err);
+                    }.bind(this));
+
+                return deferred.promise;
+            },   
         };
     });

@@ -34,11 +34,6 @@ Route::group(['prefix' => 'api/v1'],function(){
  		Route::get('/{id}','Controller@getPosID');
 	});
 
-	// Route::get('users/roles/{id}','Controller@getAllGroups'); // http://localhost:8000/api/v1/users GET
-	// Route::put('users/{id}','Controller@getAllUsers'); // http://localhost:8000/api/v1/users PUT
-	// Route::delete('users/{id}','Controller@getAllUsers'); // http://localhost:8000/api/v1/users DELETE
-
-
 	Route::group(['prefix' => 'position'],function(){
 		Route::get('/','Controller@getPosition');
 		Route::post('/','Controller@createPosition');
@@ -46,19 +41,21 @@ Route::group(['prefix' => 'api/v1'],function(){
 
 
 	Route::group(['prefix' => 'branches'],function(){
-		Route::get('/','Controller@getBranches');
-		Route::post('/','Controller@createBranch');
-		Route::get('/{id}', 'Controller@getBranchByID');
-		Route::put('/{id}', 'Controller@updateBranch');
-		Route::get('/{data}', 'Controller@searchBranch');
-		Route::delete('/{id}', 'Controller@deleteBranch');
+		Route::get('/','BranchController@getBranches');
+		Route::post('/','BranchController@createBranch');
+		Route::get('/{id}', 'BranchController@getBranchByID');
+		Route::put('/{id}', 'BranchController@updateBranch');
+		Route::get('/{data}', 'BranchController@searchBranch');
+		Route::delete('/{id}', 'BranchController@deleteBranch');
 	});
 
-
-	Route::get('banks','Controller@getBanks'); 
-	Route::get('accounts','Controller@getAccountNo'); 
-	Route::get('CDV','Controller@getAcctTitles');
-
-
+	/*Route::group(['prefix' => 'CDV'],function(){
+		
+	});
+	*/
+		Route::get('banks','CDVController@getBanks'); 
+		Route::get('accounts','CDVController@getAccountNo'); 
+		Route::get('CDV','CDVController@getAcctTitles');
+		Route::post('CDV','CDVController@createCDV');
 });
 

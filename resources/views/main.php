@@ -74,6 +74,8 @@
     <script src ="scripts/controllers/branchctrl.js"></script>
     <script src ="scripts/controllers/cdvctrl.js"></script>
     <script src ="scripts/controllers/positionctrl.js"></script>
+    <script src ="scripts/controllers/appCDVctrl.js"></script>
+    <script src ="scripts/controllers/audCDVctrl.js"></script>
     <!-- Angular Directives -->
     <script src ="scripts/directives/header.js"></script>
     <!-- Angular Services -->
