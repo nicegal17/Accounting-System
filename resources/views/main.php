@@ -75,7 +75,11 @@
     <script src ="scripts/controllers/cdvctrl.js"></script>
     <script src ="scripts/controllers/positionctrl.js"></script>
     <script src ="scripts/controllers/appCDVctrl.js"></script>
-    <script src ="scripts/controllers/audCDVctrl.js"></script>
+    <script src ="scripts/controllers/JVctrl.js"></script>
+    <script src ="scripts/controllers/checkctrl.js"></script>
+    <script src ="scripts/controllers/apvctrl.js"></script>
+    <script src ="scripts/controllers/userctrl.js"></script>
+    <script src ="scripts/controllers/bankctrl.js"></script>
     <!-- Angular Directives -->
     <script src ="scripts/directives/header.js"></script>
     <!-- Angular Services -->
@@ -83,5 +87,8 @@
     <script src ="scripts/services/branches.js"></script>
     <script src ="scripts/services/cdv.js"></script>
     <script src ="scripts/services/positions.js"></script>
+    <script src ="scripts/services/jv.js"></script>
+    <script src ="scripts/services/apv.js"></script>
+     <script src ="scripts/services/users.js"></script>
   </body>
 </html>

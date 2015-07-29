@@ -69,8 +69,6 @@ angular.module('accounting')
                 return deferred.promise;
             },
             
-           
-            
             updateUsers: function(id, data, callback) {
                 var cb = callback || angular.noop;
                 var deferred = $q.defer();

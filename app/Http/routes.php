@@ -49,13 +49,19 @@ Route::group(['prefix' => 'api/v1'],function(){
 		Route::delete('/{id}', 'BranchController@deleteBranch');
 	});
 
-	/*Route::group(['prefix' => 'CDV'],function(){
-		
+	Route::group(['prefix' => 'CDV'],function(){
+		Route::get('/','CDVController@getAcctTitles');
+		Route::post('/','CDVController@createCDV');
+		Route::get('/banks','CDVController@getBanks'); 
+		Route::get('/accounts','CDVController@getAccountNo'); 
 	});
-	*/
-		Route::get('banks','CDVController@getBanks'); 
-		Route::get('accounts','CDVController@getAccountNo'); 
-		Route::get('CDV','CDVController@getAcctTitles');
-		Route::post('CDV','CDVController@createCDV');
+	
+	Route::group(['prefix' => 'JV'],function(){
+		Route::get('/','JVController@getAcctTitles');
+	});	
+
+	Route::group(['prefix' => 'users'],function(){
+		Route::get('/','UserController@getUsers');
+	});	
 });
 

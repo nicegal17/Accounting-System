@@ -36,12 +36,65 @@ angular
             });
         };
 
-        $scope.openAudCDV = function() {
-            console.log('asdasda');
+        $scope.openJV = function() {
             var modalInstance = $modal.open({
                 animation: true,
-                templateUrl: '/templates/modals/audCDV.html',
-                controller: 'audCDVctrl',
+                templateUrl: '/templates/modals/JV.html',
+                controller: 'JVctrl',
+                size: 'lg'
+            });
+        };
+
+        $scope.openAppJV = function() {
+            var modalInstance = $modal.open({
+                animation: true,
+                templateUrl: '/templates/modals/appJV.html',
+                controller: 'JVctrl',
+                size: 'lg'
+            });
+        };
+
+        $scope.openCheck = function() {
+            var modalInstance = $modal.open({
+                animation: true,
+                templateUrl: '/templates/modals/check.html',
+                controller: 'checkctrl',
+                size: 'lg'
+            });
+        };
+
+        $scope.openAPVoucher = function() {
+            var modalInstance = $modal.open({
+                animation: true,
+                templateUrl: '/templates/modals/APVoucher.html',
+                controller: 'apvctrl',
+                size: 'lg'
+            });
+        };
+
+         $scope.openAppAPV = function() {
+            var modalInstance = $modal.open({
+                animation: true,
+                templateUrl: '/templates/modals/appAPV.html',
+                controller: 'apvctrl',
+                size: 'lg'
+            });
+        };
+
+        $scope.openUser = function() {
+            var modalInstance = $modal.open({
+                animation: true,
+                templateUrl: '/templates/modals/user.html',
+                controller: 'userctrl',
+                size: 'lg'
+            });
+        };
+
+        $scope.openBank = function() {
+            var modalInstance = $modal.open({
+                animation: true,
+                templateUrl: '/templates/modals/bank.html',
+                controller: 'bankctrl',
                 size: 'lg'
             });
         };
