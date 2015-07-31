@@ -86,16 +86,62 @@ angular
                 animation: true,
                 templateUrl: '/templates/modals/user.html',
                 controller: 'userctrl',
-                size: 'lg'
+                size: 'md'
             });
         };
 
         $scope.openBank = function() {
+            console.log('bank');
             var modalInstance = $modal.open({
                 animation: true,
                 templateUrl: '/templates/modals/bank.html',
                 controller: 'bankctrl',
-                size: 'lg'
+                size: 'md'
+            });
+        };
+
+        $scope.openGenAcct = function() {
+            var modalInstance = $modal.open({
+                animation: true,
+                templateUrl: '/templates/modals/genAcct.html',
+                controller: 'accountctrl',
+                size: 'md'
+            });
+        };
+
+        $scope.openSubAcct = function() {
+            var modalInstance = $modal.open({
+                animation: true,
+                templateUrl: '/templates/modals/subAcct.html',
+                controller: 'accountctrl',
+                size: 'md'
+            });
+        };
+
+        $scope.openFixedAsset = function() {
+            var modalInstance = $modal.open({
+                animation: true,
+                templateUrl: '/templates/modals/fixedAssets.html',
+                controller: 'assetctrl',
+                size: 'md'
+            });
+        };
+
+        $scope.openAcctPeriod = function() {
+            var modalInstance = $modal.open({
+                animation: true,
+                templateUrl: '/templates/modals/acctPeriod.html',
+                controller: 'assetctrl',
+                size: 'sm'
+            });
+        };
+
+         $scope.openBeginningBal = function() {
+            var modalInstance = $modal.open({
+                animation: true,
+                templateUrl: '/templates/modals/beginBal.html',
+                controller: 'assetctrl',
+                size: 'sm'
             });
         };
 

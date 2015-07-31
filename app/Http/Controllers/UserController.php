@@ -21,5 +21,16 @@ class UserController extends BaseController{
 		$data = Users::getPosID($id);
 		return response()->json($data);
 	}
+
+	public function createUser(Request $request){
+		$input = $request->all();
+		$data = Users::createUser($input);
+		return response()->json($data);
+	}
+
+	public function getAllUsers(){
+		$data = Users::getAllUsers();
+		return response()->json($data);
+	}
 }
 ?>

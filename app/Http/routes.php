@@ -62,6 +62,12 @@ Route::group(['prefix' => 'api/v1'],function(){
 
 	Route::group(['prefix' => 'users'],function(){
 		Route::get('/','UserController@getUsers');
+		Route::post('/','UserController@createUser');
+		Route::get('/getUsers','UserController@getAllUsers');
+	});	
+
+	Route::group(['prefix' => 'banks'],function(){
+		Route::post('/','BankController@createBank');
 	});	
 });
 

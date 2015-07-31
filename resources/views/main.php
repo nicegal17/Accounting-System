@@ -80,6 +80,8 @@
     <script src ="scripts/controllers/apvctrl.js"></script>
     <script src ="scripts/controllers/userctrl.js"></script>
     <script src ="scripts/controllers/bankctrl.js"></script>
+    <script src ="scripts/controllers/accountctrl.js"></script>
+    <script src ="scripts/controllers/assetctrl.js"></script>
     <!-- Angular Directives -->
     <script src ="scripts/directives/header.js"></script>
     <!-- Angular Services -->
@@ -89,6 +91,7 @@
     <script src ="scripts/services/positions.js"></script>
     <script src ="scripts/services/jv.js"></script>
     <script src ="scripts/services/apv.js"></script>
-     <script src ="scripts/services/users.js"></script>
+    <script src ="scripts/services/users.js"></script>
+    <script src ="scripts/services/banks.js"></script>
   </body>
 </html>

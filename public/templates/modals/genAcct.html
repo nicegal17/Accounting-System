@@ -1,0 +1,55 @@
+<div class="modal-header">
+    <h3 class="modal-title">Add New General Account</h3>
+</div>
+<div class="modal-body">
+    <div class="panel panel-primary">
+        <div class="panel-body">
+            <form>
+                <div class="form-group">
+                    <label for="inputName">Account Code</label>
+                    <input type="text" class="form-control" id="inputName" ng-model="position.posName" placeholder="Bank Name">
+                    <div class="radio">
+                        <label>
+                            <input type="radio" name="optradio">With Sub Account</label>
+                    </div>
+                    <div class="radio">
+                        <label>
+                            <input type="radio" name="optradio">Without Sub Account</label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputName">Account Title</label>
+                    <input type="text" class="form-control" id="inputName" ng-model="position.posName" placeholder="Bank Account Number">
+                </div>
+                <div class="form-group">
+                    <label for="inputName">Fund</label>
+                    <select ng-model="employee.position" class="form-control">
+                        <option ng-repeat="position in positions" value="{{position.idPosition}}">{{position.posName}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="inputName">Account Type</label>
+                    <select ng-model="employee.position" class="form-control">
+                        <option ng-repeat="position in positions" value="{{position.idPosition}}">{{position.posName}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="inputName">Normal Balance</label>
+                    <select ng-model="employee.position" class="form-control">
+                        <option ng-repeat="position in positions" value="{{position.idPosition}}">{{position.posName}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="inputName">Financial Statement</label>
+                    <select ng-model="employee.position" class="form-control">
+                        <option ng-repeat="position in positions" value="{{position.idPosition}}">{{position.posName}}</option>
+                    </select>
+                </div>
+                <a class="btn btn-warning" ng-show="isDisable" ng-click="addNew()"><i class="fa fa-plus"></i> Add New User</a>
+                <a class="btn btn-success" ng-show="!isDisable" ng-click="savePosition()">Save</a>
+                <button ng-click="cancel()" class="btn btn-danger" ng-hide="isDisable">Cancel</button>
+                <button class="btn btn-danger" ng-click="cancel()">Close</button>
+            </form>
+        </div>
+    </div>
+</div>
