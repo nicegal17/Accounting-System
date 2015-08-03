@@ -15,5 +15,26 @@ class BankController extends BaseController{
 		$data = Banks::createBank($input);
 		return response()->json($data);
 	}
+
+	public function getBanks(){
+		$data = Banks::getBanks();
+		return response()->json($data);
+	}
+
+	public function getBankByID(Request $request,$id){
+		$data = Banks::getBankID($id);
+		return response()->json($data);
+	}
+
+	public function updateBank(Request $request,$id){
+		$input = $request->all();
+		$data = Banks::updateBank($id,$input);
+		return response()->json($data);
+	}
+
+	public function deleteBank($id){
+		$data = Banks::deleteBank($id);
+		return response()->json($data);
+	}
 }
 ?>

@@ -22,7 +22,7 @@ angular
                 animation: true,
                 templateUrl: '/templates/modals/position.html',
                 controller: 'positionctrl',
-                size: 'lg'
+                size: 'md'
             });
         };
 

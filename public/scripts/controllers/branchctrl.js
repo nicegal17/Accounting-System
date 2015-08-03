@@ -41,6 +41,7 @@
 
          $scope.getBRID = function(id) {
              $scope.branch = {};
+             $scope.isDisable = false;
              BranchFactory.getBranchByID(id).then(function(data) {
                  if (data.length > 0) {
                      $scope.branch = data[0];

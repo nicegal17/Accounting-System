@@ -7,7 +7,7 @@
             <form>
                 <div class="form-group">
                     <label for="inputName">Position</label>
-                    <input type="text" class="form-control" id="inputName" ng-model="position.posName">
+                    <input type="text" class="form-control" id="inputName" ng-disabled="isDisable" ng-model="position.posName">
                 </div>
                 <a class="btn btn-warning" ng-show="isDisable" ng-click="addNew()"><i class="fa fa-plus"></i> Add New Position</a>
                 <a class="btn btn-success" ng-show="!isDisable" ng-click="savePosition()">Save</a>
@@ -23,7 +23,7 @@
             </div>
             <div class="form-inline pull-right" role="form">
                 <div class="form-group">
-                    <input id="txtvalue" type="text" ng-model="searchEmp" class="form-control" placeholder="Search">
+                    <input id="txtvalue" type="text" ng-model="searchPosition" class="form-control" placeholder="Search">
                 </div>
                 <button ng-click="search()" class="btn btn-primary"><i class="fa fa-search"></i> Search</button>
             </div>
@@ -37,11 +37,8 @@
                     </td>
                     <td data-title="'Action'">
                         <div class="text-right">
-                            <a class="btn btn-primary btn-xs" ng-click="getBRID(position.idPosition)">
+                            <a class="btn btn-primary btn-xs" ng-click="getIDPos(position.idPosition)">
                                 <i class="fa fa-pencil"></i>
-                            </a>
-                            <a class="btn btn-danger btn-xs" ng-click="delBranch(position.idPosition)">
-                                <i class="fa fa-trash"></i>
                             </a>
                         </div>
                     </td>

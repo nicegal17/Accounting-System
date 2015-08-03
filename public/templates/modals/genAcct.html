@@ -23,14 +23,14 @@
                 </div>
                 <div class="form-group">
                     <label for="inputName">Fund</label>
-                    <select ng-model="employee.position" class="form-control">
-                        <option ng-repeat="position in positions" value="{{position.idPosition}}">{{position.posName}}</option>
+                    <select ng-model="fund.fundDesc" class="form-control">
+                        <option ng-repeat="fund in funds" value="{{fund.fundID}}">{{fund.fundDesc}}</option>
                     </select>
                 </div>
                 <div class="form-group">
                     <label for="inputName">Account Type</label>
-                    <select ng-model="employee.position" class="form-control">
-                        <option ng-repeat="position in positions" value="{{position.idPosition}}">{{position.posName}}</option>
+                    <select ng-model="acctType.acctType" class="form-control">
+                        <option ng-repeat="acctType in acctTypes" value="{{acctType.acctTypeID}}">{{acctType.acctType}}</option>
                     </select>
                 </div>
                 <div class="form-group">

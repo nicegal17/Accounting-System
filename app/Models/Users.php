@@ -29,8 +29,25 @@ class Users extends Model {
 	}
 
 	public static function getAllUsers(){
-		$tbl_userAcct = DB::table('tbl_userAcct')->get();
+		$tbl_userAcct = DB::table('tbl_userAcct')
+		->leftJoin('tbl_employee', 'tbl_employee.empID', '=', 'tbl_userAcct.empID')
+		->get();
 
 		return $tbl_userAcct;
+	}
+
+	public static function getUserID($id){
+		$result = DB::select('SELECT * FROM tbl_useracct WHERE userID=?',array($id));
+		/*$result = DB::table('tbl_useracct')
+		->leftJoin('tbl_employee', 'tbl_employee.empID', '=', 'tbl_userAcct.empID')
+		->where('tbl_userAcct.userID=?',array($id))
+		->get();*/
+
+		/*$result = DB::table('tbl_userAcct')
+				->leftjoin('tbl_employee', 'tbl_employee.empID', '=', 'tbl_userAcct.empID')
+				->select('tbl_userAcct.*', 'tbl_employee.empName')
+				->where('tbl_employee.userID=?',array($id))
+				->get();*/
+		return $result;
 	}
 }

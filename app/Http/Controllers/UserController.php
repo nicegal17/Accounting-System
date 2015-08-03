@@ -17,11 +17,6 @@ class UserController extends BaseController{
 		return response()->json($data);
 	}
 
-	public function getuserID(Request $request,$id){
-		$data = Users::getPosID($id);
-		return response()->json($data);
-	}
-
 	public function createUser(Request $request){
 		$input = $request->all();
 		$data = Users::createUser($input);
@@ -30,6 +25,11 @@ class UserController extends BaseController{
 
 	public function getAllUsers(){
 		$data = Users::getAllUsers();
+		return response()->json($data);
+	}
+
+	public function getUserID(Request $request,$id){
+		$data = Users::getUserID($id);
 		return response()->json($data);
 	}
 }

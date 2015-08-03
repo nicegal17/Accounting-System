@@ -93,5 +93,6 @@
     <script src ="scripts/services/apv.js"></script>
     <script src ="scripts/services/users.js"></script>
     <script src ="scripts/services/banks.js"></script>
+    <script src ="scripts/services/account.js"></script>
   </body>
 </html>

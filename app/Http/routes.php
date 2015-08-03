@@ -37,6 +37,9 @@ Route::group(['prefix' => 'api/v1'],function(){
 	Route::group(['prefix' => 'position'],function(){
 		Route::get('/','Controller@getPosition');
 		Route::post('/','Controller@createPosition');
+		Route::get('/{id}','Controller@getPositionByID');
+		Route::put('/{id}','Controller@updatePosition');
+		Route::delete('/{id}','Controller@deletePosition');
 	});
 
 
@@ -64,10 +67,20 @@ Route::group(['prefix' => 'api/v1'],function(){
 		Route::get('/','UserController@getUsers');
 		Route::post('/','UserController@createUser');
 		Route::get('/getUsers','UserController@getAllUsers');
+		Route::get('/{id}','UserController@getUserID');
 	});	
 
-	Route::group(['prefix' => 'banks'],function(){
+	Route::group(['prefix' => 'bank'],function(){
 		Route::post('/','BankController@createBank');
+		Route::get('/','BankController@getBanks');
+		Route::get('/{id}','BankController@getBankByID');
+		Route::put('/{id}','BankController@updateBank');
+		Route::delete('/{id}','BankController@deleteBank');
+	});	
+
+	Route::group(['prefix' => 'funds'],function(){
+		Route::get('/','AccountController@getFunds');
+		Route::get('/getAcctTypes','AccountController@getAcctTypes');
 	});	
 });
 

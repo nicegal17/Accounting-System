@@ -7,7 +7,7 @@
              console.log('position`: ', $scope.position);
              if ($scope.isUpdate === true) {
                  PositionFactory.updatePositions($scope.position.idPosition,$scope.position).then(function(data) {
-                     ptoastr.success('Record Successfully Updated', 'Record Updated');
+                     toastr.success('Record Successfully Updated', 'Record Updated');
                      $scope.refresh();
                  });
              } else {
@@ -32,19 +32,21 @@
 
          $scope.refresh = function() {
              $scope.tableParams.reload();
-             $scope.searchEmp = "";
+             $scope.searchPosition = "";
          };
 
-         $scope.search = function() {
+         $scope.$watch("searchPosition", function() {
              $scope.tableParams.reload();
-         };
+         });
 
          $scope.getIDPos = function(id) {
              $scope.position = {};
+             $scope.isDisable = false;
              PositionFactory.getPositionsByID(id).then(function(data) {
                  if (data.length > 0) {
                      $scope.position = data[0];
                      $scope.position.position = data[0].idPosition;
+                     $scope.isUpdate = true;
                  }
              });
          };
@@ -57,19 +59,18 @@
              $scope.isDisable = true;
 
              $scope.tableParams = new ngTableParams({
-                 page: 1, // show first page
-                 count: 5, // count per page
+                 page: 1, 
+                 count: 5, 
                  sorting: {
-                     name: 'asc' // initial sorting
+                     name: 'asc' 
                  }
              }, {
                  getData: function($defer, params) {
                      PositionFactory.getPositions().then(function(data) {
-                         console.log('data: ', data);
                          var orderedData = {};
 
-                         if ($scope.searchEmp) {
-                             orderedData = $filter('filter')(data, $scope.searchEmp);
+                         if ($scope.searchPosition) {
+                             orderedData = $filter('filter')(data, $scope.searchPosition);
                              orderedData = params.sorting() ? $filter('orderBy')(orderedData, params.orderBy()) : orderedData;
                          } else {
                              orderedData = params.sorting() ? $filter('orderBy')(data, params.orderBy()) : data;

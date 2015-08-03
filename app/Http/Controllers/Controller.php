@@ -31,12 +31,23 @@ class Controller extends BaseController{
 
 	public function getEmployees(){
 		$data = Employees::getEmployees();
-		return response()->json($data); //always JSON ang response
+		return response()->json($data);
 	}
-	//Position
+	
 	public function createPosition(Request $request){
 		$input = $request->all();
 		$data = Positions::createPosition($input);
+		return response()->json($data);
+	}
+
+	public function getPositionByID(Request $request,$id){
+		$data = Positions::getPosDetails($id);
+		return response()->json($data);
+	}
+
+	public function updatePosition(Request $request,$id){
+		$input = $request->all();
+		$data = Positions::updatePosition($id,$input);
 		return response()->json($data);
 	}
 }

@@ -25,4 +25,25 @@ class Positions extends Model {
 
 		return $tbl_position;
 	}
+
+	public static function getPosDetails($id){
+		$result = DB::select('SELECT * FROM tbl_position WHERE idPosition=?',array($id));
+		return $result;
+	}
+
+	public static function updatePosition($id, $data){
+		$result = DB::table('tbl_position')->where('idPosition',$id)
+					->update([
+						'posName'=> $data['posName']
+					]);
+
+		if($result){
+			$results['success'] = 'true';
+			$results['msg'] = 'Record Successfully Updated';
+		}else{
+			$results['success'] = 'false';
+			$results['msg'] = 'WARNING: Unknown error occur while updating the record';
+		}
+		return $results;
+	}	
 }

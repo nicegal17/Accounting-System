@@ -69,22 +69,5 @@ angular.module('accounting')
 
                 return deferred.promise;
             },
-
-            deletePositions: function(id,callback) {
-                var cb = callback || angular.noop;
-                var deferred = $q.defer();
-
-                $http.delete('/api/v1/position/'+ id).
-                success(function(data) {
-                    deferred.resolve(data);
-                    return cb();
-                }).
-                error(function(err) {
-                    deferred.reject(err);
-                    return cb(err);
-                }.bind(this));
-
-                return deferred.promise;
-            }
-        };
+        }
     });

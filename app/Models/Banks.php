@@ -22,4 +22,41 @@ class Banks extends Model {
 		return $results;
 	}
 
+	public static function getBanks(){
+		$tbl_bank = DB::table('tbl_bank')->get();
+
+		return $tbl_bank;
+	}
+
+	public static function getBankID($id){
+		$result = DB::select('SELECT * FROM tbl_bank WHERE bankID=?',array($id));
+
+		return $result;
+	}
+
+	public static function updatebank($id,$data){
+		$result = DB::table('tbl_bank')->WHERE('bankID',$id)
+					->update([
+						'bankName'=> $data['bankName'],
+						'acctNum'=> $data['acctNum'],
+						'address'=> $data['address'],
+						'Tel'=> $data['Tel']
+					]);
+		if($result){
+			$results['success'] = 'true';
+			$results['msg'] = 'Record Successfully Updated';
+		}else{
+			$results['success'] = 'false';
+			$results['msg'] = 'WARNING: Unknown error occur while updating the record';
+		}
+
+		return $result;
+	}
+
+	public static function deleteBank($id){
+		$result = DB::table('tbl_bank')->where('bankID',$id)->delete();
+
+		return $result;
+	}
+
 }				
