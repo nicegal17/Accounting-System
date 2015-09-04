@@ -113,7 +113,7 @@ angular
             var modalInstance = $modal.open({
                 animation: true,
                 templateUrl: '/templates/modals/subAcct.html',
-                controller: 'accountctrl',
+                controller: 'subAcctctrl',
                 size: 'md'
             });
         };
@@ -140,8 +140,8 @@ angular
             var modalInstance = $modal.open({
                 animation: true,
                 templateUrl: '/templates/modals/beginBal.html',
-                controller: 'assetctrl',
-                size: 'sm'
+                controller: 'beginBalctrl',
+                size: 'md'
             });
         };
 

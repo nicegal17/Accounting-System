@@ -1,9 +1,18 @@
  'use strict';
 
  angular.module('accounting')
-     .controller('assetctrl', function($scope, $filter) {
+     .controller('assetctrl', function($scope, $filter, AssetsFactory, toastr, ngDialog) {
 
-     	$scope.today = function() {
+        $scope.saveAssetItem = function() {
+
+             AssetsFactory.createAsset($scope.asset).then(function(data) {
+                 toastr.success('Record Successfully Created', 'Record Created');
+                 $scope.asset = {};
+             });
+
+         };
+
+         $scope.today = function() {
              $scope.dt = new Date();
          }
          $scope.today();
@@ -64,5 +73,24 @@
 
              return '';
          };
+
+         $scope.cancel = function() {
+             $scope.asset = {};
+         };
+
+         function init() {
+             $scope.asset = {};
+             $scope.assets = {};
+
+             AssetsFactory.getCategories().then(function(data) {
+                 $scope.categories = data;
+             });
+
+             AssetsFactory.getPeriods().then(function(data) {
+                 $scope.periods = data;
+             });
+         }
+
+         init();
 
      });

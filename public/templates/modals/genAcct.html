@@ -7,19 +7,19 @@
             <form>
                 <div class="form-group">
                     <label for="inputName">Account Code</label>
-                    <input type="text" class="form-control" id="inputName" ng-model="position.posName" placeholder="Bank Name">
+                    <input type="text" class="form-control" id="inputName" ng-model="Account.acctCode" placeholder="Bank Name">
                     <div class="radio">
                         <label>
-                            <input type="radio" name="optradio">With Sub Account</label>
+                            <input type="radio" name="optradio" ng-model="Account.name" ng-change="withSubAcct">With Sub Account</label>
                     </div>
                     <div class="radio">
                         <label>
-                            <input type="radio" name="optradio">Without Sub Account</label>
+                            <input type="radio" name="optradio" ng-model="Account.name" ng-ngchange="noSubAcct">Without Sub Account</label>
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="inputName">Account Title</label>
-                    <input type="text" class="form-control" id="inputName" ng-model="position.posName" placeholder="Bank Account Number">
+                    <input type="text" class="form-control" id="inputName" ng-model="account.acctTitle" placeholder="Accounting Title">
                 </div>
                 <div class="form-group">
                     <label for="inputName">Fund</label>
@@ -35,18 +35,18 @@
                 </div>
                 <div class="form-group">
                     <label for="inputName">Normal Balance</label>
-                    <select ng-model="employee.position" class="form-control">
-                        <option ng-repeat="position in positions" value="{{position.idPosition}}">{{position.posName}}</option>
+                    <select ng-model="norm.normDesc" class="form-control">
+                        <option ng-repeat="norm in norms" value="{{norm.normsID}}">{{norm.normDesc}}</option>
                     </select>
                 </div>
                 <div class="form-group">
                     <label for="inputName">Financial Statement</label>
-                    <select ng-model="employee.position" class="form-control">
-                        <option ng-repeat="position in positions" value="{{position.idPosition}}">{{position.posName}}</option>
+                    <select ng-model="finStatement.FSDesc" class="form-control">
+                        <option ng-repeat="finStatement in finStatements" value="{{finStatement.FSID}}">{{finStatement.FSDesc}}</option>
                     </select>
                 </div>
                 <a class="btn btn-warning" ng-show="isDisable" ng-click="addNew()"><i class="fa fa-plus"></i> Add New User</a>
-                <a class="btn btn-success" ng-show="!isDisable" ng-click="savePosition()">Save</a>
+                <a class="btn btn-success" ng-show="!isDisable" ng-click="saveAccount()">Save</a>
                 <button ng-click="cancel()" class="btn btn-danger" ng-hide="isDisable">Cancel</button>
                 <button class="btn btn-danger" ng-click="cancel()">Close</button>
             </form>

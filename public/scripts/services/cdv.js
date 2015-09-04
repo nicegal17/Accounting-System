@@ -9,7 +9,7 @@ angular.module('accounting')
                 var cb = callback || angular.noop;
                 var deferred = $q.defer();
 
-                $http.get('/api/v1/accounts')
+                $http.get('/api/v1/CDV/accounts')
                 .success(function(data) {
                     deferred.resolve(data);
                     return cb();
@@ -26,7 +26,7 @@ angular.module('accounting')
                 var cb = callback || angular.noop;
                 var deferred = $q.defer();
 
-                $http.get('/api/v1/banks')
+                $http.get('/api/v1/CDV/banks')
                 .success(function(data) {
                     deferred.resolve(data);
                     return cb();

@@ -7,18 +7,18 @@
             <form>
                 <div class="form-group">
                     <label for="inputName">Item</label>
-                    <input type="text" class="form-control" id="inputName" ng-model="position.posName" placeholder="Item Name">
+                    <input type="text" class="form-control" id="inputName" ng-model="asset.itemName" placeholder="Item Name">
                 </div>
                 <div class="form-group">
                     <label for="inputName">Cost</label>
-                    <input type="number" class="form-control" ng-model="entry.DB" placeholder="0.00">
+                    <input type="number" class="form-control" ng-model="asset.cost" placeholder="0.00">
                 </div>
                 <div class="form-group">
-                    <label for="inputName">Check Date</label>
+                    <label for="inputName">Date Purchased</label>
                     <div class="row">
                         <div class="col-md-6">
                             <p class="input-group">
-                                <input type="date" class="form-control" datepicker-popup ng-model="dt" is-open="opened" min-date="minDate" max-date="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
+                                <input type="date" class="form-control" datepicker-popup ng-model="asset.dt" is-open="opened" min-date="minDate" max-date="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
                                 <span class="input-group-btn">
                                                 <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
                                             </span>
@@ -28,20 +28,26 @@
                 </div>
                 <div class="form-group">
                     <label for="inputName">Estimated Life</label>
-                    <input type="number" class="form-control" ng-model="entry.DB" placeholder="0">
+                    <input type="number" class="form-control" ng-model="asset.estLife" placeholder="0">
                 </div>
                 <div class="form-group">
                     <label for="inputName">Quantity</label>
-                    <input type="number" class="form-control" ng-model="entry.DB" placeholder="0">
+                    <input type="number" class="form-control" ng-model="asset.qty" placeholder="0">
                 </div>
                 <div class="form-group">
-                    <label for="inputName">Account</label>
-                    <select ng-model="CDV.bank" class="form-control">
-                        <option ng-repeat="bank in banks" value="{{bank.bankID}}">{{bank.bankName}}</option>
+                    <label for="inputName">Account Category</label>
+                    <select ng-model="asset.category" class="form-control">
+                        <option ng-repeat="category in categories" value="{{category.categoryID}}">{{category.desc}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="inputName">Accounting Period</label>
+                    <select ng-model="asset.period" class="form-control">
+                        <option ng-repeat="period in periods" value="{{period.periodID}}">{{period.strDate}}-{{period.endDate}}</option>
                     </select>
                 </div>
                 <a class="btn btn-warning" ng-show="isDisable" ng-click="addNew()"><i class="fa fa-plus"></i> Add New User</a>
-                <a class="btn btn-success" ng-show="!isDisable" ng-click="savePosition()">Save</a>
+                <a class="btn btn-success" ng-show="!isDisable" ng-click="saveAssetItem()">Save</a>
                 <button ng-click="cancel()" class="btn btn-danger" ng-hide="isDisable">Cancel</button>
                 <button class="btn btn-danger" ng-click="cancel()">Close</button>
             </form>

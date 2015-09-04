@@ -6,13 +6,13 @@
          $scope.today = function() {
              $scope.dt = new Date();
          }
+
          $scope.today();
 
          $scope.clear = function() {
              $scope.dt = null;
          };
 
-         // Disable weekend selection
          $scope.disabled = function(date, mode) {
              return (mode === 'day' && (date.getDay() === 0 || date.getDay() === 6));
          };
@@ -65,20 +65,39 @@
              return '';
          };
 
+        /* $scope.changeMeChange = function(accnt) {
+             console.log('accnt: ', accnt);
+             var str = accnt.split('-');
+             $scope.beginBal.normsID = str[1];
+             $scope.beginBal.idAccntTitle = str[0];
+             console.log('normsId: ', str[1]);
+             console.log('accntId: ', str[0]);
+         }*/
          $scope.row = {
              entries: [{
-                 acctTitle: '',
-                 DB: '',
-                 CR: ''
+                 acctTitle:'',
+                 DB:'',
+                 CR:''
              }]
          };
-
+         
          $scope.addRow = function() {
-             $scope.row.entries.push({
-                 acctTitle: '',
-                 DB: '',
-                 CR: ''
-             });
+            /*var acctEntry = new Object();*/
+            acctTitle = "";
+            DB = "";
+            CR = "";
+
+
+           $scope.row.entries = {};
+           var ee = new Array();
+           $scope.row.entries.acctTitle = ee[0];
+           $scope.row.entries.DB = ee[1];
+           $scope.row.entries.CR = ee[2];
+             // $scope.row.entries.push({
+                 /*acctTitle:'',
+                 DB:'',
+                 CR:''*/
+             // });
          };
 
          $scope.removeRow = function(index) {
@@ -95,19 +114,21 @@
          };
 
           $scope.saveCDVEntries = function() {
-             console.log('cdv: ', $scope.cdv);
-             CDVFactory.createCDV($scope.cdv).then(function(data) {
+             console.log('cdv: ', $scope.CDV);
+            /* CDVFactory.createCDV($scope.CDV).then(function(data) {
                  console.log('data: ', data);
-             });
+             });*/
          };
 
          function init() {
-             $scope.CheckDisbursements = {};
-             $scope.CDV = {};
              $scope.banks = {};
              $scope.accounts = {};
              $scope.acctTitles = {};
-
+             $scope.row.entries.acctTitle = null;
+             $scope.row.entries.DB= null;
+             $scope.row.entries.CR=null;
+             
+        
              CDVFactory.getBankName().then(function(data) {
                  $scope.banks = data;
              });

@@ -19,5 +19,21 @@ class AccountController extends BaseController{
 		$data = Accounts::getAcctTypes();
 		return response()->json($data);
 	}
+
+	public function getNorms(){
+		$data = Accounts::getNorms();
+		return response()->json($data);
+	}
+
+	public function getFS(){
+		$data = Accounts::getFS();
+		return response()->json($data);
+	}
+	
+	public function createAccount(Request $request){
+		$input = $request->all();
+		$data = Accounts::createAccount($input);
+		return response()->json($data);
+	}
 }
 ?>

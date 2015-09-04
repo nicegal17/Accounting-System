@@ -78,9 +78,33 @@ Route::group(['prefix' => 'api/v1'],function(){
 		Route::delete('/{id}','BankController@deleteBank');
 	});	
 
-	Route::group(['prefix' => 'funds'],function(){
+	Route::group(['prefix' => 'account'],function(){
 		Route::get('/','AccountController@getFunds');
 		Route::get('/getAcctTypes','AccountController@getAcctTypes');
+		Route::get('/getNorms','AccountController@getNorms');
+		Route::get('/getFS','AccountController@getFS');
+		Route::get('/getAccountTitles','AccountController@createAccount');
+		Route::post('/','AccountController@createAccount');
+	});	
+
+	Route::group(['prefix' => 'SubAccount'],function(){
+		Route::get('/','SubAccountController@getAccountTitles');
+		Route::get('/getNorms','SubAccountController@getNorms');
+		Route::get('/getAcctTypes','SubAccountController@getAcctTypes');
+		Route::get('/getFunds','SubAccountController@getFunds');
+		Route::get('/getFinStatements','SubAccountController@getFinStatements');
+		Route::post('/','SubAccountController@createSubAcct');
+	});	
+
+	Route::group(['prefix' => 'Assets'],function(){
+		Route::get('/','AssetController@getCategories');
+		Route::get('/getPeriods','AssetController@getPeriods');
+		Route::post('/','AssetController@createAsset');
+	});	
+
+	Route::group(['prefix' => 'Balance'],function(){
+		Route::get('/','BeginBalController@getAcctTitles');
+		Route::post('/','BeginBalController@createBeginBal');
 	});	
 });
 

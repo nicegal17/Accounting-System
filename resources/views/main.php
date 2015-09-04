@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -81,7 +80,9 @@
     <script src ="scripts/controllers/userctrl.js"></script>
     <script src ="scripts/controllers/bankctrl.js"></script>
     <script src ="scripts/controllers/accountctrl.js"></script>
+    <script src ="scripts/controllers/subAcctctrl.js"></script>
     <script src ="scripts/controllers/assetctrl.js"></script>
+    <script src ="scripts/controllers/beginBalctrl.js"></script>
     <!-- Angular Directives -->
     <script src ="scripts/directives/header.js"></script>
     <!-- Angular Services -->
@@ -94,5 +95,8 @@
     <script src ="scripts/services/users.js"></script>
     <script src ="scripts/services/banks.js"></script>
     <script src ="scripts/services/account.js"></script>
+    <script src ="scripts/services/subAcct.js"></script>
+    <script src ="scripts/services/assets.js"></script>
+    <script src ="scripts/services/beginBal.js"></script>
   </body>
 </html>

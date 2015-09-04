@@ -7,26 +7,43 @@
             <form>
                 <div class="form-group">
                     <label for="inputName">General Account</label>
-                    <select ng-model="employee.position" class="form-control">
-                        <option ng-repeat="position in positions" value="{{position.idPosition}}">{{position.posName}}</option>
+                    <select ng-model="subAccount.acctTitle" class="form-control">
+                        <option ng-repeat="acctTitle in acctTitles" value="{{acctTitle.idAcctTitle}}">{{acctTitle.acctTitle}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="inputName">Account Type</label>
+                    <select ng-model="subAccount.acctType" class="form-control">
+                        <option ng-repeat="acctType in acctTypes" value="{{acctType.acctTypeID}}">{{acctType.acctType}}</option>
                     </select>
                 </div>
                 <div class="form-group">
                     <label for="inputName">Account Code</label>
-                    <input type="text" class="form-control" id="inputName" ng-model="position.posName" placeholder="Bank Name">
+                    <input type="text" class="form-control" id="inputSlug" ng-model="subAccount.acctCode" placeholder="Accounting Code">
                 </div>
                 <div class="form-group">
                     <label for="inputName">Account Title</label>
-                    <input type="text" class="form-control" id="inputName" ng-model="position.posName" placeholder="Bank Account Number">
+                    <input type="text" class="form-control" id="inputSlug" ng-model="subAccount.accountTitle" placeholder="Accounting Title">
                 </div>
                 <div class="form-group">
                     <label for="inputName">Normal Balance</label>
-                    <select ng-model="employee.position" class="form-control">
-                        <option ng-repeat="position in positions" value="{{position.idPosition}}">{{position.posName}}</option>
+                    <select ng-model="subAccount.norm" class="form-control">
+                        <option ng-repeat="norm in norms" value="{{norm.normsID}}">{{norm.normDesc}}</option>
                     </select>
                 </div>
-                <a class="btn btn-warning" ng-show="isDisable" ng-click="addNew()"><i class="fa fa-plus"></i> Add New User</a>
-                <a class="btn btn-success" ng-show="!isDisable" ng-click="savePosition()">Save</a>
+                <div class="form-group">
+                    <label for="inputName">Fund Type</label>
+                    <select ng-model="subAccount.fund" class="form-control">
+                        <option ng-repeat="fund in funds" value="{{fund.fundID}}">{{fund.fundDesc}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="inputName">Financial Statement</label>
+                    <select ng-model="subAccount.statement" class="form-control">
+                        <option ng-repeat="statement in statements" value="{{statement.FSID}}">{{statement.FSDesc}}</option>
+                    </select>
+                </div>
+                <a class="btn btn-success" ng-show="!isDisable" ng-click="saveSubAccount()">Save</a>
                 <button ng-click="cancel()" class="btn btn-danger" ng-hide="isDisable">Cancel</button>
                 <button class="btn btn-danger" ng-click="cancel()">Close</button>
             </form>
