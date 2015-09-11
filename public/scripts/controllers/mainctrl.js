@@ -36,6 +36,15 @@ angular
             });
         };
 
+        $scope.openSearchCDV = function() {
+            var modalInstance = $modal.open({
+                animation: true,
+                templateUrl: '/templates/modals/searchCDV.html',
+                controller: 'searchCDVctrl',
+                size: 'lg'
+            });
+        };
+
         $scope.openJV = function() {
             var modalInstance = $modal.open({
                 animation: true,

@@ -27,8 +27,8 @@ class CDVController extends BaseController{
 
 	public function createCDV(Request $request){
 		$input = $request->all();
-		$data = CheckDisbursements::createCDV($input);
-		return response()->json($data);
+		// $data = CheckDisbursements::createCDV($input);
+		return response()->json($input);
 	}
 }
 ?>

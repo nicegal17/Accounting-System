@@ -1,5 +1,5 @@
 <div class="row">
-    <div class="col-lg-5 col-md-8">
+    <div class="col-lg-3 col-md-3 col-sm-6">
         <div class="panel panel-primary">
             <div class="panel-heading">Prepare: Check Disbursement Entry</div>
             <div class="panel-body">
@@ -51,61 +51,65 @@
             </div>
         </div>
     </div>
-    <div class="col-lg-7 col-md-8">
+    <div class="col-lg-9 col-md-9 col-sm-6">
         <div class="panel panel-primary">
             <div class="panel-heading">Prepare: Account Entry</div>
             <div class="panel-body">
-                <form>
-                    <div class="container" ng-controller="cdvctrl">
-                        <div class="row clearfix">
-                            <div class="col-md-9 column">
-                                <a id="add_row" class="btn btn-default pull-left" ng-click="addRow()">Add Row</a>
-                                <br>
-                                <br>
-                                <table class="table table-bordered table-hover" id="tab_logic">
-                                    <thead>
-                                        <tr>
-                                            <th class="text-center">Account Title</th>
-                                            <th class="text-center">Debit</th>
-                                            <th class="text-center">Credit</th>
-                                            <th></th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr ng-repeat="entry in row.entries">
-                                            <td>
-                                                <select ng-model="entry.acctTitle" class="form-control">
-                                                    <option ng-repeat="acctTitle in acctTitles" value="{{acctTitle.idAcctTitle}}">{{acctTitle.acctTitle}}</option>
-                                                </select>
-                                            </td>
-                                            <td>
-                                                <input type="number" class="form-control" ng-model="entry.DB" placeholder="0.00">
-                                            </td>
-                                            <td>
-                                                <input type="number" class="form-control" ng-model="entry.CR" placeholder="0.00">
-                                            </td>
-                                            <td>
-                                                <a class="btn btn-danger btn-xs" ng-click="removeRow($index)">
-                                                    <i class="fa fa-trash"></i>
-                                                </a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Total:</td>
-                                            <td>{{total() | currency}}</td>
-                                            <td>{{total() | currency}}</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                                <div class="form-group">
-                                    <label for="inputName">Particular</label>
-                                    <input type="text" class="form-control" id="inputName" ng-model="CDV.particular" placeholder="Particular">
-                                </div>
-                            </div>
+                <div class="form-inline form-group">
+                    <form id="frmSearch" role="form">
+                        <div class="form-group">
+                            <select ng-model="entry.acctTitle" class="form-control">
+                                <option ng-repeat="acctTitle in acctTitles" value="{{acctTitle.idAcctTitle}}">{{acctTitle.acctTitle}}</option>
+                            </select>
                         </div>
-                        <button class="btn btn-warning" ng-click="saveCDVEntries()">Save</button>
-                </form>
+                        <div class="form-group">
+                            <input type="number" class="form-control" ng-model="entry.DB" placeholder="Debit (0.00)">
+                        </div>
+                        <div class="form-group">
+                            <input type="number" class="form-control" ng-model="entry.CR" placeholder="Credit (0.00)">
+                        </div>
+                        <div class="form-group">
+                            <a id="add_row" class="btn btn-primary pull-left" ng-click="addRow(entry)"><span class="glyphicon glyphicon-plus"></span> Add Row</a>
+                        </div>
+                    </form>
                 </div>
+                <div class="table-responsive">
+                    <table class="table table-bordered table-hover" id="tab_logic">
+                        <thead>
+                            <tr>
+                                <th class="text-center">Account Title</th>
+                                <th class="text-center">Debit</th>
+                                <th class="text-center">Credit</th>
+                                <th width="5%"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="entry in entries">
+                                <td>{{entry.title}}</td>
+                                <td>{{entry.DB}}</td>
+                                <td>{{entry.CR}}</td>
+                                <td class="text-center">
+                                    <a class="btn btn-danger btn-xs" ng-click="removeRow($index)">
+                                        <i class="fa fa-trash"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Total:</td>
+                                <td>{{totalDB}}</td>
+                                <td>{{totalCR}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="form-group">
+                        <label for="inputName">Particular</label>
+                        <input type="text" class="form-control" id="inputName" ng-model="CDV.particular" placeholder="Particular">
+                    </div>
+                </div>
+            </div>
+            <div class="panel-footer">
+                <button class="btn btn-warning" ng-click="saveCDVEntries()">Save</button>
             </div>
         </div>
     </div>
+</div>

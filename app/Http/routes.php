@@ -52,17 +52,6 @@ Route::group(['prefix' => 'api/v1'],function(){
 		Route::delete('/{id}', 'BranchController@deleteBranch');
 	});
 
-	Route::group(['prefix' => 'CDV'],function(){
-		Route::get('/','CDVController@getAcctTitles');
-		Route::post('/','CDVController@createCDV');
-		Route::get('/banks','CDVController@getBanks'); 
-		Route::get('/accounts','CDVController@getAccountNo'); 
-	});
-	
-	Route::group(['prefix' => 'JV'],function(){
-		Route::get('/','JVController@getAcctTitles');
-	});	
-
 	Route::group(['prefix' => 'users'],function(){
 		Route::get('/','UserController@getUsers');
 		Route::post('/','UserController@createUser');
@@ -105,6 +94,29 @@ Route::group(['prefix' => 'api/v1'],function(){
 	Route::group(['prefix' => 'Balance'],function(){
 		Route::get('/','BeginBalController@getAcctTitles');
 		Route::post('/','BeginBalController@createBeginBal');
+	});	
+
+	Route::group(['prefix' => 'CDV'],function(){
+		Route::get('/','CDVController@getAcctTitles');
+		Route::post('/','CDVController@createCDV');
+		Route::get('/banks','CDVController@getBanks'); 
+		Route::get('/accounts','CDVController@getAccountNo'); 
+	});
+
+	Route::group(['prefix' => 'AppCDV'],function(){
+		Route::get('/','AppCDVController@getCDVNo');
+		Route::get('/getAcctEntries/{id}','AppCDVController@getAcctEntries');
+		Route::put('/{id}','AppCDVController@appCDV');
+		Route::put('/denyCDV/{id}','AppCDVController@denyCDV');
+	});	
+
+	Route::group(['prefix' => 'Search'],function(){
+		Route::get('/','SearchCDVController@getCDVNo');
+	});	
+	
+	Route::group(['prefix' => 'JV'],function(){
+		Route::get('/','JVController@getAcctTitles');
+
 	});	
 });
 

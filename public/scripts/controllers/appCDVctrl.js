@@ -1,27 +1,61 @@
  'use strict';
 
  angular.module('accounting')
-     .controller('appCDVctrl', function($scope, $filter, CDVFactory, toastr, ngDialog, ngTableParams) {
+     .controller('appCDVctrl', function($scope, $filter, AppCDVFactory, toastr, ngDialog, ngTableParams, $modalInstance) {
 
-     	 $scope.appCDV = function() {
-     	 	 $scope.cdv = {};
-             $scope.isAppAud = false;
-             $scope.isDisable = true;
+         $scope.appCDV = function() {
+             $scope.appcdv = {};
          };
 
-          $scope.audCDV = function() {
-          	 $scope.cdv = {};
-             $scope.isAppCDV= false;
-             $scope.isDisable = true;
-             $scope.ActLabel = "Audit Check Disbursement Voucher";
+         $scope.closeModal = function() {
+             console.log('cancel');
+             $modalInstance.close();
+         }
+
+         $scope.changeMeChange = function(cdv) {
+             console.log('cdv: ', cdv);
+             var str = cdv.split('--');
+             $scope.appcdv.CDVNo = str[0];
+             $scope.appcdv.sDate = str[1];
+             $scope.appcdv.Particular = str[2];
+
+             console.log('cdvNo: ', str[0]);
+             console.log('Date: ', str[1]);
+             console.log('part: ', str[2]);
+
+             AppCDVFactory.getAcctEntries($scope.appcdv.CDVNo).then(function(data) {
+                 $scope.accnts = data;
+                 console.log(data);
+
+             });
+         }
+
+         $scope.appCDV = function() {
+                 AppCDVFactory.appCDV($scope.appcdv.CDVNo, $scope.appcdv).then(function(data) {
+                     console.log('data: ', data);
+                     toastr.success('Check Disbursement Voucher has been approved', 'Approve CDV');
+                 });
          };
 
-         function init(){
-         	$scope.cdv = {};
-         	$scope.isUpdate = false;
-            $scope.isDisable = true;
+         $scope.denyCDV = function() {
+                 AppCDVFactory.denyCDV($scope.appcdv.CDVNo, $scope.appcdv).then(function(data) {
+                     console.log('data: ', data);
+                     toastr.success('Check Disbursement Voucher has been denied', 'Denied CDV');
+                 });
+         };
 
-        }
+         function init() {
+             $scope.appcdv = {};
+             $scope.appcdv.CDVNo = null;
+             $scope.appcdv.sDate = "";
+             $scope.appcdv.Particular = "";
+             $scope.entries = [];
+             $scope.acctTitles = {};
+
+             AppCDVFactory.getCDVNo().then(function(data) {
+                 $scope.IDs = data;
+             });
+         }
 
          init();
-});
+     });

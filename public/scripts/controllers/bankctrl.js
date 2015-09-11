@@ -1,7 +1,7 @@
  'use strict';
 
  angular.module('accounting')
-     .controller('bankctrl', function($scope, $filter, BankFactory, toastr, ngDialog, ngTableParams) {
+     .controller('bankctrl', function($scope, $filter, BankFactory, toastr, ngDialog, ngTableParams,$modalInstance) {
 
          $scope.saveBank = function() {
              if ($scope.isUpdate === true) {
@@ -17,6 +17,12 @@
                  });
              }
          };
+
+         $scope.closeModal = function(){
+            console.log('cancel');
+            $modalInstance.close();
+            // $modalInstance.hide();
+         }
 
          $scope.addNew = function() {
              $scope.isUpdate = false;

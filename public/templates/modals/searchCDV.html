@@ -1,5 +1,5 @@
 <div class="modal-header">
-    <h3 class="modal-title">Approve Check Disbursement Voucher</h3>
+    <h3 class="modal-title">Search Check Disbursement Voucher</h3>
 </div>
 <div class="modal-body">
     <div class="panel panel-primary">
@@ -7,21 +7,21 @@
             <form>
                 <div class="form-group">
                     <label for="inputName">CDV #</label>
-                    <select ng-model="appcdv.ID" class="form-control" ng-change="changeMeChange(appcdv.ID)">
+                    <select ng-model="cdv.ID" class="form-control" ng-change="changeMeChange(cdv.ID)">
                         <option ng-repeat="ID in IDs" value="{{ID.cdvID}}--{{ID.chkDate}}--{{ID.particular}}">{{ID.cdvID}}</option>
                     </select>
                 </div>
                 <div class="form-group">
                     <label for="inputSlug">Date:</label>
-                    <label for="inputSlug">{{appcdv.sDate}}</label>
+                    <label for="inputSlug">{{search.sDate}}</label>
                 </div>
                 <div class="form-group">
                     <label for="inputSlug">CDV No.:</label>
-                    <label for="inputSlug">{{appcdv.CDVNo}}</label>
+                    <label for="inputSlug">{{search.CDVNo}}</label>
                 </div>
                 <div class="form-group">
                     <label for="inputSlug">Particular:</label>
-                    <label for="inputSlug">{{appcdv.Particular}}</label>
+                    <label for="inputSlug">{{search.Particular}}</label>
                 </div>
             </form>
         </div>
@@ -68,7 +68,6 @@
     </div>
 </div>
 <div class="modal-footer">
-    <button class="btn btn-sm btn-primary" ng-click="appCDV()"><span class="glyphicon glyphicon-ok"></span> Approve</button>
-    <button class="btn btn-sm btn-warning" ng-click="denyCDV()"><span class="glyphicon glyphicon-remove"></span> Deny</button>
+    <button class="btn btn-sm btn-primary" ng-click="appCDV()"><span class="glyphicon glyphicon-print"></span> Print</button>
     <a class="btn btn-sm btn-danger" ng-click="closeModal()"><span class="glyphicon glyphicon-remove-circle"></span> Close</a>
 </div>

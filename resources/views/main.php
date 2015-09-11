@@ -44,6 +44,7 @@
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="bower_components/jquery/dist/jquery.min.js"></script>
     <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="bower_components/lodash/lodash.min.js"></script>
     <!-- Angular JS -->
     <script type="text/javascript" src="bower_components/angular/angular.js"></script>
     <!-- Angular Resource -->
@@ -74,9 +75,10 @@
     <script src ="scripts/controllers/cdvctrl.js"></script>
     <script src ="scripts/controllers/positionctrl.js"></script>
     <script src ="scripts/controllers/appCDVctrl.js"></script>
+    <script src ="scripts/controllers/searchCDVctrl.js"></script>
     <script src ="scripts/controllers/JVctrl.js"></script>
     <script src ="scripts/controllers/checkctrl.js"></script>
-    <script src ="scripts/controllers/apvctrl.js"></script>
+    <!-- <script src ="scripts/controllers/apvctrl.js"></script> -->
     <script src ="scripts/controllers/userctrl.js"></script>
     <script src ="scripts/controllers/bankctrl.js"></script>
     <script src ="scripts/controllers/accountctrl.js"></script>
@@ -91,7 +93,8 @@
     <script src ="scripts/services/cdv.js"></script>
     <script src ="scripts/services/positions.js"></script>
     <script src ="scripts/services/jv.js"></script>
-    <script src ="scripts/services/apv.js"></script>
+    <script src ="scripts/services/appCDV.js"></script>
+    <script src ="scripts/services/searchCDV.js"></script>
     <script src ="scripts/services/users.js"></script>
     <script src ="scripts/services/banks.js"></script>
     <script src ="scripts/services/account.js"></script>
