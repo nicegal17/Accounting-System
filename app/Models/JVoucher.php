@@ -11,6 +11,9 @@ class JVoucher extends Model {
 		$tbl_acctchart = DB::table('tbl_acctchart')->get();
 
 		return $tbl_acctchart;	
+	}
 
+	public static function createJV($data){
+		
 	}
 }

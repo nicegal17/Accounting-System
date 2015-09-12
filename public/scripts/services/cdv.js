@@ -71,6 +71,23 @@ angular.module('accounting')
                     }.bind(this));
 
                 return deferred.promise;
-            },   
+            }, 
+
+            getCDVNum: function(callback) {
+                var cb = callback || angular.noop;
+                var deferred = $q.defer();
+
+                $http.get('/api/v1/CDV/cdvnum')
+                .success(function(data) {
+                    deferred.resolve(data);
+                    return cb();
+                })
+                .error(function(err) {
+                    deferred.reject(err);
+                    return cb(err);
+                }.bind(this));
+
+                return deferred.promise;
+            },    
         };
     });

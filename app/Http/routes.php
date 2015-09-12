@@ -101,6 +101,7 @@ Route::group(['prefix' => 'api/v1'],function(){
 		Route::post('/','CDVController@createCDV');
 		Route::get('/banks','CDVController@getBanks'); 
 		Route::get('/accounts','CDVController@getAccountNo'); 
+		Route::get('/cdvnum','CDVController@getCDVNum'); 
 	});
 
 	Route::group(['prefix' => 'AppCDV'],function(){

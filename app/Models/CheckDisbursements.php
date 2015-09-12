@@ -29,6 +29,21 @@ class CheckDisbursements extends Model {
 		return $tbl_acctchart;
 	}
 
+	public static function getCDVNum(){
+		$tbl_cdvseries = DB::table('tbl_cdvseries')
+						->orderBy('id','asc')
+						->get();
+
+		return $tbl_cdvseries;
+		$CDVNo = CDV::getCDVNum();	
+	}
+
+	public static function incrementCDV(){
+		//return DB::raw('$CDVNo + 1');
+		$this->where('id', $this->id)->update(['CDVNo' => DB::raw('getCDVNum(CDVNo + 1)')]);
+		return $this->CDVNo;
+	}
+
 	public static function createCDV($data){
 		$cdv = $data['CDV'];
 		$entries = json_decode($data['entries']);

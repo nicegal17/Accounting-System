@@ -96,7 +96,7 @@
              }
              CDVFactory.createCDV(data).then(function(res) {
                  console.log('data: ', res);
-                 toastr.success('Record Successfully Created', 'Record Created');
+                 toastr.success('Check Disbursement Voucher has been Created', 'CDV Created');
                  $scope.entries = "";
                  $scope.CDV = "";
                  $scope.totalDB = "";
@@ -110,6 +110,7 @@
              $scope.acctTitles = {};
              $scope.entries = [];
              $scope.entry = {};
+             $scope.cdvnums = {};
 
              CDVFactory.getBankName().then(function(data) {
                  $scope.banks = data;
@@ -121,6 +122,10 @@
 
              CDVFactory.getAcctTitle().then(function(data) {
                  $scope.acctTitles = data;
+             });
+
+             CDVFactory.getCDVNum().then(function(data) {
+                 $scope.cdvnums = data;
              });
 
              $scope.dateOptions = {
