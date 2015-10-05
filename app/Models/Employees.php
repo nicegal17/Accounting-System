@@ -5,7 +5,6 @@ namespace App\Models;
 use DB;
 use Illuminate\Database\Eloquent\Model;
 
-// Filename is same sa class name dapat
 class Employees extends Model {
 
 	public static function getPosition(){
@@ -25,25 +24,48 @@ class Employees extends Model {
 			$results['success'] = 'false';
 			$results['msg'] = 'WARNING: Unknown error occur while saving the record';
 		}
-		return $results;
-	}
-
-	public static function getPosID($id){
-		$result = DB::table('tbl_employee')
-				->join('tbl_position', function($join)
-				{
-					$join->on('tbl_employee.idPosition','=','tbl_position.idPosition')
-						 ->where('tbl_employee.empID','=', array($id));
-				})
-				->get();
-		return $result;
+		return $results; 
 	}
 
 	public static function getEmployees(){
 		$tbl_employee = DB::table('tbl_employee')
-		->leftJoin('tbl_position','tbl_employee.idPosition','=','tbl_position.idPosition')
-		->get();
+							->leftJoin('tbl_position','tbl_employee.idPosition','=','tbl_position.idPosition')
+							->get();
 
 		return $tbl_employee;
 	}
+
+	public static function getEmployeeID($id){
+		return DB::select('SELECT a.empID, a.empName, a.empAddress, a.phoneNo, b.posName FROM tbl_employee a LEFT JOIN tbl_position b ON b.idPosition=a.idPosition WHERE a.empID=?', array($id));
+	}
+
+	public static function updateEmployee($id,$data) {
+		$result = DB::table('tbl_employee')->where('empID', $id)
+					->update([
+						'empName' => $data['empName'],
+						'empAddress' => $data['empAddress'],
+						'phoneNo' => $data['phoneNo'],
+						'idPosition' => $data['position']
+					]);
+
+		if($result){	
+			$results['success'] = 'true';
+			$results['msg'] = 'Record Successfully Updated';
+		}else{
+			$results['success'] = 'false';
+			$results['msg'] = 'WARNING: Unknown error occur while updating the record';
+		}
+		return $results;
+	} 
+
+	// public static function getPosID($id){
+	// 	$result = DB::table('tbl_employee')
+	// 			->join('tbl_position', function($join)
+	// 			{
+	// 				$join->on('tbl_employee.idPosition','=','tbl_position.idPosition')
+	// 					 ->where('tbl_employee.empID','=', array($id));
+	// 			})
+	// 			->get();
+	// 	return $result;
+	// }
 }

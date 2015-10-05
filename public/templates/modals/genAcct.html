@@ -45,10 +45,9 @@
                         <option ng-repeat="finStatement in finStatements" value="{{finStatement.FSID}}">{{finStatement.FSDesc}}</option>
                     </select>
                 </div>
-                <a class="btn btn-warning" ng-show="isDisable" ng-click="addNew()"><i class="fa fa-plus"></i> Add New User</a>
-                <a class="btn btn-success" ng-show="!isDisable" ng-click="saveAccount()">Save</a>
-                <button ng-click="cancel()" class="btn btn-danger" ng-hide="isDisable">Cancel</button>
-                <button class="btn btn-danger" ng-click="cancel()">Close</button>
+                <a class="btn btn-sm btn-success" ng-show="!isDisable" ng-click="saveAccount()"><span class="glyphicon glyphicon-saved"></span> Save</a>
+                <button ng-click="cancel()" class="btn btn-sm btn-danger" ng-hide="isDisable">Cancel</button>
+                <a class="btn btn-sm btn-danger" ng-click="closeModal()"><span class="glyphicon glyphicon-remove-circle"></span> Close</a>
             </form>
         </div>
     </div>

@@ -68,20 +68,36 @@ angular.module('accounting')
 
                 return deferred.promise;
             },
-            
-            updateUsers: function(id, data, callback) {
+
+            getEID: function(id, callback) {
                 var cb = callback || angular.noop;
                 var deferred = $q.defer();
-                $http.put('/api/1.0/a/bout/' + id, data)
-                .success(function(data) {
-                    console.log('data: ', data);
-                    deferred.resolve(data);
-                    return cb();
-                })
-                .error(function(err) {
-                    deferred.reject(err);
-                    return cb(err);
-                }.bind(this));
+                $http.get('/api/v1/employees/' + id)
+                    .success(function(data) {
+                        deferred.resolve(data);
+                        return cb();
+                    })
+                    .error(function(err) {
+                        deferred.reject(err);
+                        return cb(err);
+                    }.bind(this));
+
+                return deferred.promise;
+            },
+
+            updateEmployee: function(id, data, callback) {
+                var cb = callback || angular.noop;
+                var deferred = $q.defer();
+                $http.put('/api/v1/employees/'+ id,data)
+                    .success(function(data) {
+                        console.log('data: ', data);
+                        deferred.resolve(data);
+                        return cb();
+                    })
+                    .error(function(err) {
+                        deferred.reject(err);
+                        return cb(err);
+                    }.bind(this));
 
                 return deferred.promise;
             },
@@ -89,15 +105,15 @@ angular.module('accounting')
                 var cb = callback || angular.noop;
                 var deferred = $q.defer();
                 $http.put('/api/1.0/a/bout/' + id, data)
-                .success(function(data) {
-                    console.log('data: ', data);
-                    deferred.resolve(data);
-                    return cb();
-                })
-                .error(function(err) {
-                    deferred.reject(err);
-                    return cb(err);
-                }.bind(this));
+                    .success(function(data) {
+                        console.log('data: ', data);
+                        deferred.resolve(data);
+                        return cb();
+                    })
+                    .error(function(err) {
+                        deferred.reject(err);
+                        return cb(err);
+                    }.bind(this));
 
                 return deferred.promise;
             },

@@ -14,6 +14,7 @@
              $scope.search.CDVNo = str[0];
              $scope.search.sDate = str[1];
              $scope.search.Particular = str[2];
+             $scope.search.CDVNum = str[3];
 
              SearchCDVFactory.getAcctEntries($scope.search.CDVNo).then(function(data) {
                  $scope.accnts = data;

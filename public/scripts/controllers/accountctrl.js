@@ -1,7 +1,7 @@
  'use strict';
 
  angular.module('accounting')
-     .controller('accountctrl', function($scope, $filter, AccountFactory,toastr, ngDialog) {
+     .controller('accountctrl', function($scope, $filter, AccountFactory,toastr, ngDialog, $modalInstance) {
 
         $scope.saveAccount = function() {
              if ($scope.isUpdate === true) {
@@ -27,6 +27,11 @@
             "valID":"1",
             "value":"With Sub Account"
         };
+
+        $scope.closeModal = function() {
+             console.log('cancel');
+             $modalInstance.close();
+         }
 
      	function init(){
      		$scope.Account = {};

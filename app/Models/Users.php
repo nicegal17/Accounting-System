@@ -5,7 +5,6 @@ namespace App\Models;
 use DB;
 use Illuminate\Database\Eloquent\Model;
 
-// Filename is same sa class name dapat
 class Users extends Model {
 
 	public static function getUsers(){
@@ -15,7 +14,7 @@ class Users extends Model {
 	}
 
 	public static function createUser($data){
-		$result = DB::insert('INSERT INTO tbl_userAcct(empID,UName,Pwd) VALUES (?,?,?)',
+		$result = DB::insert('INSERT INTO tbl_useracct(empID,UName,Pwd) VALUES (?,?,?)',
 			array($data['empName'],$data['UName'],$data['Pwd']));
 
 		if($result){
@@ -37,17 +36,29 @@ class Users extends Model {
 	}
 
 	public static function getUserID($id){
-		$result = DB::select('SELECT * FROM tbl_useracct WHERE userID=?',array($id));
-		/*$result = DB::table('tbl_useracct')
-		->leftJoin('tbl_employee', 'tbl_employee.empID', '=', 'tbl_userAcct.empID')
-		->where('tbl_userAcct.userID=?',array($id))
-		->get();*/
+		return DB::select('SELECT b.userID, a.empName, b.UName, b.Pwd FROM tbl_employee a LEFT JOIN tbl_useracct b ON a.empID=b.empID WHERE b.userID=?',array($id));
+	}
 
-		/*$result = DB::table('tbl_userAcct')
-				->leftjoin('tbl_employee', 'tbl_employee.empID', '=', 'tbl_userAcct.empID')
-				->select('tbl_userAcct.*', 'tbl_employee.empName')
-				->where('tbl_employee.userID=?',array($id))
-				->get();*/
+	public static function updateUser($id,$data) {		
+		$result = DB::table('tbl_useracct')->where('userID',$id)
+					->update([
+						'UName'=> $data['UName'],
+						'Pwd'=> $data['Pwd']
+					]);
+
+		if($result){	
+			$results['success'] = 'true';
+			$results['msg'] = 'Record Successfully Updated';
+		}else{
+			$results['success'] = 'false';
+			$results['msg'] = 'WARNING: Unknown error occur while updating the record';
+		}
+		return $results;
+	} 
+
+	public static function deleteUser($id){
+		$result = DB::table('tbl_useracct')->where('userID',$id)->delete();
+
 		return $result;
 	}
 }

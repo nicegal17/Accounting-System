@@ -18,10 +18,7 @@
              $scope.appcdv.CDVNo = str[0];
              $scope.appcdv.sDate = str[1];
              $scope.appcdv.Particular = str[2];
-
-             console.log('cdvNo: ', str[0]);
-             console.log('Date: ', str[1]);
-             console.log('part: ', str[2]);
+             $scope.appcdv.CDVNum = str[3];
 
              AppCDVFactory.getAcctEntries($scope.appcdv.CDVNo).then(function(data) {
                  $scope.accnts = data;
@@ -49,6 +46,7 @@
              $scope.appcdv.CDVNo = null;
              $scope.appcdv.sDate = "";
              $scope.appcdv.Particular = "";
+             $scope.appcdv.CDVNum = "";
              $scope.entries = [];
              $scope.acctTitles = {};
 

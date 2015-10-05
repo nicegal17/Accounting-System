@@ -30,25 +30,34 @@ class CheckDisbursements extends Model {
 	}
 
 	public static function getCDVNum(){
-		$tbl_cdvseries = DB::table('tbl_cdvseries')
-						->orderBy('id','asc')
-						->get();
-
-		return $tbl_cdvseries;
-		$CDVNo = CDV::getCDVNum();	
+		return DB::select('SELECT id, numSeries FROM tbl_series WHERE ABRV="CDV" ORDER BY id DESC LIMIT 1');
 	}
 
-	public static function incrementCDV(){
-		//return DB::raw('$CDVNo + 1');
-		$this->where('id', $this->id)->update(['CDVNo' => DB::raw('getCDVNum(CDVNo + 1)')]);
-		return $this->CDVNo;
+	public static function CDVNumSeries(){
+		return DB::select("SELECT 
+    					CASE WHEN (SELECT COUNT(*) FROM tbl_series) = 0 THEN
+							CONCAT(YEAR(NOW()),DATE_FORMAT(NOW(),'%m'),'0001')
+						ELSE 
+							CONCAT(YEAR(NOW()),DATE_FORMAT(NOW(),'%m'),
+        				LEFT('0000',(LENGTH('0000') - 
+        				LENGTH(
+								CONVERT((CONVERT(RIGHT((SELECT MAX(numSeries) AS CDV FROM tbl_series WHERE ABRV='CDV' ),LENGTH('0000')) , SIGNED) + 1), CHAR)))),
+                				CONVERT((CONVERT( RIGHT((SELECT MAX(numSeries) AS CDV FROM tbl_series WHERE ABRV='CDV'),LENGTH('0000')) , SIGNED) + 1) , CHAR)
+								)
+    						END AS CDV");	
 	}
 
 	public static function createCDV($data){
 		$cdv = $data['CDV'];
 		$entries = json_decode($data['entries']);
+		$JVNumSeries = CheckDisbursements::CDVNumSeries();	
+		$CDVNo = CheckDisbursements::getCDVNum();	
+		$ID = $CDVNo[0]->id;
+		$Voucher = $CDVNo[0]->numSeries + 1;
+		
+		DB::table('tbl_series')->where('id',$ID)->update(['numSeries' => ($Voucher)]);
 
-		$id = DB::table('tbl_cdv')->insertGetId(['payee' => ($cdv['payee']),'address' => ($cdv['address']),'chkDate' => ($cdv['dt']),
+		$id = DB::table('tbl_cdv')->insertGetId(['CDVNo' => $JVNumSeries[0]->CDV,'payee' => ($cdv['payee']),'address' => ($cdv['address']),'chkDate' => ($cdv['dt']),
 			'bankID' => ($cdv['bank']),'acctID' => ($cdv['account']),'amount' => ($cdv['amount']),'chkNO' => ($cdv['chkNO']),'particular' => ($cdv['particular']),
 			'transDate' => Carbon::NOW() ]);
 
@@ -78,7 +87,7 @@ class CheckDisbursements extends Model {
 		}else{
 			$ids['success'] = 'false';
 			$ids['msg'] = 'WARNING: Unknown error occur while saving the record';	
-		}
+		 }
 
 		return $ids;
 	}

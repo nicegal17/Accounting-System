@@ -14,5 +14,11 @@ class JVController extends BaseController{
 		$data = JVoucher::getAcctTitles();
 		return response()->json($data);
 	}
+
+	public function createJV(Request $request){
+		$input = $request->all();
+	    $data = JVoucher::createJV($input);
+		return response()->json($data);
+	}
 }
 ?>

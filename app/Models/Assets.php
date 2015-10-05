@@ -6,7 +6,6 @@ use DB;
 use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
 
-// Filename is same sa class name dapat
 class Assets extends Model {
 
 	public static function getCategories(){

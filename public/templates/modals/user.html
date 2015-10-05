@@ -9,27 +9,28 @@
                     <select ng-model="user.empName" class="form-control">
                         <option ng-repeat="empName in empNames" value="{{empName.empID}}">{{empName.empName}}</option>
                     </select>
+
+                    <!-- <select ng-model="user.empName" class="form-control">
+                        <option ng-repeat="user in users" value="{{user.empID}}">{{user.empName}}</option>
+                    </select> -->
                 </div>
                 <div class="form-group">
                     <label for="inputName">Username</label>
-                    <input type="text" class="form-control" id="inputName" ng-disabled="isDisable" ng-model="user.UName" placeholder="Username">
+                    <input type="text" class="form-control" ng-disabled="isDisable" ng-model="user.UName" placeholder="Username">
                 </div>
                 <div class="form-group">
                     <label for="inputName">Password</label>
-                    <input type="text" class="form-control" id="inputName" ng-disabled="isDisable" ng-model="user.Pwd" placeholder="Password">
+                    <input type="text" class="form-control" ng-disabled="isDisable" ng-model="user.Pwd" placeholder="Password">
                 </div>
                 <a class="btn btn-warning" ng-show="isDisable" ng-click="addNew()"><i class="fa fa-plus"></i> Add New User</a>
-                <a class="btn btn-success" ng-show="!isDisable" ng-click="saveUser()">Save</a>
-                <button ng-click="cancel()" class="btn btn-danger" ng-hide="isDisable">Cancel</button>
+                <a class="btn btn-sm btn-primary" ng-show="!isDisable" ng-click="saveUser()"><span class="glyphicon glyphicon-saved"></span> Save</a>
+                <button ng-click="cancel()" class="btn btn-sm btn-danger" ng-hide="isDisable"> Cancel</button>
             </form>
         </div>
     </div>
     <div class="panel panel-primary">
         <div class="panel-heading">Manage Users</div>
         <div class="panel-body">
-            <div class="form-inline pull-left" role="form">
-                <a class="btn btn-success" ng-click="refresh()">Refresh</a>
-            </div>
             <div class="form-inline pull-right" role="form">
                 <div class="form-group">
                     <input id="txtvalue" type="text" ng-model="searchUser" class="form-control" placeholder="Search">
@@ -48,10 +49,10 @@
                     </td>
                     <td data-title="'Action'">
                         <div class="text-right">
-                            <a class="btn btn-primary btn-xs" ng-click="getUserID(user.UserID)">
+                            <a class="btn btn-primary btn-xs" ng-click="getIDUser(user.userID)">
                                 <i class="fa fa-pencil"></i>
                             </a>
-                            <a class="btn btn-danger btn-xs" ng-click="delBranch(position.idPosition)">
+                            <a class="btn btn-danger btn-xs" ng-click="delUser(user.userID)">
                                 <i class="fa fa-trash"></i>
                             </a>
                         </div>
@@ -62,5 +63,5 @@
     </div>
 </div>
 <div class="modal-footer">
-    <button class="btn btn-danger" ng-click="cancel()">Close</button>
+    <button class="btn btn-sm btn-danger" ng-click="closeModal()"><span class="glyphicon glyphicon-remove-circle"></span> Close</button>
 </div>

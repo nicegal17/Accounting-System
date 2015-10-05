@@ -1,7 +1,7 @@
  'use strict';
 
  angular.module('accounting')
-     .controller('JVctrl', function($scope, $filter, JVFactory, toastr, ngDialog) {
+     .controller('JVctrl', function($scope, $filter, JVFactory, toastr, ngDialog, $modalInstance) {
 
          $scope.addRow = function(row) {
              var DB, CR;
@@ -44,6 +44,28 @@
                  $scope.totalCR += entry.CR;
                  console.log('$scope.totalDB: ', $scope.totalDB);
                  console.log('$scope.totalCR: ', $scope.totalCR);
+             });
+         };
+
+         $scope.closeModal = function() {
+             console.log('cancel');
+             $modalInstance.close();
+         }
+
+          $scope.saveJVEntries = function() {
+             console.log('jv: ', $scope.JV);
+             console.log('jv: ', JSON.stringify($scope.entries));
+             var data = {
+                 JV: $scope.JV,
+                 entries: JSON.stringify($scope.entries)
+             }
+             JVFactory.createJV(data).then(function(res) {
+                 console.log('data: ', res);
+                 toastr.success('Journal Voucher has been Created', 'JV Created');
+                 $scope.entries = "";
+                 $scope.JV = "";
+                 $scope.totalDB = "";
+                 $scope.totalCR = "";
              });
          };
 

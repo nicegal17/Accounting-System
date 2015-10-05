@@ -5,7 +5,6 @@ namespace App\Models;
 use DB;
 use Illuminate\Database\Eloquent\Model;
 
-// Filename is same sa class name dapat
 class Branches extends Model {
 
 	public static function createBranch($data){

@@ -43,9 +43,9 @@
                         <option ng-repeat="statement in statements" value="{{statement.FSID}}">{{statement.FSDesc}}</option>
                     </select>
                 </div>
-                <a class="btn btn-success" ng-show="!isDisable" ng-click="saveSubAccount()">Save</a>
-                <button ng-click="cancel()" class="btn btn-danger" ng-hide="isDisable">Cancel</button>
-                <button class="btn btn-danger" ng-click="cancel()">Close</button>
+                <a class="btn btn-sm btn-success" ng-show="!isDisable" ng-click="saveSubAccount()"><span class="glyphicon glyphicon-saved"></span> Save</a>
+                <button ng-click="cancel()" class="btn btn-sm btn-danger" ng-hide="isDisable">Cancel</button>
+                <a class="btn btn-sm btn-danger" ng-click="closeModal()"><span class="glyphicon glyphicon-remove-circle"></span> Close</a>
             </form>
         </div>
     </div>

@@ -8,7 +8,7 @@
                 <div class="form-group">
                     <label for="inputName">CDV #</label>
                     <select ng-model="cdv.ID" class="form-control" ng-change="changeMeChange(cdv.ID)">
-                        <option ng-repeat="ID in IDs" value="{{ID.cdvID}}--{{ID.chkDate}}--{{ID.particular}}">{{ID.cdvID}}</option>
+                        <option ng-repeat="ID in IDs" value="{{ID.cdvID}}--{{ID.chkDate}}--{{ID.particular}}--{{ID.CDVNo}}">{{ID.CDVNo}}</option>
                     </select>
                 </div>
                 <div class="form-group">
@@ -17,7 +17,7 @@
                 </div>
                 <div class="form-group">
                     <label for="inputSlug">CDV No.:</label>
-                    <label for="inputSlug">{{search.CDVNo}}</label>
+                    <label for="inputSlug">{{search.CDVNum}}</label>
                 </div>
                 <div class="form-group">
                     <label for="inputSlug">Particular:</label>

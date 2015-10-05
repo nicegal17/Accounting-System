@@ -1,4 +1,4 @@
-<?php
+	<?php
 
 /*
 |--------------------------------------------------------------------------
@@ -10,28 +10,59 @@
 | and give it the controller to call when that URI is requested.
 |
 */
-
 Route::get('/', function () {
 	// if nakalogin
-    return redirect()->to('/main');
+    return redirect()->to('/login');
     // if wla
     // return view('login');
 });
 
-Route::any('/main/{path?}', function(){
+Route::any('/login/{path?}', function(){
 	// if nakalogin
-	return view("main");
+	return view("login");
 	// else if wla
 	// redirect()->to('/');
 })->where("path", ".+");
 
+// Route::get('/', function () {
+// 	// if nakalogin
+//     return redirect()->to('/main');
+//     // if wla
+//     // return view('login');
+// });
+	
+// Route::any('/main/{path?}', function(){
+// 	// if nakalogin
+// 	return view("main");
+// 	// else if wla
+// 	// redirect()->to('/');
+// })->where("path", ".+");
+
+//------
+
+// Route::group('prefix', ['middleware' => 'auth', function(){
+// 	Route::get('auth/login', 'Auth\AuthController@getLogin');
+// 	Route::post('auth/login', 'Auth\AuthController@postLogin');
+// }]);
+
+// Route::get('prefix', ['middleware' => 'auth'], function(){
+	Route::get('/login', 'Auth\AuthController@getLogin');
+	Route::post('auth/login', 'Auth\AuthController@postLogin');
+// });
+
+	Route::controllers([
+		'auth' => 'Auth\AuthController',
+		'password' => 'Auth\PasswordController'
+	]);
+
 
 Route::group(['prefix' => 'api/v1'],function(){
-
  	Route::group(['prefix' => 'employees'],function(){
 		Route::get('/','Controller@getEmployees');
  		Route::post('/','Controller@createEmployee');
  		Route::get('/{id}','Controller@getPosID');
+ 		Route::get('/{id}', 'Controller@getEmployeeID');
+ 		Route::put('/{id}', 'Controller@updateEmployee');
 	});
 
 	Route::group(['prefix' => 'position'],function(){
@@ -41,7 +72,6 @@ Route::group(['prefix' => 'api/v1'],function(){
 		Route::put('/{id}','Controller@updatePosition');
 		Route::delete('/{id}','Controller@deletePosition');
 	});
-
 
 	Route::group(['prefix' => 'branches'],function(){
 		Route::get('/','BranchController@getBranches');
@@ -57,6 +87,8 @@ Route::group(['prefix' => 'api/v1'],function(){
 		Route::post('/','UserController@createUser');
 		Route::get('/getUsers','UserController@getAllUsers');
 		Route::get('/{id}','UserController@getUserID');
+		Route::put('/{id}','UserController@updateUser');
+		Route::delete('/{id}','UserController@deleteUser');
 	});	
 
 	Route::group(['prefix' => 'bank'],function(){
@@ -117,7 +149,37 @@ Route::group(['prefix' => 'api/v1'],function(){
 	
 	Route::group(['prefix' => 'JV'],function(){
 		Route::get('/','JVController@getAcctTitles');
+		Route::post('/','JVController@createJV');
+	});	
 
+	Route::group(['prefix' => 'appJV'],function(){
+		Route::get('/','AppJVController@getJVNo');
+		Route::get('/getAcctEntries/{id}','AppJVController@getAcctEntries');
+		Route::put('/{id}','AppJVController@approveJV');
+		Route::put('/denyJV/{id}','AppJVController@denyJV');
+	});	
+
+	Route::group(['prefix' => 'SearchJV'],function(){
+		Route::get('/','SearchJVController@getJVNo');
+	});	
+
+	Route::group(['prefix' => 'APV'],function(){
+		Route::get('/','APVController@getAcctTitles');
+		Route::post('/','APVController@createAPV');
+	});	
+
+	Route::group(['prefix' => 'appAPV'],function(){
+		Route::get('/','AppAPVController@getAPVNo');
+		Route::get('/getAcctEntries/{id}','AppAPVController@getAcctEntries');
+	});	
+
+	Route::group(['prefix' => 'SearchAPV'],function(){
+		Route::get('/','SearchAPVController@getAPVNo');
+		Route::get('/getAcctTitles{id}','SearchAPVController@getAcctTitles');
+	});	
+
+	Route::group(['prefix' => 'check'],function(){
+		Route::get('/','CheckController@createCheck');
 	});	
 });
 

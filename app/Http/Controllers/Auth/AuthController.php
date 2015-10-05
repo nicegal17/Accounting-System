@@ -21,6 +21,24 @@ class AuthController extends Controller
     |
     */
 
+
+    public function authenticate() {
+        if (Auth::attempt(['UName' => $username, 'password' => $password])) {
+            return redirect()->intended('dashboard');
+        }
+    }
+
+
+
+
+     /*protected $redirectPath = '/dashboard';
+
+     protected $loginPath = '/login';
+
+     public function getLogin(){
+        return DB::select('SELECT * FROM tbl_useracct WHERE UName="tt" AND pwd="tt"');
+     }
+*/
     use AuthenticatesAndRegistersUsers, ThrottlesLogins;
 
     /**
@@ -28,9 +46,14 @@ class AuthController extends Controller
      *
      * @return void
      */
+
+   // $username = Auth::user()->user;
+    //$id = Auth::id();
+
     public function __construct()
     {
-        $this->middleware('guest', ['except' => 'getLogout']);
+        // $this->middleware('guest', ['except' => 'getLogout']);
+        $this->middleware('auth');
     }
 
     /**

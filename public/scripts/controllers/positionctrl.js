@@ -1,21 +1,23 @@
  'use strict';
 
  angular.module('accounting')
-     .controller('positionctrl', function($scope, $filter, PositionFactory, toastr, ngDialog, ngTableParams) {
+     .controller('positionctrl', function($scope, $filter, PositionFactory, toastr, ngDialog, ngTableParams, $modalInstance) {
 
          $scope.savePosition = function() {
              console.log('position`: ', $scope.position);
              if ($scope.isUpdate === true) {
                  PositionFactory.updatePositions($scope.position.idPosition,$scope.position).then(function(data) {
                      toastr.success('Record Successfully Updated', 'Record Updated');
-                     $scope.refresh();
                  });
              } else {
                  PositionFactory.createPositions($scope.position).then(function(data) {
                      toastr.success('Record Successfully Created', 'Record Saved');
-                     $scope.refresh();
                  });
              }
+             $scope.position = {};
+             $scope.refresh();
+
+             $scope.isDisable = true;
          };
 
          $scope.addNew = function() {
@@ -35,6 +37,11 @@
              $scope.searchPosition = "";
          };
 
+         $scope.closeModal = function() {
+             console.log('cancel');
+             $modalInstance.close();
+         }
+
          $scope.$watch("searchPosition", function() {
              $scope.tableParams.reload();
          });
@@ -52,8 +59,6 @@
          };
 
          function init() {
-             console.log('hahahaha');
-
              $scope.position = {};
              $scope.isUpdate = false;
              $scope.isDisable = true;

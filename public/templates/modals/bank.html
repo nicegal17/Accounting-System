@@ -22,17 +22,14 @@
                     <input type="text" class="form-control" ng-model="bank.Tel" ng-disabled="isDisable" placeholder="Bank Hotline Number">
                 </div>
                 <a class="btn btn-warning" ng-show="isDisable" ng-click="addNew()"><i class="fa fa-plus"></i> Add New Bank</a>
-                <a class="btn btn-success" ng-show="!isDisable" ng-click="saveBank()">Save</a>
-                <button ng-click="cancel()" class="btn btn-danger" ng-hide="isDisable">Cancel</button>
+                <a class="btn btn-sm btn-primary" ng-show="!isDisable" ng-click="saveBank()"><span class="glyphicon glyphicon-saved"></span> Save</a>
+                <button ng-click="cancel()" class="btn btn-sm btn-danger" ng-hide="isDisable"> Cancel</button>
             </form>
         </div>
     </div>
     <div class="panel panel-primary">
         <div class="panel-heading">Manage Banks</div>
         <div class="panel-body">
-            <div class="form-inline pull-left" role="form">
-                <a class="btn btn-success" ng-click="refresh()">Refresh</a>
-            </div>
             <div class="form-inline pull-right" role="form">
                 <div class="form-group">
                     <input id="txtvalue" type="text" ng-model="searchBank" class="form-control" placeholder="Search">
@@ -69,5 +66,5 @@
             </table>
         </div>
     </div>
-    <a class="btn btn-danger" ng-click="closeModal()">Close</a>
+     <button class="btn btn-sm btn-danger" ng-click="closeModal()"><span class="glyphicon glyphicon-remove-circle"></span> Close</button>
 </div>

@@ -17,7 +17,7 @@ angular
         }
 
         $scope.openPosition = function() {
-        	console.log('asdasda');
+            console.log('asdasda');
             var modalInstance = $modal.open({
                 animation: true,
                 templateUrl: '/templates/modals/position.html',
@@ -58,7 +58,16 @@ angular
             var modalInstance = $modal.open({
                 animation: true,
                 templateUrl: '/templates/modals/appJV.html',
-                controller: 'JVctrl',
+                controller: 'appJVctrl',
+                size: 'lg'
+            });
+        };
+
+        $scope.openSearchJV = function() {
+            var modalInstance = $modal.open({
+                animation: true,
+                templateUrl: '/templates/modals/searchJV.html',
+                controller: 'searchJVctrl',
                 size: 'lg'
             });
         };
@@ -68,7 +77,7 @@ angular
                 animation: true,
                 templateUrl: '/templates/modals/check.html',
                 controller: 'checkctrl',
-                size: 'lg'
+                size: 'md'
             });
         };
 
@@ -81,11 +90,20 @@ angular
             });
         };
 
-         $scope.openAppAPV = function() {
+        $scope.openAppAPV = function() {
             var modalInstance = $modal.open({
                 animation: true,
                 templateUrl: '/templates/modals/appAPV.html',
-                controller: 'apvctrl',
+                controller: 'appAPVctrl',
+                size: 'lg'
+            });
+        };
+
+        $scope.openSearchAPV = function() {
+            var modalInstance = $modal.open({
+                animation: true,
+                templateUrl: '/templates/modals/searchAPV.html',
+                controller: 'searchAPVctrl',
                 size: 'lg'
             });
         };
@@ -145,7 +163,7 @@ angular
             });
         };
 
-         $scope.openBeginningBal = function() {
+        $scope.openBeginningBal = function() {
             var modalInstance = $modal.open({
                 animation: true,
                 templateUrl: '/templates/modals/beginBal.html',

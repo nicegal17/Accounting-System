@@ -28,8 +28,8 @@
                         <label for="inputSlug">Code</label>
                         <input type="text" class="form-control" ng-model="branch.code" placeholder="Enter Branch Code No." ng-disabled="isDisable">
                     </div>
-                    <button class="btn btn-warning" ng-click="saveBranch()">Save</button>
-                    <button ng-click="cancel()" class="btn btn-danger" ng-hide="isDisable">Cancel</button>
+                    <button class="btn btn-sm btn-primary" ng-click="saveBranch()"><span class="glyphicon glyphicon-save"></span> Save</button>
+                    <button ng-click="cancel()" class="btn btn-sm btn-danger" ng-hide="isDisable"> Cancel</button>
                 </form>
             </div>
         </div>
@@ -40,7 +40,6 @@
             <div class="panel-body">
                 <div class="form-inline pull-left" role="form">
                     <a class="btn btn-warning" ng-click="addNew()"><i class="fa fa-plus"></i>Add New Branch</a>
-                    <a class="btn btn-primary" ng-click="refresh()">Refresh</a>
                 </div>
                 <div class="form-inline pull-right" role="form">
                     <div class="form-group">

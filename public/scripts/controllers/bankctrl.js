@@ -1,27 +1,29 @@
  'use strict';
 
  angular.module('accounting')
-     .controller('bankctrl', function($scope, $filter, BankFactory, toastr, ngDialog, ngTableParams,$modalInstance) {
+     .controller('bankctrl', function($scope, $filter, BankFactory, toastr, ngDialog, ngTableParams, $modalInstance) {
 
          $scope.saveBank = function() {
              if ($scope.isUpdate === true) {
                  BankFactory.updateBank($scope.bank.bankID, $scope.bank).then(function(data) {
                      console.log('data: ', data);
                      toastr.success('Record Successfully Updated', 'Update Record');
-                     $scope.refresh();
                  });
              } else {
                  BankFactory.createBanks($scope.bank).then(function(data) {
                      toastr.success('Record Successfully Created', 'Record Created');
-                     $scope.refresh();
                  });
              }
+
+             $scope.bank = {};
+             $scope.refresh();
+
+             $scope.isDisable = true;
          };
 
-         $scope.closeModal = function(){
-            console.log('cancel');
-            $modalInstance.close();
-            // $modalInstance.hide();
+         $scope.closeModal = function() {
+             console.log('cancel');
+             $modalInstance.close();
          }
 
          $scope.addNew = function() {

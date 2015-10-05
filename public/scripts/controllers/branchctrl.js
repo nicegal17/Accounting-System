@@ -9,17 +9,19 @@
              if ($scope.isUpdate === true) {
                  BranchFactory.updateBranch($scope.branch.brID, $scope.branch).then(function(data) {
                      console.log('data: ', data);
-                     toastr.success('success', 'update');
-
-                     $scope.refresh();
+                     toastr.success('Branch Details has been updated', 'Update Branch Details');
                  });
              } else {
                  BranchFactory.createBranch($scope.branch).then(function(data) {
                      console.log('data: ', data);
-                     toastr.success('hello');
-                     $scope.refresh();
+                     toastr.success('New Branch has been added', 'New Branch');
                  });
              }
+
+              $scope.branch = {};
+              $scope.refresh();
+
+              $scope.isDisable = true;
          };
 
          $scope.addNew = function() {
@@ -61,17 +63,11 @@
                  });
                  console.log(id);
              });
-
          };
 
          $scope.$watch("searchUser", function() {
              $scope.tableParams.reload();
          });
-
-         /*$scope.search = function() {
-             $scope.tableParams.reload();
-         };*/
-
 
          function init() {
              $scope.branches = {};
@@ -103,8 +99,6 @@
                      });
                  }
              });
-
-
          }
 
          init();

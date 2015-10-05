@@ -7,17 +7,17 @@
             <form>
                 <div class="form-group">
                     <label for="inputName">APV #</label>
-                    <select ng-model="employee.position" class="form-control" id="textBoxes">
-                        <option ng-repeat="position in positions" value="{{position.idPosition}}">{{position.posName}}</option>
+                    <select ng-model="appApv.apv" class="form-control" id="textBoxes">
+                        <option ng-repeat="apv in apvs" value="{{apv.apvID}}--{{apv.transDate}}--{{apv.particulars}}--{{apv.APVnum}}">{{apv.APVNum}}</option>
                     </select>
                 </div>
                 <div class="form-group">
                     <label for="inputSlug">Date:</label>
-                    <label for="inputSlug">Date</label>
+                    <label for="inputSlug">{{appApv.sDate}}</label>
                 </div>
                 <div class="form-group">
                     <label for="inputSlug">CDV No.:</label>
-                    <label for="inputSlug">APV No</label>
+                    <label for="inputSlug">{{appApv.APVNum}}</label>
                 </div>
             </form>
         </div>
@@ -34,15 +34,18 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr ng-repeat="entry in row.entries">
+                    <tr ng-repeat="accnt in accnts">
                         <td>
-                            <input type="number" class="form-control" ng-model="entry.DB" placeholder="0.00">
+                            <span ng-show="accnt.idAcctTitleDB != null && accnt.idAcctTitleCR == null">{{accnt.acctTitle}}</span>
+                            <span ng-show="accnt.idAcctTitleDB == null && accnt.idAcctTitleCR != null">&nbsp;&nbsp;&nbsp;&nbsp;{{accnt.acctTitle}}</span>
                         </td>
                         <td>
-                            <input type="number" class="form-control" ng-model="entry.DB" placeholder="0.00">
+                            <span ng-show="accnt.idAcctTitleDB != null && accnt.idAcctTitleCR == null"> {{accnt.amount}} </span>
+                            <span ng-show="accnt.idAcctTitleDB == null && accnt.idAcctTitleCR != null"></span>
                         </td>
                         <td>
-                            <input type="number" class="form-control" ng-model="entry.CR" placeholder="0.00">
+                            <span ng-show="accnt.idAcctTitleCR != null && accnt.idAcctTitleDB == null"> {{accnt.amount}} </span>
+                            <span ng-show="accnt.idAcctTitleCR == null && accnt.idAcctTitleDB != null"></span>
                         </td>
                     </tr>
                 </tbody>
@@ -68,10 +71,7 @@
     </div>
 </div>
 <div class="modal-footer">
-    <!-- <button ng-click="cancel()" class="btn btn-danger" ng-hide="isDisable">Cancel</button> -->
-    <button class="btn btn-save" ng-click="appCDV()">Approve</button>
-    <button class="btn btn-save" ng-click="audCDV">Audit</button>
-    <button class="btn btn-danger" ng-click="cancel()">Deny</button>
-    <button class="btn btn-save" ng-click="audCDV">Print</button>
-    <button class="btn btn-danger" ng-click="close()">Close</button>
+    <button class="btn btn-sm btn-primary" ng-click="approveJV()"><span class="glyphicon glyphicon-ok"></span> Approve</button>
+    <button class="btn btn-sm btn-warning" ng-click="denyJV()"><span class="glyphicon glyphicon-remove"></span> Deny</button>
+    <a class="btn btn-sm btn-danger" ng-click="closeModal()"><span class="glyphicon glyphicon-remove-circle"></span> Close</a>
 </div>

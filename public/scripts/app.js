@@ -2,6 +2,11 @@
 
 var config = function($stateProvider, $urlRouterProvider, $locationProvider) {
     $stateProvider
+        .state('login', {
+            url: '/login',
+            templateUrl: 'templates/login.html',
+            controller: 'loginctrl'
+        })
         .state('main', {
             url: '/main',
             templateUrl: 'templates/main.html',
@@ -24,7 +29,8 @@ var config = function($stateProvider, $urlRouterProvider, $locationProvider) {
 
         });
         
-    $urlRouterProvider.otherwise('/main');
+    // $urlRouterProvider.otherwise('/main');
+    $urlRouterProvider.otherwise('/login');
     $locationProvider.html5Mode(true);
 };
 

@@ -1,7 +1,7 @@
  'use strict';
 
  angular.module('accounting')
-     .controller('subAcctctrl', function($scope, $filter, SubAcctFactory, toastr, ngDialog) {
+     .controller('subAcctctrl', function($scope, $filter, SubAcctFactory, toastr, ngDialog, $modalInstance) {
 
          $scope.saveSubAccount = function() {
 
@@ -16,6 +16,11 @@
           $scope.cancel = function() {
              $scope.subAccount = {};
          };
+
+         $scope.closeModal = function() {
+             console.log('cancel');
+             $modalInstance.close();
+         }
 
          function init() {
              $scope.subAccount = {};

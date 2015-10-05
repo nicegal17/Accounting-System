@@ -10,17 +10,14 @@
                     <input type="text" class="form-control" id="inputName" ng-disabled="isDisable" ng-model="position.posName">
                 </div>
                 <a class="btn btn-warning" ng-show="isDisable" ng-click="addNew()"><i class="fa fa-plus"></i> Add New Position</a>
-                <a class="btn btn-success" ng-show="!isDisable" ng-click="savePosition()">Save</a>
-                <button ng-click="cancel()" class="btn btn-danger" ng-hide="isDisable">Cancel</button>
+                <a class="btn btn-sm btn-primary" ng-show="!isDisable" ng-click="savePosition()"><span class="glyphicon glyphicon-saved"></span> Save</a>
+                <button ng-click="cancel()" class="btn btn-sm btn-danger" ng-hide="isDisable"> Cancel</button>
             </form>
         </div>
     </div>
     <div class="panel panel-primary">
         <div class="panel-heading">Manage Position</div>
         <div class="panel-body">
-            <div class="form-inline pull-left" role="form">
-                <a class="btn btn-success" ng-click="refresh()">Refresh</a>
-            </div>
             <div class="form-inline pull-right" role="form">
                 <div class="form-group">
                     <input id="txtvalue" type="text" ng-model="searchPosition" class="form-control" placeholder="Search">
@@ -48,5 +45,5 @@
     </div>
 </div>
 <div class="modal-footer">
-    <button class="btn btn-danger" ng-click="cancel()">Close</button>
+    <button class="btn btn-sm btn-danger" ng-click="closeModal()"><span class="glyphicon glyphicon-remove-circle"></span> Close</button>
 </div>

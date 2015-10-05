@@ -88,6 +88,6 @@ angular.module('accounting')
                 }.bind(this));
 
                 return deferred.promise;
-            },    
+            }, 
         };
     });

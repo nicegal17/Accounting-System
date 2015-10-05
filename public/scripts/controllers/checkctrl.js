@@ -1,12 +1,16 @@
  'use strict';
 
  angular.module('accounting')
-     .controller('checkctrl', function($scope, $filter) {
+     .controller('checkctrl', function($scope, $filter, $modalInstance, toastr) {
+
+         $scope.closeModal = function() {
+             console.log('cancel');
+             $modalInstance.close();
+         }
 
          $scope.today = function() {
              $scope.dt = new Date();
          }
-         $scope.today();
 
          $scope.clear = function() {
              $scope.dt = null;
@@ -29,26 +33,6 @@
              $scope.opened = true;
          };
 
-         $scope.dateOptions = {
-             formatYear: 'yy',
-             startingDay: 1
-         };
-
-         $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
-         $scope.format = $scope.formats[0];
-
-         var tomorrow = new Date();
-         tomorrow.setDate(tomorrow.getDate() + 1);
-         var afterTomorrow = new Date();
-         afterTomorrow.setDate(tomorrow.getDate() + 2);
-         $scope.events = [{
-             date: tomorrow,
-             status: 'full'
-         }, {
-             date: afterTomorrow,
-             status: 'partially'
-         }];
-
          $scope.getDayClass = function(date, mode) {
              if (mode === 'day') {
                  var dayToCheck = new Date(date).setHours(0, 0, 0, 0);
@@ -64,5 +48,44 @@
 
              return '';
          };
+
+         $scope.saveCheck = function() {
+             CheckFactory.createCheck($scope.check).then(function(data) {
+                 toastr.success('Record Successfully Created', 'Record Saved');
+                 $scope.check = {};
+             });
+         };
+
+         $scope.cancel = function() {
+             $scope.check = {};
+         };
+
+         function init() {
+             $scope.check = {};
+
+             $scope.dateOptions = {
+                 formatYear: 'yy',
+                 startingDay: 1
+             };
+
+             $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
+             $scope.format = $scope.formats[0];
+
+             var tomorrow = new Date();
+             tomorrow.setDate(tomorrow.getDate() + 1);
+             var afterTomorrow = new Date();
+             afterTomorrow.setDate(tomorrow.getDate() + 2);
+             $scope.events = [{
+                 date: tomorrow,
+                 status: 'full'
+             }, {
+                 date: afterTomorrow,
+                 status: 'partially'
+             }];
+         }
+
+         $scope.today();
+
+         init();
 
      });

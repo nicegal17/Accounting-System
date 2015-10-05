@@ -1,7 +1,7 @@
  'use strict';
 
  angular.module('accounting')
-     .controller('assetctrl', function($scope, $filter, AssetsFactory, toastr, ngDialog) {
+     .controller('assetctrl', function($scope, $filter, AssetsFactory, toastr, ngDialog, $modalInstance) {
 
         $scope.saveAssetItem = function() {
 
@@ -11,6 +11,11 @@
              });
 
          };
+
+         $scope.closeModal = function() {
+             console.log('cancel');
+             $modalInstance.close();
+         }
 
          $scope.today = function() {
              $scope.dt = new Date();
