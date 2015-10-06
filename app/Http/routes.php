@@ -10,53 +10,23 @@
 | and give it the controller to call when that URI is requested.
 |
 */
-Route::get('/', function () {
-	// if nakalogin
-    return redirect()->to('/login');
-    // if wla
-    // return view('login');
+
+Route::get('/','loginController@getViewLogin');
+
+	
+Route::any('/main/{path?}','mainController@getviewMain')->where("path", ".+");
+
+Route::group(['prefix' => 'auth'], function(){
+	Route::get('/logout', 'loginController@logoutAuth');
+	Route::post('/login', 'loginController@loginAuth');
 });
 
-Route::any('/login/{path?}', function(){
-	// if nakalogin
-	return view("login");
-	// else if wla
-	// redirect()->to('/');
-})->where("path", ".+");
-
-// Route::get('/', function () {
-// 	// if nakalogin
-//     return redirect()->to('/main');
-//     // if wla
-//     // return view('login');
-// });
-	
-// Route::any('/main/{path?}', function(){
-// 	// if nakalogin
-// 	return view("main");
-// 	// else if wla
-// 	// redirect()->to('/');
-// })->where("path", ".+");
-
-//------
-
-// Route::group('prefix', ['middleware' => 'auth', function(){
-// 	Route::get('auth/login', 'Auth\AuthController@getLogin');
-// 	Route::post('auth/login', 'Auth\AuthController@postLogin');
-// }]);
-
-// Route::get('prefix', ['middleware' => 'auth'], function(){
-	Route::get('/login', 'Auth\AuthController@getLogin');
-	Route::post('auth/login', 'Auth\AuthController@postLogin');
-// });
-
-	Route::controllers([
-		'auth' => 'Auth\AuthController',
-		'password' => 'Auth\PasswordController'
-	]);
-
-
 Route::group(['prefix' => 'api/v1'],function(){
+
+	Route::group(['prefix' => 'auth'], function(){
+		Route::get('/user', 'loginController@getCurrentUser');
+	});
+
  	Route::group(['prefix' => 'employees'],function(){
 		Route::get('/','Controller@getEmployees');
  		Route::post('/','Controller@createEmployee');

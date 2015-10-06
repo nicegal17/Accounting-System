@@ -13,31 +13,24 @@
 
     <!-- Bootstrap core CSS -->
     <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Angular Toastr -->
-    <link href="bower_components/angular-toastr/dist/angular-toastr.css" rel="stylesheet"/>
-    <!-- Angular NgDialog -->
-    <link href="bower_components/ngDialog/css/ngDialog.css" rel="stylesheet"/>
-    <link href="bower_components/ngDialog/css/ngDialog-theme-default.css" rel="stylesheet"/>
-    <!-- Angular ngTable -->
-    <link href="bower_components/ng-table/dist/ng-table.css" rel="stylesheet"/>
     <!-- font awesome icons -->
     <link href="bower_components/fontawesome/css/font-awesome.min.css" rel="stylesheet">
     <!-- Custom styles for this template -->
-    <link href="styles/style.css" rel="stylesheet">
-    <link href="styles/main.css" rel="stylesheet">
+    <link href="styles/login.css" rel="stylesheet">
    
   </head>
 
-  <body ng-app="accounting">
+  <body>
 
-    <!-- mao ning  nav bar sa bootstrap nga g.himong directive nako pra pwede ma reuse sa ubang page -->
-
-    <!-- Dri e render sa angular ang mga views nga naa sa templates -->
-    <div id="wrapper">
-      <div id="page-wrapper">
-        <div data-ui-view></div>
-      </div>
-    </div>
+    <div class="container">
+        <form class="form-signin" action="/auth/login" method="post">
+            <label for="inputEmail" class="sr-only">Username</label>
+            <input type="email" id="inputEmail" name="username" class="form-control" placeholder="Username" required autofocus>
+            <label for="inputPassword" class="sr-only">Password</label>
+            <input type="password" id="inputPassword" name="password" class="form-control" placeholder="Password" required>
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+        </form>
+    </div> <!-- /container -->
 
     <!-- Bootstrap core JavaScript
     ================================================== -->
@@ -45,71 +38,5 @@
     <script src="bower_components/jquery/dist/jquery.min.js"></script>
     <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="bower_components/lodash/lodash.min.js"></script>
-    <!-- Angular JS -->
-    <script type="text/javascript" src="bower_components/angular/angular.js"></script>
-    <!-- Angular Resource -->
-    <script type="text/javascript" src="bower_components/angular-resource/angular-resource.min.js"></script>
-    <!-- Angular Sanitize -->
-    <script type="text/javascript" src="bower_components/angular-sanitize/angular-sanitize.js"></script>
-    <!-- Angular Route -->
-    <script type="text/javascript" src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
-    <!-- Angular Bootstrap -->
-    <script type="text/javascript" src="bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
-    <!-- Angular Animate -->
-    <script type="text/javascript" src="bower_components/angular-animate/angular-animate.js"></script>
-     <!-- Angular Toastr -->
-    <script type="text/javascript" src="bower_components/angular-toastr/dist/angular-toastr.tpls.js"></script>
-    <!-- Angular ngDialog  -->
-    <script type="text/javascript" src="bower_components/ngDialog/js/ngDialog.js"></script>
-    <!-- Angular ngTable -->
-    <script type="text/javascript" src="bower_components/ng-table/dist/ng-table.js"></script>
-    
-
-
-    <!-- Angular Libraries -->
-    <script src ="scripts/app.js"></script>
-    <!-- Angular Controllers -->
-    <script src ="scripts/controllers/loginctrl.js"></script>
-    <script src ="scripts/controllers/mainctrl.js"></script>
-    <script src ="scripts/controllers/employeectrl.js"></script>
-    <script src ="scripts/controllers/branchctrl.js"></script>
-    <script src ="scripts/controllers/cdvctrl.js"></script>
-    <script src ="scripts/controllers/positionctrl.js"></script>
-    <script src ="scripts/controllers/appCDVctrl.js"></script>
-    <script src ="scripts/controllers/appJVctrl.js"></script>
-    <script src ="scripts/controllers/searchCDVctrl.js"></script>
-    <script src ="scripts/controllers/JVctrl.js"></script>
-    <script src ="scripts/controllers/checkctrl.js"></script>
-    <script src ="scripts/controllers/userctrl.js"></script>
-    <script src ="scripts/controllers/bankctrl.js"></script>
-    <script src ="scripts/controllers/accountctrl.js"></script>
-    <script src ="scripts/controllers/subAcctctrl.js"></script>
-    <script src ="scripts/controllers/assetctrl.js"></script>
-    <script src ="scripts/controllers/beginBalctrl.js"></script>
-    <script src ="scripts/controllers/searchJVctrl.js"></script>
-    <script src ="scripts/controllers/apvctrl.js"></script>
-    <script src ="scripts/controllers/appAPVctrl.js"></script>
-    <script src ="scripts/controllers/searchAPVctrl.js"></script>
-    <!-- Angular Directives -->
-    <script src ="scripts/directives/header.js"></script>
-    <!-- Angular Services -->
-    <script src ="scripts/services/employees.js"></script>
-    <script src ="scripts/services/branches.js"></script>
-    <script src ="scripts/services/cdv.js"></script>
-    <script src ="scripts/services/positions.js"></script>
-    <script src ="scripts/services/jv.js"></script>
-    <script src ="scripts/services/appCDV.js"></script>
-    <script src ="scripts/services/appJV.js"></script>
-    <script src ="scripts/services/searchCDV.js"></script>
-    <script src ="scripts/services/users.js"></script>
-    <script src ="scripts/services/banks.js"></script>
-    <script src ="scripts/services/account.js"></script>
-    <script src ="scripts/services/subAcct.js"></script>
-    <script src ="scripts/services/assets.js"></script>
-    <script src ="scripts/services/beginBal.js"></script>
-    <script src ="scripts/services/searchJV.js"></script>
-    <script src ="scripts/services/apv.js"></script>
-    <script src ="scripts/services/appAPV.js"></script>
-    <script src ="scripts/services/searchAPV.js"></script>
   </body>
 </html>
