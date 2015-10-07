@@ -2,11 +2,6 @@
 
 var config = function($stateProvider, $urlRouterProvider, $locationProvider) {
     $stateProvider
-        .state('login', {
-            url: '/login',
-            templateUrl: 'templates/login.html',
-            controller: 'loginctrl'
-        })
         .state('main', {
             url: '/main',
             templateUrl: 'templates/main.html',

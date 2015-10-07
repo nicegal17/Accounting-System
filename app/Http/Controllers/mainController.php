@@ -13,10 +13,13 @@ class mainController extends BaseController
 
 
     public function getviewMain(){
-    	if (Auth::check()) {
-	   		return view('main'); 
-		}else{
-			return redirect()->intended('/');
-		}    	
+    	// $user = Auth::check();
+    	// return response()->json($user);
+  //   	if (Auth::check()) {
+
+	   		 return view('main'); 
+		// }else{
+		// 	// return redirect()->intended('/');
+		// }    	
     }
 }

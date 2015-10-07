@@ -23,9 +23,14 @@
   <body>
 
     <div class="container">
+        <?php if (isset($message) && !empty($message)) : ?>
+        <div class="alert alert-danger" role="alert">
+            <strong>WARNING: </strong> {{message}}.
+        </div>
+        <?php endif; ?>
         <form class="form-signin" action="/auth/login" method="post">
             <label for="inputEmail" class="sr-only">Username</label>
-            <input type="email" id="inputEmail" name="username" class="form-control" placeholder="Username" required autofocus>
+            <input type="text" id="inputEmail" name="username" class="form-control" placeholder="Username" required autofocus>
             <label for="inputPassword" class="sr-only">Password</label>
             <input type="password" id="inputPassword" name="password" class="form-control" placeholder="Password" required>
             <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
