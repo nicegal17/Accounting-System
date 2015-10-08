@@ -12,9 +12,13 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 
+use Illuminate\Foundation\Auth\ThrottlesLogins;
+use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
+
 class loginController extends BaseController 
 {
     use DispatchesJobs, ValidatesRequests;
+    use AuthenticatesAndRegistersUsers, ThrottlesLogins;
 
 
     public function getViewLogin(){
@@ -30,23 +34,25 @@ class loginController extends BaseController
     	$input = $request->all();
         $user = Login::authenticate($input);
         if(isset($user) && !empty($user)){
+
             $result = Auth::loginUsingId($user[0]->userID);
-            // $check = Auth::check();
-            // return response()->json($result);
+            Session::put('user', Auth::user());
+            Session::save();
 
             if ($result) {
-                return redirect('/main');
+                return response()->json(array('url'=>'/main','success'=>true,'msg'=>''));
             }else{
-                return redirect('/')->with('message', 'Login Failed');;
+                return response()->json(array('url'=>'/main','success'=>true,'msg'=>'Login Failed'));
             }
         }else{
-            return redirect('/')->with('message', 'Username and Password incorrect');;
+            return response()->json(array('url'=>'/','success'=>false,'msg'=>'Username and Password incorrect'));
         }
-        
     }
 
     public function logoutAuth(){
     	Auth::logout();
+        Session::forget('user');
+        return response()->json(array('url'=>'/','success'=>true,'msg'=>'Successfully logout'));
     }
 
     public function getCurrentUser(Request $request){    	

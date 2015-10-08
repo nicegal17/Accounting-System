@@ -23,16 +23,18 @@
   <body>
 
     <div class="container">
-        <?php if (isset($message) && !empty($message)) : ?>
+        <?php if (isset($message) && !empty($message)) : 
+            foreach ($errors->all() as $error):
+        ?>
         <div class="alert alert-danger" role="alert">
             <strong>WARNING: </strong> {{message}}.
         </div>
-        <?php endif; ?>
-        <form class="form-signin" action="/auth/login" method="post">
+        <?php endforeach; endif; ?>
+        <form class="form-signin" id="form-signin" method="post">
             <label for="inputEmail" class="sr-only">Username</label>
-            <input type="text" id="inputEmail" name="username" class="form-control" placeholder="Username" required autofocus>
+            <input type="text" id="inputEmail" name="username" class="form-control" placeholder="Username" autofocus>
             <label for="inputPassword" class="sr-only">Password</label>
-            <input type="password" id="inputPassword" name="password" class="form-control" placeholder="Password" required>
+            <input type="password" id="inputPassword" name="password" class="form-control" placeholder="Password">
             <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
         </form>
     </div> <!-- /container -->
@@ -43,5 +45,7 @@
     <script src="bower_components/jquery/dist/jquery.min.js"></script>
     <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="bower_components/lodash/lodash.min.js"></script>
+    <script src="bower_components/notifyjs/dist/notify-combined.min.js"></script>
+    <script src="scripts/lib/login.js"></script>
   </body>
 </html>

@@ -37,7 +37,7 @@ class AuthController extends Controller
 
      public function getLogin(){
         return DB::select('SELECT * FROM tbl_useracct WHERE UName="tt" AND pwd="tt"');
-     }
+     }  
 */
     use AuthenticatesAndRegistersUsers, ThrottlesLogins;
 

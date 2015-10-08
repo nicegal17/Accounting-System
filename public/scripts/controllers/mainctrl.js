@@ -10,7 +10,7 @@ angular
 
         init();
     })
-    .controller('headerCtrl', function($scope, $modal) {
+    .controller('headerCtrl', function($scope, $modal,UsersFactory) {
 
         function init() {
             console.log('headerCtrl');
@@ -169,6 +169,15 @@ angular
                 templateUrl: '/templates/modals/beginBal.html',
                 controller: 'beginBalctrl',
                 size: 'md'
+            });
+        };
+
+        $scope.logout = function(){
+            console.log('logout');
+            UsersFactory.logoutUser().then(function(data){
+                if(data.success == true){
+                    window.location.href=data.url;
+                }
             });
         };
 
