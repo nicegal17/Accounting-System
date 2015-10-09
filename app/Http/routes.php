@@ -154,5 +154,9 @@ Route::group(['prefix' => 'api/v1'],function(){
 	Route::group(['prefix' => 'check'],function(){
 		Route::get('/','CheckController@createCheck');
 	});	
+
+	Route::group(['prefix' => 'PO'],function(){
+		Route::get('/','POController@getSupplier');
+	});	
 });
 

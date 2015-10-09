@@ -84,6 +84,10 @@ body {
     border-radius: 6px 0 6px 6px;
 }
 
-#cboNum{
-    width: 100px;
+#combobox{
+    width: 120px;
+}
+
+#textbox{
+    width: 130px;
 }

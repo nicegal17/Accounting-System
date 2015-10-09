@@ -36,14 +36,14 @@ class Users extends Model {
 	}
 
 	public static function getUserID($id){
-		return DB::select('SELECT b.userID, a.empName, b.UName, b.Pwd FROM tbl_employee a LEFT JOIN tbl_useracct b ON a.empID=b.empID WHERE b.userID=?',array($id));
+		return DB::select('SELECT b.userID, a.empName, b.username, b.password FROM tbl_employee a LEFT JOIN tbl_useracct b ON a.empID=b.empID WHERE b.userID=?',array($id));
 	}
 
 	public static function updateUser($id,$data) {		
 		$result = DB::table('tbl_useracct')->where('userID',$id)
 					->update([
-						'UName'=> $data['UName'],
-						'Pwd'=> $data['Pwd']
+						'username'=> $data['username'],
+						'password'=> $data['password']
 					]);
 
 		if($result){	

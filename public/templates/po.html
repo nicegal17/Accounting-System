@@ -1,0 +1,135 @@
+<div class="row">
+    <div class="col-lg-12 col-md-12">
+        <div class="panel panel-primary">
+            <div class="panel-heading">PURCHASE ORDER Details</div>
+            <div class="panel-body">
+                <form>
+                    <div class="row">
+                        <div class="form-inline form-group">
+                            <label for="inputName" class="col-md-2 control-label">Name (ORDERED FROM: )</label>
+                            <div class="form-group">
+                                <select ng-model="purchaseOrder.supplier" class="form-control input-sm">
+                                    <option ng-repeat="supplier in suppliers" value="{{supplier.supplierID}}">{{supplier.supplier}}</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control input-sm" style="width:500px" ng-model="employee.empAddress" placeholder="ADDRESS" ng-disabled="isDisable">
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control input-sm" style="width:200px" ng-model="employee.phoneNo" placeholder="PHONE/FAX" ng-disabled="isDisable">
+                            </div>
+                        </DIV>
+                        <div class="form-inline form-group">
+                            <label for="inputName" class="col-md-2 control-label">Name (DELIVERED TO: )</label>
+                            <div class="form-group">
+                                <select ng-model="employee.position" class="form-control input-sm">
+                                    <option ng-repeat="position in positions" value="{{position.idPosition}}">{{position.posName}}</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control input-sm" style="width:500px" ng-model="employee.empAddress" placeholder="ADDRESS" ng-disabled="isDisable">
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control input-sm" style="width:200px" ng-model="employee.phoneNo" placeholder="PHONE/FAX" ng-disabled="isDisable">
+                            </div>
+                        </div>
+                        <div class="form-inline form-group">
+                            <label for="inputSlug" class="col-md-2 control-label">Bank Name: </label>
+                            <select ng-model="employee.position" id="combobox" class="form-control input-sm">
+                                <option ng-repeat="position in positions" value="{{position.idPosition}}">{{position.posName}}</option>
+                            </select>
+                            <label for="inputSlug">Account Number: </label>
+                            <div class="form-group">
+                                <input type="text" class="form-control input-sm" ng-model="employee.phoneNo" placeholder="ACCOUNT NUMBER" ng-disabled="isDisable">
+                            </div>
+                            <label for="inputSlug">Purchasing Agent: </label>
+                            <input type="text" class="form-control input-sm" ng-model="employee.phoneNo" placeholder="PURCHASING AGENT" ng-disabled="isDisable">
+                            <label for="inputSlug">Requested By: </label>
+                            <select ng-model="employee.position" class="form-control input-sm">
+                                <option ng-repeat="position in positions" value="{{position.idPosition}}">{{position.posName}}</option>
+                            </select>
+                            <label for="inputSlug">Check Paid To: </label>
+                            <select ng-model="employee.position" class="form-control input-sm">
+                                <option ng-repeat="position in positions" value="{{position.idPosition}}">{{position.posName}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-lg-12 col-md-12 col-sm-9">
+                        <div class="panel panel-primary">
+                            <div class="panel-body">
+                                <div class="form-inline form-group">
+                                    <div class="form-group">
+                                        <input type="number" class="form-control input-sm" style="width:80px" ng-model="employee.phoneNo" placeholder="QTY" ng-disabled="isDisable">
+                                    </div>
+                                    <div class="form-group">
+                                        <select ng-model="employee.position" id="combobox" style="width:90px" class="form-control input-sm">
+                                            <option ng-repeat="position in positions" value="{{position.idPosition}}">{{position.posName}}</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="text" class="form-control input-sm" ng-model="employee.phoneNo" placeholder="ITEMS REQUESTED" ng-disabled="isDisable">
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="number" class="form-control input-sm" ng-model="employee.phoneNo" placeholder="UNIT PRICE" ng-disabled="isDisable">
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="number" class="form-control input-sm" ng-model="employee.phoneNo" placeholder="TOTAL" ng-disabled="isDisable">
+                                    </div>
+                                    <div class="form-group">
+                                        <a id="add_row" class="btn btn-primary pull-left" ng-click="addRow(entry)"><span class="glyphicon glyphicon-plus"></span> Add Row</a>
+                                    </div>
+                                </div>
+                                <div class="table-responsive">
+                                    <table class="table table-bordered table-hover" id="tab_logic">
+                                        <thead>
+                                            <tr>
+                                                <th class="text-center">QTY</th>
+                                                <th class="text-center">ITEMS UNIT</th>
+                                                <th class="text-center">ITEMS REQUESTED</th>
+                                                <th class="text-center">UNIT PRICE</th>
+                                                <th class="text-center">TOTAL</th>
+                                                <th width="5%"></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr ng-repeat="entry in entries">
+                                                <td>{{entry.title}}</td>
+                                                <td>{{entry.DB}}</td>
+                                                <td>{{entry.CR}}</td>
+                                                <td>{{entry.FF}}</td>
+                                                <td>{{entry.FFF}}</td>
+                                                <td class="text-center">
+                                                    <a class="btn btn-danger btn-xs" ng-click="removeRow($index)">
+                                                        <i class="fa fa-trash"></i>
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <!-- <td>SUBTOTAL:</td> -->
+                                                <td>TOTAL:</td>
+                                                <td>{{totalDB}}</td>
+                                                <td>{{totalCR}}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="panel-footer">
+        <button class="btn btn-sm btn-primary" ng-click="saveCDVEntries()"><span class="glyphicon glyphicon-saved"></span> Save</button>
+        <button class="btn btn-sm btn-danger" ng-hide="isDisable">Cancel</button>
+    </div>
+    <div class="col-lg-12 col-md-12">
+        <div class="panel panel-primary">
+            <div class="panel-heading">PURCHASE ORDER LISTS</div>
+            <div class="panel-body">
+                <form>
+                </form>
+            </div>
+        </div>
+    </div>

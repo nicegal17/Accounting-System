@@ -15,8 +15,8 @@ class mainController extends BaseController
 
 
     public function getviewMain(){
-        //$user1 = Session::get('user');
-    	//return response()->json(array('user'=>$user1));
+     //    $user1 = Session::get('user');
+    	// return response()->json(array('user'=>$user1));
 
         //if (Auth::check()) {
    		return view('main'); 

@@ -16,11 +16,11 @@
                 </div>
                 <div class="form-group">
                     <label for="inputName">Username</label>
-                    <input type="text" class="form-control" ng-disabled="isDisable" ng-model="user.UName" placeholder="Username">
+                    <input type="text" class="form-control" ng-disabled="isDisable" ng-model="user.username" placeholder="Username">
                 </div>
                 <div class="form-group">
                     <label for="inputName">Password</label>
-                    <input type="text" class="form-control" ng-disabled="isDisable" ng-model="user.Pwd" placeholder="Password">
+                    <input class="form-control" ng-disabled="isDisable" placeholder="Password" name="password" ng-model="user.password" type="password" id="password" value="">
                 </div>
                 <a class="btn btn-warning" ng-show="isDisable" ng-click="addNew()"><i class="fa fa-plus"></i> Add New User</a>
                 <a class="btn btn-sm btn-primary" ng-show="!isDisable" ng-click="saveUser()"><span class="glyphicon glyphicon-saved"></span> Save</a>
@@ -45,11 +45,11 @@
                         {{user.empName}}
                     </td>
                     <td data-title="'Username'" sortable="'posName'">
-                        {{user.UName}}
+                        {{user.username}}
                     </td>
                     <td data-title="'Action'">
                         <div class="text-right">
-                            <a class="btn btn-primary btn-xs" ng-click="getIDUser(user.userID)">
+                            <a class="btn btn-primary btn-xs" id="edit" ng-click="getIDUser(user.userID)">
                                 <i class="fa fa-pencil"></i>
                             </a>
                             <a class="btn btn-danger btn-xs" ng-click="delUser(user.userID)">
@@ -65,3 +65,11 @@
 <div class="modal-footer">
     <button class="btn btn-sm btn-danger" ng-click="closeModal()"><span class="glyphicon glyphicon-remove-circle"></span> Close</button>
 </div>
+
+<script type="text/javascript">
+    $(document).ready(function(){
+         $('#edit').click(function(){
+        alert('tt');
+        });
+    });
+</script>

@@ -22,6 +22,12 @@ var config = function($stateProvider, $urlRouterProvider, $locationProvider) {
             templateUrl:'templates/checkDisbursement.html',
             controller:'cdvctrl'
 
+        })
+        .state('purchaseOrder', {
+            url:'/main/purchaseOrder',
+            templateUrl:'templates/po.html',
+            controller:'poctrl'
+
         });
         
     // $urlRouterProvider.otherwise('/main');
