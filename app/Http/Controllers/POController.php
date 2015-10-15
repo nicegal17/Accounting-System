@@ -14,5 +14,46 @@ class POController extends BaseController{
 		$data = PurchaseOrders::getSupplier();
 		return response()->json($data);
 	}
+
+	public function getBranch(){
+		$data = PurchaseOrders::getBranch();
+		return response()->json($data);
+	}
+
+	public function getBank(){
+		$data = PurchaseOrders::getBank();
+		return response()->json($data);
+	}
+
+	public function getBranchNames(){
+		$data = PurchaseOrders::getBranchNames();
+		return response()->json($data);
+	}
+
+	public function getSupplier2(){
+		$data = PurchaseOrders::getSupplier2();
+		return response()->json($data);
+	}
+
+	public function getUnit(){
+		$data = PurchaseOrders::getUnit();
+		return response()->json($data);
+	}
+
+	public function getMOP(){
+		$data = PurchaseOrders::getMOP();
+		return response()->json($data);
+	}
+
+	public function createPO(Request $request){
+		$input = $request->all();
+	    $data = PurchaseOrders::createPO($input);
+		return response()->json($data);
+	}
+
+	public function getPOLists(){
+		$data = PurchaseOrders::getPOLists();
+		return response()->json($data);
+	}
 }
 ?>

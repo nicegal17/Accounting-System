@@ -157,6 +157,14 @@ Route::group(['prefix' => 'api/v1'],function(){
 
 	Route::group(['prefix' => 'PO'],function(){
 		Route::get('/','POController@getSupplier');
+		Route::get('/getBranch','POController@getBranch');
+		Route::get('/getBank','POController@getBank');
+		Route::get('/getBranchNames','POController@getBranchNames');
+		Route::get('/getUnit','POController@getUnit');
+		Route::get('/getSupplier2','POController@getSupplier2');
+		Route::get('/getMOP','POController@getMOP');
+		Route::post('/','POController@createPO');
+		Route::get('/','POController@getPOLists');
 	});	
 });
 

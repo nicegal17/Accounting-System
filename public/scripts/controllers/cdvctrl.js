@@ -46,9 +46,9 @@
          $scope.addRow = function(row) {
              var DB, CR;
 
-             var title = _.find($scope.acctTitles, {
-                 'idAcctTitle': parseInt(row.acctTitle)
-             });
+                 var title = _.find($scope.acctTitles, {
+                     'idAcctTitle': parseInt(row.acctTitle)
+                 });
 
              if (row.DB === undefined || row.DB === null) {
                  DB = 0;
@@ -57,7 +57,7 @@
              }
 
              if (row.CR === undefined || row.CR === null) {
-                 CR = 0;
+                 CR = 0;    
              } else {
                  CR = row.CR;
              }
@@ -75,7 +75,6 @@
          $scope.removeRow = function(index) {
              $scope.entries.splice(index, 1);
          };
-
          $scope.total = function() {
              $scope.totalDB = 0;
              $scope.totalCR = 0;
@@ -102,7 +101,7 @@
                  $scope.totalDB = "";
                  $scope.totalCR = "";
              });
-         };
+         }; 
 
          function init() {
              $scope.banks = {};
