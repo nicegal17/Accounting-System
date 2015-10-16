@@ -40,6 +40,10 @@ class Controller extends BaseController{
 		return response()->json($data);
 	}
 
+	public function deletePosition($id){
+		return response()->json($id);
+	}
+
 	public function getPosID(Request $request,$id){
 		$data = Employees::getPosID($id);
 		return response()->json($data);

@@ -13,6 +13,9 @@
 
 Route::get('/','loginController@getViewLogin');
 
+Route::get('docs', function(){
+	return View::make('docs.api.v1.index');
+});
 	
 Route::any('/main/{path?}','mainController@getviewMain')->where("path", ".+");
 
@@ -51,7 +54,7 @@ Route::group(['prefix' => 'api/v1'],function(){
 		Route::post('/','BranchController@createBranch');
 		Route::get('/{id}', 'BranchController@getBranchByID');
 		Route::put('/{id}', 'BranchController@updateBranch');
-		Route::get('/{data}', 'BranchController@searchBranch');
+		// Route::get('/{data}', 'BranchController@searchBranch');
 		Route::delete('/{id}', 'BranchController@deleteBranch');
 	});
 
@@ -82,7 +85,7 @@ Route::group(['prefix' => 'api/v1'],function(){
 	});	
 
 	Route::group(['prefix' => 'SubAccount'],function(){
-		Route::get('/','SubAccountController@getAccountTitles');
+		// Route::get('/','SubAccountController@getAccountTitles');
 		Route::get('/getNorms','SubAccountController@getNorms');
 		Route::get('/getAcctTypes','SubAccountController@getAcctTypes');
 		Route::get('/getFunds','SubAccountController@getFunds');
@@ -97,12 +100,12 @@ Route::group(['prefix' => 'api/v1'],function(){
 	});	
 
 	Route::group(['prefix' => 'Balance'],function(){
-		Route::get('/','BeginBalController@getAcctTitles');
+		// Route::get('/','BeginBalController@getAcctTitles');
 		Route::post('/','BeginBalController@createBeginBal');
 	});	
 
 	Route::group(['prefix' => 'CDV'],function(){
-		Route::get('/','CDVController@getAcctTitles');
+		// Route::get('/','CDVController@getAcctTitles');
 		Route::post('/','CDVController@createCDV');
 		Route::get('/banks','CDVController@getBanks'); 
 		Route::get('/accounts','CDVController@getAccountNo'); 
@@ -121,7 +124,7 @@ Route::group(['prefix' => 'api/v1'],function(){
 	});	
 	
 	Route::group(['prefix' => 'JV'],function(){
-		Route::get('/','JVController@getAcctTitles');
+		// Route::get('/','JVController@getAcctTitles');
 		Route::post('/','JVController@createJV');
 	});	
 
@@ -137,7 +140,7 @@ Route::group(['prefix' => 'api/v1'],function(){
 	});	
 
 	Route::group(['prefix' => 'APV'],function(){
-		Route::get('/','APVController@getAcctTitles');
+		// Route::get('/','APVController@getAcctTitles');
 		Route::post('/','APVController@createAPV');
 	});	
 
@@ -148,7 +151,7 @@ Route::group(['prefix' => 'api/v1'],function(){
 
 	Route::group(['prefix' => 'SearchAPV'],function(){
 		Route::get('/','SearchAPVController@getAPVNo');
-		Route::get('/getAcctTitles{id}','SearchAPVController@getAcctTitles');
+		// Route::get('/getAcctTitles{id}','SearchAPVController@getAcctTitles');
 	});	
 
 	Route::group(['prefix' => 'check'],function(){
