@@ -7,6 +7,9 @@ use App\Models\Login;
 use Auth;
 use Validator;
 use Session;
+use JWTAuth;
+use JWTFactory;
+use Tymon\JWTAuth\Exceptions\JWTException;
 use Illuminate\Http\Request;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller as BaseController;
@@ -34,18 +37,15 @@ class loginController extends BaseController
     	$input = $request->all();
         $user = Login::authenticate($input);
         if(isset($user) && !empty($user)){
-
-            $result = Auth::loginUsingId($user[0]->userID);
-            Session::put('user', Auth::user());
-            Session::save();
-
-            if ($result) {
-                return response()->json(array('url'=>'/main','success'=>true,'msg'=>''));
+            $user = $user[0];
+            $token = JWTAuth::fromUser($user);            
+            if ($token) {
+                return response()->json(array('url'=>'/main','success'=>true,'msg'=>'','token'=>$token));
             }else{
                 return response()->json(array('url'=>'/main','success'=>true,'msg'=>'Login Failed'));
             }
         }else{
-            return response()->json(array('url'=>'/','success'=>false,'msg'=>'Username and Password incorrect'));
+            // return response()->json(array('url'=>'/','success'=>false,'msg'=>'Username and Password incorrect'));
         }
     }
 

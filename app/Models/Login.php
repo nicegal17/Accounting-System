@@ -13,6 +13,6 @@ class Login extends Model {
 	}
 
 	public static function authenticate($data){
-		return DB::select('SELECT * FROM tbl_useracct WHERE username=? AND password=? LIMIT 1;',array($data['username'],$data['password']));
+		return DB::select('SELECT userID,empID,UName FROM tbl_useracct WHERE UName=? AND Pwd=? LIMIT 1;',array($data['username'],$data['password']));
 	}
 }				
