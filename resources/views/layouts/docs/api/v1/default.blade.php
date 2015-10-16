@@ -125,6 +125,8 @@
                             <li>
                                 <a href="#SubAccount">SubAccount</a>
                                 <ul>
+									<li><a href="#SubAccount_getAccountTitles">getAccountTitles</a></li>
+
 									<li><a href="#SubAccount_getNorms">getNorms</a></li>
 
 									<li><a href="#SubAccount_getAcctTypes">getAcctTypes</a></li>
@@ -153,6 +155,8 @@
                             <li>
                                 <a href="#BeginBal">BeginBal</a>
                                 <ul>
+									<li><a href="#BeginBal_getAcctTitles">getAcctTitles</a></li>
+
 									<li><a href="#BeginBal_createBeginBal">createBeginBal</a></li>
 </ul>
                             </li>
@@ -161,6 +165,8 @@
                             <li>
                                 <a href="#CDV">CDV</a>
                                 <ul>
+									<li><a href="#CDV_getAcctTitles">getAcctTitles</a></li>
+
 									<li><a href="#CDV_createCDV">createCDV</a></li>
 
 									<li><a href="#CDV_getBanks">getBanks</a></li>
@@ -197,6 +203,8 @@
                             <li>
                                 <a href="#JV">JV</a>
                                 <ul>
+									<li><a href="#JV_getAcctTitles">getAcctTitles</a></li>
+
 									<li><a href="#JV_createJV">createJV</a></li>
 </ul>
                             </li>
@@ -227,6 +235,8 @@
                             <li>
                                 <a href="#APV">APV</a>
                                 <ul>
+									<li><a href="#APV_getAcctTitles">getAcctTitles</a></li>
+
 									<li><a href="#APV_createAPV">createAPV</a></li>
 </ul>
                             </li>
@@ -1166,6 +1176,32 @@
                         <p></p>
 
                         
+                        <a href="#" class="waypoint" name="SubAccount_getAccountTitles"></a>
+                        <div class="endpoint-header">
+                            <ul>
+                            <li><h2>GET</h2></li>
+                            <li><h3>getAccountTitles</h3></li>
+                            <li>api/v1/SubAccount</li>
+                          </ul>
+                        </div>
+
+                        <div>
+                          <p class="endpoint-short-desc"></p>
+                        </div>
+                       <!--  <div class="parameter-header">
+                             <p class="endpoint-long-desc"></p>
+                        </div> -->
+                        <form class="api-explorer-form" uri="api/v1/SubAccount" type="GET">
+                          <div class="endpoint-paramenters">
+                            
+                          </div>
+                           <div class="generate-response" >
+                              <!-- <input type="hidden" name="_method" value="GET"> -->
+                              <input type="submit" class="generate-response-btn" value="Generate Example Response">
+                          </div>
+                        </form>
+                        <hr>
+
                         <a href="#" class="waypoint" name="SubAccount_getNorms"></a>
                         <div class="endpoint-header">
                             <ul>
@@ -1386,6 +1422,32 @@
                         <p></p>
 
                         
+                        <a href="#" class="waypoint" name="BeginBal_getAcctTitles"></a>
+                        <div class="endpoint-header">
+                            <ul>
+                            <li><h2>GET</h2></li>
+                            <li><h3>getAcctTitles</h3></li>
+                            <li>api/v1/Balance</li>
+                          </ul>
+                        </div>
+
+                        <div>
+                          <p class="endpoint-short-desc"></p>
+                        </div>
+                       <!--  <div class="parameter-header">
+                             <p class="endpoint-long-desc"></p>
+                        </div> -->
+                        <form class="api-explorer-form" uri="api/v1/Balance" type="GET">
+                          <div class="endpoint-paramenters">
+                            
+                          </div>
+                           <div class="generate-response" >
+                              <!-- <input type="hidden" name="_method" value="GET"> -->
+                              <input type="submit" class="generate-response-btn" value="Generate Example Response">
+                          </div>
+                        </form>
+                        <hr>
+
                         <a href="#" class="waypoint" name="BeginBal_createBeginBal"></a>
                         <div class="endpoint-header">
                             <ul>
@@ -1418,6 +1480,32 @@
                         <p></p>
 
                         
+                        <a href="#" class="waypoint" name="CDV_getAcctTitles"></a>
+                        <div class="endpoint-header">
+                            <ul>
+                            <li><h2>GET</h2></li>
+                            <li><h3>getAcctTitles</h3></li>
+                            <li>api/v1/CDV</li>
+                          </ul>
+                        </div>
+
+                        <div>
+                          <p class="endpoint-short-desc"></p>
+                        </div>
+                       <!--  <div class="parameter-header">
+                             <p class="endpoint-long-desc"></p>
+                        </div> -->
+                        <form class="api-explorer-form" uri="api/v1/CDV" type="GET">
+                          <div class="endpoint-paramenters">
+                            
+                          </div>
+                           <div class="generate-response" >
+                              <!-- <input type="hidden" name="_method" value="GET"> -->
+                              <input type="submit" class="generate-response-btn" value="Generate Example Response">
+                          </div>
+                        </form>
+                        <hr>
+
                         <a href="#" class="waypoint" name="CDV_createCDV"></a>
                         <div class="endpoint-header">
                             <ul>
@@ -1670,6 +1758,32 @@
                         <p></p>
 
                         
+                        <a href="#" class="waypoint" name="JV_getAcctTitles"></a>
+                        <div class="endpoint-header">
+                            <ul>
+                            <li><h2>GET</h2></li>
+                            <li><h3>getAcctTitles</h3></li>
+                            <li>api/v1/JV</li>
+                          </ul>
+                        </div>
+
+                        <div>
+                          <p class="endpoint-short-desc"></p>
+                        </div>
+                       <!--  <div class="parameter-header">
+                             <p class="endpoint-long-desc"></p>
+                        </div> -->
+                        <form class="api-explorer-form" uri="api/v1/JV" type="GET">
+                          <div class="endpoint-paramenters">
+                            
+                          </div>
+                           <div class="generate-response" >
+                              <!-- <input type="hidden" name="_method" value="GET"> -->
+                              <input type="submit" class="generate-response-btn" value="Generate Example Response">
+                          </div>
+                        </form>
+                        <hr>
+
                         <a href="#" class="waypoint" name="JV_createJV"></a>
                         <div class="endpoint-header">
                             <ul>
@@ -1844,6 +1958,32 @@
                         <p></p>
 
                         
+                        <a href="#" class="waypoint" name="APV_getAcctTitles"></a>
+                        <div class="endpoint-header">
+                            <ul>
+                            <li><h2>GET</h2></li>
+                            <li><h3>getAcctTitles</h3></li>
+                            <li>api/v1/APV</li>
+                          </ul>
+                        </div>
+
+                        <div>
+                          <p class="endpoint-short-desc"></p>
+                        </div>
+                       <!--  <div class="parameter-header">
+                             <p class="endpoint-long-desc"></p>
+                        </div> -->
+                        <form class="api-explorer-form" uri="api/v1/APV" type="GET">
+                          <div class="endpoint-paramenters">
+                            
+                          </div>
+                           <div class="generate-response" >
+                              <!-- <input type="hidden" name="_method" value="GET"> -->
+                              <input type="submit" class="generate-response-btn" value="Generate Example Response">
+                          </div>
+                        </form>
+                        <hr>
+
                         <a href="#" class="waypoint" name="APV_createAPV"></a>
                         <div class="endpoint-header">
                             <ul>
