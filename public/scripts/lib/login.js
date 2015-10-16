@@ -26,7 +26,6 @@ $("#form-signin").submit(function(event) {
             	return;
             }
             window.location.href= data.url;
-            window.localStorage['acctgToken'] = data.token;
         },
         error: function(xhr, textStatus, errorThrown) {
             console.log('textStatus: ',textStatus);
