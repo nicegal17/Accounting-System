@@ -92,6 +92,7 @@
     <script src ="scripts/controllers/appAPVctrl.js"></script>
     <script src ="scripts/controllers/searchAPVctrl.js"></script>
     <script src ="scripts/controllers/poctrl.js"></script>
+    <script src ="scripts/controllers/podetailsctrl.js"></script>
     <!-- Angular Directives -->
     <script src ="scripts/directives/header.js"></script>
     <!-- Angular Services -->
@@ -114,5 +115,6 @@
     <script src ="scripts/services/appAPV.js"></script>
     <script src ="scripts/services/searchAPV.js"></script>
     <script src ="scripts/services/po.js"></script>
+    <script src ="scripts/services/podetails.js"></script>
   </body>
 </html>

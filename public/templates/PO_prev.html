@@ -1,0 +1,75 @@
+<div class="row">
+    <div class="col-lg-12 col-md-12">
+        <div class="panel panel-primary">
+            <div class="panel-heading">PURCHASE ORDER Details Report</div>
+            <div class="panel-body">
+                <form>
+                    <div class="col-lg-12 col-md-12 col-sm-9">
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-hover" id="tab_logic">
+                                <tbody>
+                                    <tr ng-repeat="poDetail in poDetails">
+                                        <td class="col-lg-3 col-md-3">NAME (ORDERED FROM): </td>
+                                        <td class="col-lg-3 col-md-3">{{poDetail.supplier}}</td>
+                                        <td class="col-lg-1 col-md-1" style="border-top:none; border-bottom:none"></td>
+                                        <td class="col-lg-3 col-md-3">NAME (DELIVERED TO): </td>
+                                        <td class="col-lg-3 col-md-3">{{poDetail.brName}}</td>
+                                    </tr>
+                                    <tr ng-repeat="poDetail in poDetails">
+                                        <td class="col-lg-3 col-md-3">ADDRESS: </td>
+                                        <td class="col-lg-3 col-md-3">{{poDetail.address}}</td>
+                                        <td class="col-lg-1 col-md-1" style="border-top:none; border-bottom:none"></td>
+                                        <td class="col-lg-3 col-md-3">ADDRESS: </td>
+                                        <td class="col-lg-3 col-md-3">{{poDetail.brAddress}}</td>
+                                    </tr>
+                                    <tr ng-repeat="poDetail in poDetails">
+                                        <td class="col-lg-3 col-md-3">PHONE/FAX: </td>
+                                        <td class="col-lg-3 col-md-3">{{poDetail.phone}}</td>
+                                        <td class="col-lg-1 col-md-1" style="border-top:none; border-bottom:none"></td>
+                                        <td class="col-lg-3 col-md-3">PHONE/FAX: </td>
+                                        <td class="col-lg-3 col-md-3">{{poDetail.tel}}</td>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <table class="table table-bordered table-hover" id="tab_logic">
+                        <thead>
+                            <tr>
+                                <th class="text-center">QTY</th>
+                                <th class="text-center">ITEMS UNIT</th>
+                                <th class="text-center">ITEMS REQUESTED</th>
+                                <th class="text-center">UNIT PRICE</th>
+                                <th class="text-center">TOTAL</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="poDetail in poDetails">
+                                <td>{{poDetail.qty}}</td>
+                                <td>{{poDetail.unit}}</td>
+                                <td>{{poDetail.items}}</td>
+                                <td>{{poDetail.unit_price}}</td>
+                                <td>{{poDetail.total}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <!-- <div class="col-lg-6 col-md-6 col-sm-9">
+                        <div class="panel panel-primary">
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-hover" id="tab_logic">
+                                    <tbody>
+                                        <tr ng-repeat="poDetail in poDetails">
+                                        </tr>
+                                        <tr ng-repeat="poDetail in poDetails">
+                                        </tr>
+                                        <tr ng-repeat="poDetail in poDetails">
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div> -->
+            </div>
+            </form>
+        </div>
+    </div>
+</div>

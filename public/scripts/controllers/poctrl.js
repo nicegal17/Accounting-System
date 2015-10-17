@@ -3,29 +3,16 @@
  angular.module('accounting')
      .controller('poctrl', function($scope, $filter, POFactory, toastr, ngTableParams) {
 
-         $scope.cboSupplier = function(po) {
-             var str = po.split('--');
-             $scope.PO.supplierID = str[0];
-             $scope.PO.address = str[1];
-             $scope.PO.phone = str[2];
-         };
-
-         $scope.cboBranch = function(poBrnch) {
-             var str = poBrnch.split('--');
-             $scope.PO.brID = str[0];
-             $scope.PO.brAddress = str[1];
-             $scope.PO.tel = str[2];
-         };
-
          $scope.cboBank = function(bank) {
              var str = bank.split('--');
              $scope.PO.bankID = str[0];
              $scope.PO.acctNum = str[1];
          };
 
-         $scope.today = function() {
-             $scope.dt = new Date();
-         }
+          $scope.refresh = function() {
+             $scope.tableParams.reload();
+             $scope.POSearch = "";
+         };
 
          $scope.addRow = function(row) {
             var qty, Items, unitPrice, total;
@@ -78,22 +65,19 @@
                  $scope.entries = "";
                  $scope.PO = "";
                  $scope.total = "";
+                 $scope.refresh();
              });
          }; 
+
+         $scope.$watch("POSearch", function() {
+             $scope.tableParams.reload();
+         });
 
          function init() {
              $scope.PO = {};
              $scope.units = {};
              $scope.entries = [];
              $scope.entry = {};
-
-             $scope.PO.supplierID = null;
-             $scope.PO.address = "";
-             $scope.PO.phone = "";
-
-             $scope.PO.brID = null;
-             $scope.PO.brAddress = "";
-             $scope.PO.tel = "";
 
              $scope.PO.bankID = null;
              $scope.PO.bankName = "";
@@ -151,8 +135,6 @@
                  $scope.mops = data;
              });
          }
-
-         $scope.today();
 
          init();
      });

@@ -108,8 +108,8 @@ class PurchaseOrders extends Model {
 	}
 
 	public static function getPOLists(){
-		return DB::select('SELECT a.po_num, b.supplier, c.branch, a.PO_date, d.bank, a.purchasing_agent, e.payment FROM tbl_po a
-				LEFT JOIN tbl_suplier b ON b.supplierID=a.supplier
+		return DB::select('SELECT a.poID, a.po_num, b.supplier, c.brName, a.PO_date, d.bankName, a.purchasing_agent FROM tbl_po a
+				LEFT JOIN tbl_supplier b ON b.supplierID=a.supplier
 				LEFT JOIN tbl_branch c ON c.brID=a.branch
 				LEFT JOIN tbl_bank d ON d.bankID=a.bank
 				LEFT JOIN tbl_mop e ON e.id=a.mop');

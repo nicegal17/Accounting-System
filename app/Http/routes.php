@@ -1,4 +1,4 @@
-	<?php
+<?php
 
 /*
 |--------------------------------------------------------------------------
@@ -164,7 +164,11 @@ Route::group(['prefix' => 'api/v1'],function(){
 		Route::get('/getSupplier2','POController@getSupplier2');
 		Route::get('/getMOP','POController@getMOP');
 		Route::post('/','POController@createPO');
-		Route::get('/','POController@getPOLists');
-	});	
+		Route::get('/getPOLists','POController@getPOLists');
+	});
+
+	Route::group(['prefix' => 'podetails'],function(){
+		Route::get('/{id}','PODetController@getPODetails');
+	});		
 });
 

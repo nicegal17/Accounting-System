@@ -21,13 +21,16 @@ var config = function($stateProvider, $urlRouterProvider, $locationProvider) {
             url:'/main/checkDisbursement',
             templateUrl:'templates/checkDisbursement.html',
             controller:'cdvctrl'
-
         })
         .state('purchaseOrder', {
             url:'/main/purchaseOrder',
             templateUrl:'templates/po.html',
             controller:'poctrl'
-
+        })
+        .state('prevPO', {
+            url:'/main/purchaseOrder/:id',
+            templateUrl:'templates/PO_prev.html',
+            controller:'podetailsctrl'
         });
         
     // $urlRouterProvider.otherwise('/main');
