@@ -15,10 +15,10 @@ class PurchaseOrders extends Model {
 	}
 
 	public static function getBranch(){
-		$tbl_branch = DB::table('tbl_branch')->where('code', 'SMSi')
+		$tbl_settings = DB::table('tbl_settings')->where('idSettings', '1')
 						->get();
 
-		return $tbl_branch;	
+		return $tbl_settings;	
 	}
 
 	public static function getBank(){
@@ -108,11 +108,13 @@ class PurchaseOrders extends Model {
 	}
 
 	public static function getPOLists(){
-		return DB::select('SELECT a.poID, a.po_num, b.supplier, c.brName, a.PO_date, d.bankName, a.purchasing_agent FROM tbl_po a
+		return DB::select('SELECT a.poID, a.po_num, b.supplier, c.brName, a.PO_date, a.purchasing_agent, f.value AS branch, e.payment 
+				FROM tbl_po a
 				LEFT JOIN tbl_supplier b ON b.supplierID=a.supplier
 				LEFT JOIN tbl_branch c ON c.brID=a.branch
 				LEFT JOIN tbl_bank d ON d.bankID=a.bank
-				LEFT JOIN tbl_mop e ON e.id=a.mop');
+				LEFT JOIN tbl_mop e ON e.id=a.mop
+				LEFT JOIN tbl_settings f On f.idsettings=a.branch');
 	}
 }
 ?>

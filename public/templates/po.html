@@ -15,7 +15,7 @@
                             <div class="form-group">
                                 <label for="inputName">Name (DELIVERED TO: )</label>
                                 <select ng-model="PO.branch" class="form-control input-sm">
-                                    <option ng-repeat="branch in branches" value="{{branch.brID}}">{{branch.brName}}</option>
+                                    <option ng-repeat="branch in branches" value="{{branch.idSettings}}">{{branch.value}}</option>
                                 </select>
                             </div>
                             <div class="form-group">
@@ -135,7 +135,7 @@
                     <div class="scrollable-area">
                         <table id="tbl_subject" class="table table-hover table-responsive" ng-table="tableParams">
                             <tr ng-repeat="PO in $data">
-                                 <td data-title="'ID'" sortable="'title'">
+                                <td data-title="'ID'" sortable="'title'">
                                     {{PO.poID}}
                                 </td>
                                 <td data-title="'PO No.'" sortable="'title'">
@@ -144,8 +144,8 @@
                                 <td data-title="'Supplier'">
                                     {{PO.supplier}}
                                 </td>
-                                <td data-title="'Branch'">
-                                    {{PO.brName}}
+                                <td data-title="'Delivered To'">
+                                    {{PO.branch}}
                                 </td>
                                 <td data-title="'Date'">
                                     {{PO.PO_date}}
@@ -154,19 +154,15 @@
                                     {{PO.purchasing_agent}}
                                 </td>
                                 <td data-title="'Requested By'">
-                                    {{PO.PO_date}}
+                                    {{PO.brName}}
                                 </td>
-                                <td data-title="'Action'">
+                                <td data-title="'MOP'">
+                                    {{PO.payment}}
+                                </td>
+                                <td data-title="'View'">
                                     <div class="text-right">
-                                        <a class="btn btn-primary btn-xs" ng-click="getEmployeeID(employee.empID)">
-                                            <i class="fa fa-pencil"></i>
-                                        </a>
                                         <a class="btn btn-primary btn-xs" href="/main/purchaseOrder/{{PO.poID}}">
                                             <i class="glyphicon glyphicon-stats"></i>
-                                        </a>
-                                        
-                                        <a class="btn btn-danger btn-xs" ng-click="delBranch(branch.brID)">
-                                            <i class="fa fa-trash"></i>
                                         </a>
                                     </div>
                                 </td>

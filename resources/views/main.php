@@ -93,6 +93,7 @@
     <script src ="scripts/controllers/searchAPVctrl.js"></script>
     <script src ="scripts/controllers/poctrl.js"></script>
     <script src ="scripts/controllers/podetailsctrl.js"></script>
+    <script src ="scripts/controllers/seriesnumctrl.js"></script>
     <!-- Angular Directives -->
     <script src ="scripts/directives/header.js"></script>
     <!-- Angular Services -->

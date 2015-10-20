@@ -15,5 +15,15 @@ class PODetController extends BaseController{
 		$data = PODetails::getPODetails($id);
 		return response()->json($data);
 	}
+
+	public function getPOItems(Request $request,$id){
+		$data = PODetails::getPOItems($id);
+		return response()->json($data);
+	}
+
+	public function selectSUM(Request $request,$id){
+		$data = PODetails::selectSUM($id);
+		return response()->json($data);
+	}
 }
 ?>

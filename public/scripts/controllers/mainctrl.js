@@ -181,5 +181,14 @@ angular
             });
         };
 
+        $scope.seriesNumbers = function(){
+           var modalInstance = $modal.open({
+                animation: true,
+                templateUrl: '/templates/modals/seriesNo.html',
+                controller: 'seriesnumctrl',
+                size: 'md'
+            });
+        };
+
         init();
     });

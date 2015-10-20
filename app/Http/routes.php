@@ -169,6 +169,8 @@ Route::group(['prefix' => 'api/v1'],function(){
 
 	Route::group(['prefix' => 'podetails'],function(){
 		Route::get('/{id}','PODetController@getPODetails');
+		Route::get('/getPOItems/{id}','PODetController@getPOItems');
+		Route::get('/selectSUM/{id}','PODetController@selectSUM');
 	});		
 });
 
