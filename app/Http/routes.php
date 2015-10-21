@@ -171,6 +171,12 @@ Route::group(['prefix' => 'api/v1'],function(){
 		Route::get('/{id}','PODetController@getPODetails');
 		Route::get('/getPOItems/{id}','PODetController@getPOItems');
 		Route::get('/selectSUM/{id}','PODetController@selectSUM');
+	});	
+
+	Route::group(['prefix' => 'series'],function(){
+		Route::get('/','SeriesController@getSeriesNum');
+		Route::get('/getSeriesDet/{id}','SeriesController@getSeriesDet');
+		Route::put('/{id}','SeriesController@updateNumSeries');
 	});		
 });
 

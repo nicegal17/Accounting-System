@@ -117,5 +117,6 @@
     <script src ="scripts/services/searchAPV.js"></script>
     <script src ="scripts/services/po.js"></script>
     <script src ="scripts/services/podetails.js"></script>
+    <script src ="scripts/services/series.js"></script>
   </body>
 </html>

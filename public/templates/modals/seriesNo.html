@@ -1,21 +1,75 @@
+<!-- <div class="modal-header">
+    <span class="col-lg-6"><h5 class="modal-title"></h5></span>
+    <span class="pull-right">
+        <span class="glyphicon glyphicon-remove-circle"></span>
+    </span>
+    <br/>
+</div> -->
+
 <div class="modal-header">
-    <h3 class="modal-title">Accounting Number Series</h3>
-</div>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="closeModal()"><span aria-hidden="true">&times;</span></button>
+        <h5 class="modal-title">Accounting Number Series</h5>
+      </div>
 <div class="modal-body">
     <div class="panel panel-primary">
         <div class="panel-body">
             <form>
-                <div class="form-inline form-group col-lg-12 col-md-12">
-                    <input type="text" class="form-control col-lg-2 col-md-2" ng-model="beginBal.amount" placeholder="JV No.">
-                    <input type="text" class="form-control col-lg-2 col-md-2" ng-model="beginBal.amount" placeholder="CDV No.">
-                    <input type="text" class="form-control col-lg-2 col-md-2" ng-model="beginBal.amount" placeholder="PO No.">
-                    <input type="text" class="form-control col-lg-2 col-md-2" ng-model="beginBal.amount" placeholder="APV NO.">
-                    <input type="text" class="form-control col-lg-2 col-md-2" ng-model="beginBal.amount" placeholder="SOA NO.">
+                <div class="form-inline form-group">
+                    <div class="form-group">
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <label>Description: </label>
+                        <input type="text" class="form-control input-sm" ng-model="series.Description" placeholder="Description">
+                    </div>
+                    <div class="form-group">
+                        <label>Abbrevation.: </label>
+                        <input type="text" class="form-control input-sm" ng-model="series.ABRV" placeholder="Abbrevation">
+                    </div>
+                    <br/>
+                    <br/>
+                    <div class="form-group">
+                        <label>Series Number.: </label>
+                        <input type="text" class="form-control input-sm" ng-model="series.numSeries" placeholder="Input Number Series">
+                    </div>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <button class="btn btn-sm btn-success" ng-click="saveSeries()"><span class="glyphicon glyphicon-saved"></span> Save</button>
+                    <button class="btn btn-sm btn-danger" ng-click="cancel()">Cancel</button>
                 </div>
-                <!-- <a class="btn btn-sm btn-success" ng-show="!isDisable" ng-click="saveBeginningBal()"><span class="glyphicon glyphicon-saved"></span> Save</a>
-                <button ng-click="cancel()" class="btn btn-sm btn-danger" ng-hide="isDisable">Cancel</button>
-                <button class="btn btn-sm btn-danger" ng-click="closeModal()"><span class="glyphicon glyphicon-remove-circle"></span> Close</button> -->
             </form>
+        </div>
+    </div>
+    <div class="panel panel-primary">
+        <div class="panel-heading">Manage Number Series Lists</div>
+        <div class="panel-body">
+            <div class="form-inline pull-right" role="form">
+                <div class="input-group">
+                    <span class="input-group-addon">
+                        <i class="glyphicon glyphicon-search"></i>
+                    </span>
+                    <input id="txtvalue" type="text" ng-model="seriesnum" class="form-control" placeholder="Search" />
+                </div>
+            </div>
+        </div>
+        <div class="scrollable-area">
+            <table id="tbl_subject" class="table table-hover table-responsive" ng-table="tableParams">
+                <tr ng-repeat="series in $data">
+                    <td data-title="'Description'" sortable="'posName'">
+                        {{series.Description}}
+                    </td>
+                    <td data-title="'Abbrevation'" sortable="'posName'">
+                        {{series.ABRV}}
+                    </td>
+                    <td data-title="'Series Number'" sortable="'posName'">
+                        {{series.numSeries}}
+                    </td>
+                    <td data-title="'Action'">
+                        <div class="text-right">
+                            <a class="btn btn-primary btn-xs" ng-click="getSeriesNum(series.idNum)">
+                                <i class="fa fa-pencil"></i>
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+            </table>
         </div>
     </div>
 </div>
