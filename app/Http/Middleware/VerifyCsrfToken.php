@@ -8,6 +8,9 @@ use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken as BaseVerifier;
 class VerifyCsrfToken extends BaseVerifier
 {
 
+	protected $except = [
+	  'api/v1/*'
+	];
 
     public function handle($request, Closure $next){
     	if(strpos($request->getRequestUri(),'api') >= 0){
