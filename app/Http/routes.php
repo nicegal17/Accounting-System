@@ -11,7 +11,7 @@
 |
 */
 
-Route::get('/','loginController@getViewLogin');
+/*Route::get('/','loginController@getViewLogin');
 
 	
 Route::any('/main/{path?}','mainController@getviewMain')->where("path", ".+");
@@ -22,11 +22,13 @@ Route::group(['prefix' => 'auth'], function(){
 	Route::get('/login', function(){
 		return redirect()->to('/');
 	});
-});
+});*/
 
 Route::group(['prefix' => 'api/v1'],function(){
 
 	Route::group(['prefix' => 'auth'], function(){
+		Route::get('/logout', 'loginController@logoutAuth');
+		Route::post('/login', 'loginController@loginAuth');
 		Route::get('/user', 'loginController@getCurrentUser');
 	});
 

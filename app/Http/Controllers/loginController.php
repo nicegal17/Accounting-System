@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Login;
-
+use App\User;
 use Auth;
 use Validator;
-use Session;
+use JWTAuth;
+use JWTFactory;
+use Tymon\JWTAuth\PayloadFactory;
 use Illuminate\Http\Request;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller as BaseController;
@@ -34,13 +36,12 @@ class loginController extends BaseController
     	$input = $request->all();
         $user = Login::authenticate($input);
         if(isset($user) && !empty($user)){
-
-            $result = Auth::loginUsingId($user[0]->userID);
-            Session::put('user', Auth::user());
-            Session::save();
-
+            // $result = Auth::loginUsingId($user[0]->userID);
+            $user = $user[0];
+            $users = User::find($user->userID);            
+            $token = JWTAuth::fromUser($users);
             if ($result) {
-                return response()->json(array('url'=>'/main','success'=>true,'msg'=>''));
+                return response()->json(array('url'=>'/main','success'=>true,'msg'=>'','token'=> $token));
             }else{
                 return response()->json(array('url'=>'/main','success'=>true,'msg'=>'Login Failed'));
             }
