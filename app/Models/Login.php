@@ -13,6 +13,9 @@ class Login extends Model {
 	}
 
 	public static function authenticate($data){
-		return DB::select('SELECT * FROM tbl_useracct WHERE username=? AND password=? LIMIT 1;',array($data['username'],$data['password']));
+		return DB::select('SELECT U.userID,E.empID,U.username, E.empName,E.idPosition,
+			(SELECT posName FROM tbl_position WHERE idPosition = E.idPosition) AS empPosition 
+			FROM tbl_useracct U INNER JOIN tbl_employee E ON E.empID = U.empID 
+			WHERE username=? AND password=? LIMIT 1;',array($data['username'],$data['password']));
 	}
 }				

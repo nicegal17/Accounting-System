@@ -36,12 +36,11 @@ class loginController extends BaseController
     	$input = $request->all();
         $user = Login::authenticate($input);
         if(isset($user) && !empty($user)){
-            // $result = Auth::loginUsingId($user[0]->userID);
             $user = $user[0];
             $users = User::find($user->userID);            
             $token = JWTAuth::fromUser($users);
-            if ($result) {
-                return response()->json(array('url'=>'/main','success'=>true,'msg'=>'','token'=> $token));
+            if ($token) {
+                return response()->json(array('url'=>'/main','success'=>true,'msg'=>'','user'=>$user,'token'=> $token));
             }else{
                 return response()->json(array('url'=>'/main','success'=>true,'msg'=>'Login Failed'));
             }
