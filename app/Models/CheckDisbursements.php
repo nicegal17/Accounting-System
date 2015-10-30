@@ -14,12 +14,6 @@ class CheckDisbursements extends Model {
 		return $tbl_bank;	
 	}
 
-	public static function getAccountNo(){
-		$tbl_bankAcct = DB::table('tbl_bankAcct')->get();
-
-		return $tbl_bankAcct;	
-	}
-
 	public static function getAcctTitles(){
 		$tbl_acctchart = DB::table('tbl_acctchart')
 							->where('depth', '=',2)
@@ -30,7 +24,7 @@ class CheckDisbursements extends Model {
 	}
 
 	public static function getCDVNum(){
-		return DB::select('SELECT id, numSeries FROM tbl_series WHERE ABRV="CDV" ORDER BY id DESC LIMIT 1');
+		return DB::select('SELECT idNum, numSeries FROM tbl_series WHERE ABRV="CDV" ORDER BY idNum DESC LIMIT 1');
 	}
 
 	public static function CDVNumSeries(){
@@ -52,14 +46,14 @@ class CheckDisbursements extends Model {
 		$entries = json_decode($data['entries']);
 		$JVNumSeries = CheckDisbursements::CDVNumSeries();	
 		$CDVNo = CheckDisbursements::getCDVNum();	
-		$ID = $CDVNo[0]->id;
+		$ID = $CDVNo[0]->idNum;
 		$Voucher = $CDVNo[0]->numSeries + 1;
 		
-		DB::table('tbl_series')->where('id',$ID)->update(['numSeries' => ($Voucher)]);
+		DB::table('tbl_series')->where('idNum',$ID)->update(['numSeries' => ($Voucher)]);
 
 		$id = DB::table('tbl_cdv')->insertGetId(['CDVNo' => $JVNumSeries[0]->CDV,'payee' => ($cdv['payee']),'address' => ($cdv['address']),'chkDate' => ($cdv['dt']),
-			'bankID' => ($cdv['bank']),'acctID' => ($cdv['account']),'amount' => ($cdv['amount']),'chkNO' => ($cdv['chkNO']),'particular' => ($cdv['particular']),
-			'transDate' => Carbon::NOW() ]);
+			'bankID' => ($cdv['bank']),'amount' => ($cdv['amount']),'chkNO' => ($cdv['chkNO']),'particular' => ($cdv['particular']),
+			'transDate' => Carbon::NOW(), 'prepBy' => ($cdv['userID']) ]);
 
 		for ($i=0; $i < count($entries); $i++) { 
 			$var = $entries[$i];

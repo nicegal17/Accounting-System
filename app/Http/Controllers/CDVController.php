@@ -15,11 +15,6 @@ class CDVController extends BaseController{
 		return response()->json($data);
 	}
 
-	public function getAccountNo(){
-		$data = CheckDisbursements::getAccountNo();
-		return response()->json($data);
-	}
-
 	public function getAcctTitles(){
 		$data = CheckDisbursements::getAcctTitles();
 		return response()->json($data);

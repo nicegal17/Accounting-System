@@ -32,11 +32,15 @@
                                 <option ng-repeat="bank in banks" value="{{bank.bankID}}">{{bank.bankName}}</option>
                             </select>
                         </div>
-                        <div class="form-group">
+                        <!-- <div class="form-group">
                             <label>Account No.</label>
                             <select ng-model="CDV.account" class="form-control">
                                 <option ng-repeat="account in accounts" value="{{account.acctID}}">{{account.acctNo}}</option>
                             </select>
+                        </div> -->
+                        <div class="form-group">
+                            <label for="inputName">Bank Account Number</label>
+                            <input type="number" class="form-control" id="inputName" ng-model="CDV.amount" placeholder="Input Amount">
                         </div>
                         <div class="form-group">
                             <label for="inputName">Amount</label>
