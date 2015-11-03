@@ -53,7 +53,7 @@ class CheckDisbursements extends Model {
 
 		$id = DB::table('tbl_cdv')->insertGetId(['CDVNo' => $JVNumSeries[0]->CDV,'payee' => ($cdv['payee']),'address' => ($cdv['address']),'chkDate' => ($cdv['dt']),
 			'bankID' => ($cdv['bank']),'amount' => ($cdv['amount']),'chkNO' => ($cdv['chkNO']),'particular' => ($cdv['particular']),
-			'transDate' => Carbon::NOW(), 'prepBy' => ($cdv['userID']) ]);
+			'transDate' => Carbon::NOW(), 'prepBy' => ($cdv['currentUser']->userID) ]);
 
 		for ($i=0; $i < count($entries); $i++) { 
 			$var = $entries[$i];

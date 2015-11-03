@@ -22,7 +22,6 @@ class loginController extends BaseController
     use DispatchesJobs, ValidatesRequests;
     use AuthenticatesAndRegistersUsers, ThrottlesLogins;
 
-
     public function getViewLogin(){
        	if (Auth::check()) {
 	   		return redirect()->intended('/main');
@@ -62,6 +61,37 @@ class loginController extends BaseController
         	$user = Auth::user();
         }
     	return response()->json($user);
+
+    //     try {
+    //          if (! $user = JWTAuth::parseToken()->authenticate()) {
+    //         return response()->json(['user_not_found'], 404);
+    //         }
+            
+    //     } catch (Tymon\JWTAuth\Exceptions\TokenExpiredException $e) {
+    //         return response()->json(['token_expired'], $e->getStatusCode());
+
+    //     } catch (Tymon\JWTAuth\Exceptions\TokenInvalidException $e) {
+
+    //     return response()->json(['token_invalid'], $e->getStatusCode());
+
+    //     } catch (Tymon\JWTAuth\Exceptions\JWTException $e) {
+
+    //         return response()->json(['token_absent'], $e->getStatusCode());
+    //     }
+
+    // // the token is valid and we have found the user via the sub claim
+    //     return response()->json(compact('user'));
+    // }
+
+    // public function render($request, Exception $e)
+    // {
+    //     if ($e instanceof Tymon\JWTAuth\Exceptions\TokenExpiredException) {
+    //         return response()->json(['token_expired'], $e->getStatusCode());
+    //     } else if ($e instanceof Tymon\JWTAuth\Exceptions\TokenInvalidException) {
+    //         return response()->json(['token_invalid'], $e->getStatusCode());
+    //     }
+
+    //     return parent::render($request, $e);
     }
 
 }
