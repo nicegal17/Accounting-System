@@ -1,7 +1,7 @@
  'use strict';
 
  angular.module('accounting')
-     .controller('cdvctrl', function($scope, $filter, CDVFactory, toastr) {
+     .controller('cdvctrl', function($scope, $filter, $window, CDVFactory, toastr) {
 
          $scope.today = function() {
              $scope.dt = new Date();
@@ -46,9 +46,9 @@
          $scope.addRow = function(row) {
              var DB, CR;
 
-                 var title = _.find($scope.acctTitles, {
-                     'idAcctTitle': parseInt(row.acctTitle)
-                 });
+             var title = _.find($scope.acctTitles, {
+                 'idAcctTitle': parseInt(row.acctTitle)
+             });
 
              if (row.DB === undefined || row.DB === null) {
                  DB = 0;
@@ -57,7 +57,7 @@
              }
 
              if (row.CR === undefined || row.CR === null) {
-                 CR = 0;    
+                 CR = 0;
              } else {
                  CR = row.CR;
              }
@@ -101,7 +101,7 @@
                  $scope.totalDB = "";
                  $scope.totalCR = "";
              });
-         }; 
+         };
 
          function init() {
              $scope.banks = {};
