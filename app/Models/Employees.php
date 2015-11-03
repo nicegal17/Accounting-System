@@ -36,7 +36,7 @@ class Employees extends Model {
 	}
 
 	public static function getEmployeeID($id){
-		return DB::select('SELECT a.empID, a.empName, a.empAddress, a.phoneNo, b.posName FROM tbl_employee a LEFT JOIN tbl_position b ON b.idPosition=a.idPosition WHERE a.empID=?', array($id));
+		return DB::select('SELECT a.empID, a.empName, a.empAddress, a.phoneNo, b.posName,b.idPosition FROM tbl_employee a LEFT JOIN tbl_position b ON b.idPosition=a.idPosition WHERE a.empID=?', array($id));
 	}
 
 	public static function updateEmployee($id,$data) {
