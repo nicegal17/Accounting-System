@@ -57,15 +57,4 @@ class Employees extends Model {
 		}
 		return $results;
 	} 
-
-	// public static function getPosID($id){
-	// 	$result = DB::table('tbl_employee')
-	// 			->join('tbl_position', function($join)
-	// 			{
-	// 				$join->on('tbl_employee.idPosition','=','tbl_position.idPosition')
-	// 					 ->where('tbl_employee.empID','=', array($id));
-	// 			})
-	// 			->get();
-	// 	return $result;
-	// }
 }

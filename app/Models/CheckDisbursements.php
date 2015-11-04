@@ -29,21 +29,22 @@ class CheckDisbursements extends Model {
 
 	public static function CDVNumSeries(){
 		return DB::select("SELECT 
-    					CASE WHEN (SELECT COUNT(*) FROM tbl_series) = 0 THEN
+						CASE WHEN (SELECT COUNT(*) FROM tbl_series) = 0 THEN
 							CONCAT(YEAR(NOW()),DATE_FORMAT(NOW(),'%m'),'0001')
 						ELSE 
 							CONCAT(YEAR(NOW()),DATE_FORMAT(NOW(),'%m'),
-        				LEFT('0000',(LENGTH('0000') - 
-        				LENGTH(
+						LEFT('0000',(LENGTH('0000') - 
+						LENGTH(
 								CONVERT((CONVERT(RIGHT((SELECT MAX(numSeries) AS CDV FROM tbl_series WHERE ABRV='CDV' ),LENGTH('0000')) , SIGNED) + 1), CHAR)))),
-                				CONVERT((CONVERT( RIGHT((SELECT MAX(numSeries) AS CDV FROM tbl_series WHERE ABRV='CDV'),LENGTH('0000')) , SIGNED) + 1) , CHAR)
+								CONVERT((CONVERT( RIGHT((SELECT MAX(numSeries) AS CDV FROM tbl_series WHERE ABRV='CDV'),LENGTH('0000')) , SIGNED) + 1) , CHAR)
 								)
-    						END AS CDV");	
+							END AS CDV");	
 	}
 
 	public static function createCDV($data){
 		$cdv = $data['CDV'];
 		$entries = json_decode($data['entries']);
+		$userID = $data['userID'];
 		$JVNumSeries = CheckDisbursements::CDVNumSeries();	
 		$CDVNo = CheckDisbursements::getCDVNum();	
 		$ID = $CDVNo[0]->idNum;
@@ -53,7 +54,7 @@ class CheckDisbursements extends Model {
 
 		$id = DB::table('tbl_cdv')->insertGetId(['CDVNo' => $JVNumSeries[0]->CDV,'payee' => ($cdv['payee']),'address' => ($cdv['address']),'chkDate' => ($cdv['dt']),
 			'bankID' => ($cdv['bank']),'amount' => ($cdv['amount']),'chkNO' => ($cdv['chkNO']),'particular' => ($cdv['particular']),
-			'transDate' => Carbon::NOW(), 'prepBy' => ($cdv['currentUser']->userID) ]);
+			'transDate' => Carbon::NOW(), 'prepBy' => $userID ]);
 
 		for ($i=0; $i < count($entries); $i++) { 
 			$var = $entries[$i];
