@@ -18,7 +18,7 @@ class JVoucher extends Model {
 	}
 
 	public static function getJVNum(){
-		return DB::select('SELECT id, numSeries FROM tbl_series WHERE ABRV="JV" ORDER BY id DESC LIMIT 1');
+		return DB::select('SELECT idNum, numSeries FROM tbl_series WHERE ABRV="JV" ORDER BY idNum DESC LIMIT 1');
 	}
 
 	public static function JVnum(){
@@ -26,11 +26,11 @@ class JVoucher extends Model {
     					CASE WHEN (SELECT COUNT(*) FROM tbl_series) = 0 THEN
 							CONCAT(YEAR(NOW()),DATE_FORMAT(NOW(),'%m'),'0001')
 						ELSE 
-							CONCAT(YEAR(NOW()),DATE_FORMAT(NOW(),'%m'),
+							CONCAT(YEAR(NOW()),DATE_FORMAT(NOW(),'%m'),'-',
         				LEFT('0000',(LENGTH('0000') - 
         				LENGTH(
-								CONVERT((CONVERT(RIGHT((SELECT MAX(numSeries) AS JV FROM tbl_series WHERE ABRV='JV' ),LENGTH('0000')) , SIGNED) + 1), CHAR)))),
-                				CONVERT((CONVERT( RIGHT((SELECT MAX(numSeries) AS JV FROM tbl_series WHERE ABRV='JV'),LENGTH('0000')) , SIGNED) + 1) , CHAR)
+								CONVERT((CONVERT(RIGHT((SELECT MAX(numSeries) AS JV FROM tbl_series WHERE ABRV='JV' ),LENGTH('0000')) , SIGNED)), CHAR)))),
+                				CONVERT((CONVERT( RIGHT((SELECT MAX(numSeries) AS JV FROM tbl_series WHERE ABRV='JV'),LENGTH('0000')) , SIGNED)) , CHAR)
 								)
     						END AS JV");	
 	}
@@ -38,14 +38,15 @@ class JVoucher extends Model {
 	public static function createJV($data){
 		$jv = $data['JV'];
 		$entries = json_decode($data['entries']);
+		$userID = $data['userID'];
 		$JVNo = JVoucher::JVnum();	
 		$JVNumSeries = JVoucher::getJVNum();	
-		$ID = $JVNumSeries[0]->id;
+		$ID = $JVNumSeries[0]->idNum;
 		$Voucher = $JVNumSeries[0]->numSeries + 1;
 
-		DB::table('tbl_series')->where('id',$ID)->update(['numSeries' => ($Voucher)]);
+		DB::table('tbl_series')->where('idNum',$ID)->update(['numSeries' => ($Voucher)]);
 	
-		$id = DB::table('tbl_gj')->insertGetId(['JVNum' => $JVNo[0]->JV,'transDate' => Carbon::NOW(), 'particulars' => ($jv['particular'])]);
+		$id = DB::table('tbl_gj')->insertGetId(['JVNum' => $JVNo[0]->JV,'transDate' => Carbon::NOW(), 'prepBy' => $userID, 'particulars' => ($jv['particular'])]);
 
 		for ($i=0; $i < count($entries); $i++) { 
 			$var = $entries[$i];

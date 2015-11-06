@@ -8,11 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class AppCDVs extends Model {
 
 	public static function getCDVNo(){
-		$tbl_cdv = DB::table('tbl_cdv')
-					->where('status', '=', 'PEN')
-					->get();
-
-		return $tbl_cdv;
+		return DB::select('SELECT a.cdvID, a.CDVNo, a.transDate, a.particular, b.empName FROM tbl_cdv a
+					LEFT JOIN tbl_useracct c ON c.userID=a.prepBy
+					LEFT JOIN tbl_employee b ON b.empID=c.empID
+					WHERE status = "PEN" ORDER BY a.cdvID ASC ');
 	}
 
 	public static function getAcctEntries($CDVNo) {

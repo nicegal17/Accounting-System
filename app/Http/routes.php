@@ -117,8 +117,15 @@ Route::group(['prefix' => 'api/v1'],function(){
 		Route::put('/denyCDV/{id}','AppCDVController@denyCDV');
 	});	
 
+	Route::group(['prefix' => 'Audit'],function(){
+		Route::get('/','AuditCDVController@getCDVNo');
+		Route::get('/getAcctEntries/{id}','AuditCDVController@getAcctEntries');
+		Route::put('/{id}','AuditCDVController@auditCDV');
+	});	
+
 	Route::group(['prefix' => 'Search'],function(){
 		Route::get('/','SearchCDVController@getCDVNo');
+		Route::get('/getAcctEntries/{id}','SearchCDVController@getAcctEntries');
 	});	
 	
 	Route::group(['prefix' => 'JV'],function(){
