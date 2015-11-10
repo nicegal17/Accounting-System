@@ -18,7 +18,22 @@ class AuditCDVs extends Model {
 		return DB::select('SELECT * FROM tbl_acctngEntries e LEFT JOIN tbl_acctchart a ON a.idAcctTitle = e.idAcctTitleDB OR a.idAcctTitle = e.idAcctTitleCR WHERE e.cdvID = ?',array($CDVNo));
 	}
 
-	public static function auditCDV($CDVNo){
-		return DB::update('UPDATE tbl_cdv SET status="AUD" WHERE cdvID=?', array($CDVNo));
+	public static function auditCDV($CDVNo,$data){
+		$userID = $data['userID'];
+
+		$result = DB::table('tbl_cdv')->where('cdvID', $CDVNo)
+					->update([
+						'status' => "AUD",
+						'auditedBy' => $userID
+					]);
+
+		if($result){	
+			$results['success'] = 'true';
+			$results['msg'] = 'Record Successfully Updated';
+		}else{
+			$results['success'] = 'false';
+			$results['msg'] = 'WARNING: Unknown error occur while updating the record';
+		}
+	 return $results;
 	}
 }	

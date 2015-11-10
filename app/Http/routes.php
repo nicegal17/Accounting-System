@@ -137,11 +137,18 @@ Route::group(['prefix' => 'api/v1'],function(){
 		Route::get('/','AppJVController@getJVNo');
 		Route::get('/getAcctEntries/{id}','AppJVController@getAcctEntries');
 		Route::put('/{id}','AppJVController@approveJV');
-		Route::put('/denyJV/{id}','AppJVController@denyJV');
+		// Route::put('/denyJV/{id}','AppJVController@denyJV');
+	});	
+
+	Route::group(['prefix' => 'AuditJV'],function(){
+		Route::get('/','AuditJVController@getJVNo');
+		Route::get('/getAcctEntries/{id}','AuditJVController@getAcctEntries');
+		Route::put('/{id}','AuditJVController@auditJV');
 	});	
 
 	Route::group(['prefix' => 'SearchJV'],function(){
 		Route::get('/','SearchJVController@getJVNo');
+		Route::get('/getAcctEntries/{id}','SearchJVController@getAcctEntries');
 	});	
 
 	Route::group(['prefix' => 'APV'],function(){

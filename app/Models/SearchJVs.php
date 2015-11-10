@@ -15,6 +15,6 @@ class SearchJVs extends Model {
 	}
 
 	public static function getAcctEntries($JID) {
-		return DB::select('SELECT * FROM tbl_acctngEntries e LEFT JOIN tbl_acctchart a ON a.idAcctTitle = e.idAcctTitleDB OR a.idAcctTitle = e.idAcctTitleCR WHERE e.JID = ?',array($JID));
+		return DB::select('SELECT * FROM tbl_journalentries e LEFT JOIN tbl_acctchart a ON a.idAcctTitle = e.idAcctTitleDB OR a.idAcctTitle = e.idAcctTitleCR WHERE e.JID = ?',array($JID));
 	}
 }	

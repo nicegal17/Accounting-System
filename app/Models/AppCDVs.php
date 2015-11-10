@@ -18,8 +18,23 @@ class AppCDVs extends Model {
 		return DB::select('SELECT * FROM tbl_acctngEntries e LEFT JOIN tbl_acctchart a ON a.idAcctTitle = e.idAcctTitleDB OR a.idAcctTitle = e.idAcctTitleCR WHERE e.cdvID = ?',array($CDVNo));
 	}
 
-	public static function appCDV($CDVNo){
-		return DB::update('UPDATE tbl_cdv SET status="APR" WHERE cdvID=?', array($CDVNo));
+	public static function appCDV($CDVNo,$data){
+		$userID = $data['userID'];
+
+		$result = DB::table('tbl_cdv')->where('cdvID', $CDVNo)
+					->update([
+						'status' => "APR",
+						'approveBy' => $userID
+					]);
+
+		if($result){	
+			$results['success'] = 'true';
+			$results['msg'] = 'Record Successfully Updated';
+		}else{
+			$results['success'] = 'false';
+			$results['msg'] = 'WARNING: Unknown error occur while updating the record';
+		}
+	 return $results;
 	}
 
 	public static function denyCDV($CDVNo){

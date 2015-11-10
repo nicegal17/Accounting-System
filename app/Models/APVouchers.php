@@ -26,26 +26,27 @@ class APVouchers extends Model {
     					CASE WHEN (SELECT COUNT(*) FROM tbl_series) = 0 THEN
 							CONCAT(YEAR(NOW()),DATE_FORMAT(NOW(),'%m'),'0001')
 						ELSE 
-							CONCAT(YEAR(NOW()),DATE_FORMAT(NOW(),'%m'),
+							CONCAT(YEAR(NOW()),DATE_FORMAT(NOW(),'%m'),'-',
         				LEFT('0000',(LENGTH('0000') - 
         				LENGTH(
-								CONVERT((CONVERT(RIGHT((SELECT MAX(numSeries) AS APV FROM tbl_series WHERE ABRV='APV' ),LENGTH('0000')) , SIGNED) + 1), CHAR)))),
-                				CONVERT((CONVERT( RIGHT((SELECT MAX(numSeries) AS APV FROM tbl_series WHERE ABRV='APV'),LENGTH('0000')) , SIGNED) + 1) , CHAR)
+								CONVERT((CONVERT(RIGHT((SELECT MAX(numSeries) AS APV FROM tbl_series WHERE ABRV='APV' ),LENGTH('0000')) , SIGNED)), CHAR)))),
+                				CONVERT((CONVERT( RIGHT((SELECT MAX(numSeries) AS APV FROM tbl_series WHERE ABRV='APV'),LENGTH('0000')) , SIGNED)) , CHAR)
 								)
     						END AS APV");	
 	}
 
 	public static function createAPV($data){
 		$apv = $data['APVoucher'];
+		$userID = $data['userID'];
 		$entries = json_decode($data['entries']);
 		$APVNumSeries = APVouchers::APVNum();	
 		$APVNo = APVouchers::getAPVNum();	
 		$ID = $APVNo[0]->id;
 		$Voucher = $APVNo[0]->numSeries + 1;
 
-		DB::table('tbl_series')->where('id',$ID)->update(['numSeries' => ($Voucher)]);
+		DB::table('tbl_series')->where('idNum',$ID)->update(['numSeries' => ($Voucher)]);
 	
-		$id = DB::table('tbl_apv')->insertGetId(['APVNum' => $APVNumSeries[0]->APV,'transDate' => Carbon::NOW(), 'particulars' => ($apv['particular'])]);
+		$id = DB::table('tbl_apv')->insertGetId(['APVNum' => $APVNumSeries[0]->APV,'transDate' => Carbon::NOW(), 'particulars' => ($apv['particular']), 'prepBy' => $userID]);
 
 		for ($i=0; $i < count($entries); $i++) { 
 			$var = $entries[$i];
