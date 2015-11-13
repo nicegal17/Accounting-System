@@ -18,7 +18,7 @@ class AppJVouchers extends Model {
 		return DB::select('SELECT * FROM tbl_journalEntries e LEFT JOIN tbl_acctchart a ON a.idAcctTitle = e.idAcctTitleDB OR a.idAcctTitle = e.idAcctTitleCR WHERE e.JID=?',array($JID));
 	}
 
-	public static function appCDV($JID,$data){
+	public static function approveJV($JID,$data){
 		$userID = $data['userID'];
 
 		$result = DB::table('tbl_gj')->where('JID', $JID)
@@ -29,7 +29,7 @@ class AppJVouchers extends Model {
 
 		if($result){	
 			$results['success'] = 'true';
-			$results['msg'] = 'Record Successfully Updated';
+			$results['msg'] = 'Journal Voucher has been approved';
 		}else{
 			$results['success'] = 'false';
 			$results['msg'] = 'WARNING: Unknown error occur while updating the record';

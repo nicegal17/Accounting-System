@@ -8,10 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class SearchAPVs extends Model {
 
 	public static function getAPVNo(){
-		$tbl_apv = DB::table('tbl_apv')
-					->get();
-
-		return $tbl_apv;
+		return DB::select('SELECT a.apvID, a.APVNum, a.transDate, a.particulars, b.empName 
+					FROM tbl_apv a
+					LEFT JOIN tbl_useracct c ON c.userID=a.prepBy
+					LEFT JOIN tbl_employee b ON b.empID=c.empID ORDER BY a.apvID ASC ');
 	}
 
 	public static function getAcctEntries($apvID) {

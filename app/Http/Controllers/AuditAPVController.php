@@ -1,28 +1,28 @@
 <?php
 namespace App\Http\Controllers;
 
-use App\Models\AppAPVs;
+use App\Models\AuditAPVs;
 
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Http\Request;
 
-class AppAPVController extends BaseController{ 
+class AuditAPVController extends BaseController{ 
 	
-	public function getAPVNo(){
-		$data = AppAPVs::getAPVNo();
+	public function getAPV(){
+		$data = AuditAPVs::getAPV();
 		return response()->json($data);
 	}
 
 	public function getAcctEntries($id){
-		$data = AppAPVs::getAcctEntries($id);
+		$data = AuditAPVs::getAcctEntries($id);
 		return response()->json($data);
 	}
 
-	public function approveAPV(Request $request, $id){
+	public function auditAPV(Request $request, $id){
 		$input = $request->all();
-		$data = AppAPVs::approveAPV($id,$input);
+		$data = AuditAPVs::auditAPV($id,$input);
 		return response()->json($data);
 	}
 }

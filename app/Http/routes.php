@@ -58,9 +58,8 @@ Route::group(['prefix' => 'api/v1'],function(){
 	});
 
 	Route::group(['prefix' => 'users'],function(){
-		Route::get('/','UserController@getUsers');
+		Route::get('/','UserController@getAllUsers');
 		Route::post('/','UserController@createUser');
-		Route::get('/getUsers','UserController@getAllUsers');
 		Route::get('/{id}','UserController@getUserID');
 		Route::put('/{id}','UserController@updateUser');
 		Route::delete('/{id}','UserController@deleteUser');
@@ -133,11 +132,10 @@ Route::group(['prefix' => 'api/v1'],function(){
 		Route::post('/','JVController@createJV');
 	});	
 
-	Route::group(['prefix' => 'appJV'],function(){
+	Route::group(['prefix' => 'approveJV'],function(){
 		Route::get('/','AppJVController@getJVNo');
 		Route::get('/getAcctEntries/{id}','AppJVController@getAcctEntries');
 		Route::put('/{id}','AppJVController@approveJV');
-		// Route::put('/denyJV/{id}','AppJVController@denyJV');
 	});	
 
 	Route::group(['prefix' => 'AuditJV'],function(){
@@ -159,15 +157,22 @@ Route::group(['prefix' => 'api/v1'],function(){
 	Route::group(['prefix' => 'appAPV'],function(){
 		Route::get('/','AppAPVController@getAPVNo');
 		Route::get('/getAcctEntries/{id}','AppAPVController@getAcctEntries');
+		Route::put('/{id}','AppAPVController@approveAPV');
+	});	
+
+	Route::group(['prefix' => 'AuditAPV'],function(){
+		Route::get('/','AuditAPVController@getAPV');
+		Route::get('/getAcctEntries/{id}','AuditAPVController@getAcctEntries');
+		Route::put('/{id}','AuditAPVController@auditAPV');
 	});	
 
 	Route::group(['prefix' => 'SearchAPV'],function(){
 		Route::get('/','SearchAPVController@getAPVNo');
-		Route::get('/getAcctTitles{id}','SearchAPVController@getAcctTitles');
+		Route::get('/getAcctEntries/{id}','SearchAPVController@getAcctEntries');
 	});	
 
 	Route::group(['prefix' => 'check'],function(){
-		Route::get('/','CheckController@createCheck');
+		Route::post('/','CheckController@createCheck');
 	});	
 
 	Route::group(['prefix' => 'PO'],function(){
@@ -178,14 +183,16 @@ Route::group(['prefix' => 'api/v1'],function(){
 		Route::get('/getUnit','POController@getUnit');
 		Route::get('/getSupplier2','POController@getSupplier2');
 		Route::get('/getMOP','POController@getMOP');
-		Route::post('/','POController@createPO');
 		Route::get('/getPOLists','POController@getPOLists');
+		Route::post('/','POController@createPO');
 	});
 
 	Route::group(['prefix' => 'podetails'],function(){
 		Route::get('/{id}','PODetController@getPODetails');
 		Route::get('/getPOItems/{id}','PODetController@getPOItems');
 		Route::get('/selectSUM/{id}','PODetController@selectSUM');
+		//Route::get('/{id}', 'PODetController@getPOID');
+		Route::put('/{id}', 'PODetController@approvePO');
 	});	
 
 	Route::group(['prefix' => 'series'],function(){

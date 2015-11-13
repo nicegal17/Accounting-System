@@ -32,11 +32,11 @@ class CheckDisbursements extends Model {
 						CASE WHEN (SELECT COUNT(*) FROM tbl_series) = 0 THEN
 							CONCAT(YEAR(NOW()),DATE_FORMAT(NOW(),'%m'),'0001')
 						ELSE 
-							CONCAT(YEAR(NOW()),DATE_FORMAT(NOW(),'%m'),
+							CONCAT(YEAR(NOW()),DATE_FORMAT(NOW(),'%m'),'-',
 						LEFT('0000',(LENGTH('0000') - 
 						LENGTH(
-								CONVERT((CONVERT(RIGHT((SELECT MAX(numSeries) AS CDV FROM tbl_series WHERE ABRV='CDV' ),LENGTH('0000')) , SIGNED) + 1), CHAR)))),
-								CONVERT((CONVERT( RIGHT((SELECT MAX(numSeries) AS CDV FROM tbl_series WHERE ABRV='CDV'),LENGTH('0000')) , SIGNED) + 1) , CHAR)
+								CONVERT((CONVERT(RIGHT((SELECT MAX(numSeries) AS CDV FROM tbl_series WHERE ABRV='CDV' ),LENGTH('0000')) , SIGNED)), CHAR)))),
+								CONVERT((CONVERT( RIGHT((SELECT MAX(numSeries) AS CDV FROM tbl_series WHERE ABRV='CDV'),LENGTH('0000')) , SIGNED)) , CHAR)
 								)
 							END AS CDV");	
 	}

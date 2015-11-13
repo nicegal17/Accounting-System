@@ -9,6 +9,7 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Http\Request;
 
 class CheckController extends BaseController{ 
+	
 	public function createCheck(Request $request){
 		$input = $request->all();
 		$data = Checks::createCheck($input);

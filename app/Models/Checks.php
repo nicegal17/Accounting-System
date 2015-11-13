@@ -8,13 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 class Checks extends Model {
 
 	public static function createCheck($data){
+		$userID = $data['userID'];
 
-		$result = DB::insert('INSERT INTO tbl_assetinfo(itemName,cost,datePurchased,estLife,qty,categoryID,idPeriod,postedDate) VALUES(?,?,?,?,?,?,?,NOW())',
-			array($data['itemName'],$data['cost'],$data['dt'],$data['estLife'],$data['qty'],$data['category'],$data['period']));
+		$result = DB::insert('INSERT INTO tbl_checks(Items, amount, check_date, userID) VALUES(?,?,?,?)',
+			array($data['Items'],$data['amount'],$data['dt'],$userID);
 
 		if($result){
 			$results['success'] = 'true';
-			$results['msg'] = 'Record Successfully Saved';
+			$results['msg'] = 'New record has been added';
 		}else{
 			$results['success'] = 'false';
 			$results['msg'] = 'WARNING: Unknown error occur while saving the record';

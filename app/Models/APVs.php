@@ -6,7 +6,7 @@ use DB;
 use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
 
-class APVouchers extends Model {
+class APVs extends Model {
 
 	public static function getAcctTitles(){
 		$tbl_acctchart = DB::table('tbl_acctchart')
@@ -18,7 +18,7 @@ class APVouchers extends Model {
 	}
 
 	public static function getAPVNum(){
-		return DB::select('SELECT id, numSeries FROM tbl_series WHERE ABRV="APV" ORDER BY id DESC LIMIT 1');
+		return DB::select('SELECT idNum, numSeries FROM tbl_series WHERE ABRV="APV" ORDER BY idNum DESC LIMIT 1');
 	}
 
 	public static function APVNum(){
@@ -36,17 +36,17 @@ class APVouchers extends Model {
 	}
 
 	public static function createAPV($data){
-		$apv = $data['APVoucher'];
-		$userID = $data['userID'];
+		$apv = $data['APV'];
 		$entries = json_decode($data['entries']);
-		$APVNumSeries = APVouchers::APVNum();	
-		$APVNo = APVouchers::getAPVNum();	
-		$ID = $APVNo[0]->id;
-		$Voucher = $APVNo[0]->numSeries + 1;
+		$userID = $data['userID'];
+		$APVSeries = APVs::APVNum();
+		$APVNum = APVs::getAPVNum();
+		$ID = $APVNum[0]->idNum;	
+		$Voucher = $APVNum[0]->numSeries + 1;	
 
 		DB::table('tbl_series')->where('idNum',$ID)->update(['numSeries' => ($Voucher)]);
-	
-		$id = DB::table('tbl_apv')->insertGetId(['APVNum' => $APVNumSeries[0]->APV,'transDate' => Carbon::NOW(), 'particulars' => ($apv['particular']), 'prepBy' => $userID]);
+
+		$id = DB::table('tbl_apv')->insertGetId(['APVNum' => $APVSeries[0]->APV,'transDate' => Carbon::NOW(), 'prepBy' => $userID, 'particulars' => ($apv['particulars'])]);
 
 		for ($i=0; $i < count($entries); $i++) { 
 			$var = $entries[$i];
@@ -65,7 +65,7 @@ class APVouchers extends Model {
 				$ID2 = null;
 			}
 
-			DB::table('tbl_apvEntries')->insert(['apvID' => ($id),'idAcctTitleDB' => ($ID),'idAcctTitleCR' => ($ID2),'amount' => ($amount)]);			
+			DB::table('tbl_apventries')->insert(['apvID' => ($id),'idAcctTitleDB' => ($ID),'idAcctTitleCR' => ($ID2),'amount' => ($amount)]);			
 		}
 
 		if($id){
@@ -77,4 +77,5 @@ class APVouchers extends Model {
 		 }
 		return $ids;
 	}
+
 }

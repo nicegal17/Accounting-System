@@ -6,20 +6,14 @@ use DB;
 use Illuminate\Database\Eloquent\Model;
 
 class Users extends Model {
-
-	public static function getUsers(){
-		$tbl_employee = DB::table('tbl_employee')->get();
-
-		return $tbl_employee;
-	}
-
+	
 	public static function createUser($data){
 		$result = DB::insert('INSERT INTO tbl_useracct(empID,UName,Pwd) VALUES (?,?,?)',
 			array($data['empName'],$data['UName'],$data['Pwd']));
 
 		if($result){
 			$results['success'] = 'true';
-			$results['msg'] = 'Record Successfully Saved';
+			$results['msg'] = 'New user has been successfully created';
 		}else{
 			$results['success'] = 'false';
 			$results['msg'] = 'WARNING: Unknown error occur while saving the record';
@@ -30,6 +24,7 @@ class Users extends Model {
 	public static function getAllUsers(){
 		$tbl_userAcct = DB::table('tbl_userAcct')
 		->leftJoin('tbl_employee', 'tbl_employee.empID', '=', 'tbl_userAcct.empID')
+		->leftJoin('tbl_position', 'tbl_position.idPosition', '=', 'tbl_employee.idPosition')
 		->get();
 
 		return $tbl_userAcct;
@@ -48,7 +43,7 @@ class Users extends Model {
 
 		if($result){	
 			$results['success'] = 'true';
-			$results['msg'] = 'Record Successfully Updated';
+			$results['msg'] = 'User Account has been updated';
 		}else{
 			$results['success'] = 'false';
 			$results['msg'] = 'WARNING: Unknown error occur while updating the record';

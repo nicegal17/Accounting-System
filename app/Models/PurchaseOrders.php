@@ -53,7 +53,7 @@ class PurchaseOrders extends Model {
 	}
 
 	public static function getPONum(){
-		return DB::select('SELECT id, numSeries FROM tbl_series WHERE ABRV="PO" ORDER BY id DESC LIMIT 1');
+		return DB::select('SELECT idNum, numSeries FROM tbl_series WHERE ABRV="PO" ORDER BY idNum DESC LIMIT 1');
 	}
 
 	public static function PONumseries(){
@@ -64,25 +64,27 @@ class PurchaseOrders extends Model {
 							CONCAT(YEAR(NOW()),
         				LEFT('0000',(LENGTH('000') - 
         				LENGTH(
-								CONVERT((CONVERT(RIGHT((SELECT MAX(numSeries) AS PO FROM tbl_series WHERE ABRV='PO' ),LENGTH('00')) , SIGNED) + 1), CHAR)))),
-                				CONVERT((CONVERT( RIGHT((SELECT MAX(numSeries) AS PO FROM tbl_series WHERE ABRV='PO'),LENGTH('00')) , SIGNED) + 1) , CHAR)
+								CONVERT((CONVERT(RIGHT((SELECT MAX(numSeries) AS PO FROM tbl_series WHERE ABRV='PO' ),LENGTH('00')) , SIGNED)), CHAR)))),
+                				CONVERT((CONVERT( RIGHT((SELECT MAX(numSeries) AS PO FROM tbl_series WHERE ABRV='PO'),LENGTH('00')) , SIGNED)) , CHAR)
 								)
     						END AS PO");	
 	}
 
 	public static function createPO($data){
 		$po = $data['PO'];
+		$userID = $data['userID'];
 		$entries = json_decode($data['entries']);
 		$POSeries = PurchaseOrders::PONumseries();	
 		$PONo = PurchaseOrders::getPONum();	
 
-		$ID = $PONo[0]->id;
+		$ID = $PONo[0]->idNum;
 		$Voucher = $PONo[0]->numSeries + 1;
 
-		DB::table('tbl_series')->where('id',$ID)->update(['numSeries' => ($Voucher)]);
+		DB::table('tbl_series')->where('idNum',$ID)->update(['numSeries' => ($Voucher)]);
 
-		$id = DB::table('tbl_po')->insertGetId(['po_num' => $POSeries[0]->PO, 'supplier' => ($po['supplier']), 'branch' => ($po['branch']),
-				'PO_date' => Carbon::NOW(), 'bank' => ($po['bank']), 'purchasing_agent' => ($po['POAgent']), 'requestedby' =>($po['brName']), 'mop' =>($po['mop']) ]);
+		$result = DB::table('tbl_po')->insertGetId(['po_num' => $POSeries[0]->PO, 'supplier' => ($po['supplier']), 'branch' => ($po['branch']),
+				'PO_date' => Carbon::NOW(), 'bank' => ($po['bank']), 'purchasing_agent' => ($po['POAgent']), 'requestedby' =>($po['brName']),
+				 'mop' =>($po['mop']), 'userID' => $userID ]);
 
 		for ($i=0; $i < count($entries); $i++) { 
 			$var = $entries[$i];
@@ -93,23 +95,23 @@ class PurchaseOrders extends Model {
 			$unitPrice = $var->unitPrice;
 			$total = $var->total;
 			
-			DB::table('tbl_po_items')->insert(['poID' => ($id),'items' => ($Items),'qty' => ($quantity),'unit' => ($unit),'unit_price' =>($unitPrice),'total' => ($total)]);	
+			DB::table('tbl_po_items')->insert(['poID' => ($result),'items' => ($Items),'qty' => ($quantity),'unit' => ($unit),'unit_price' =>($unitPrice),'total' => ($total)]);	
 		}
 
-		if($id){
-			$ids['success'] = 'true';
-			$ids['msg'] = 'Record Successfully Saved';
+		if($result){
+			$results['success'] = 'true';
+			$results['msg'] = 'New Purchase Order has been saved.';
 		}else{
-			$ids['success'] = 'false';
-			$ids['msg'] = 'WARNING: Unknown error occur while saving the record';	
+			$results['success'] = 'false';
+			$results['msg'] = 'WARNING: Unknown error occur while saving the record';	
 		 }
 
-		return $ids;
+		return $results;
 	}
 
 	public static function getPOLists(){
 		return DB::select('SELECT a.poID, a.po_num, b.supplier, c.brName, a.PO_date, a.purchasing_agent, f.value AS branch, e.payment 
-				FROM tbl_po a
+				, a.status FROM tbl_po a
 				LEFT JOIN tbl_supplier b ON b.supplierID=a.supplier
 				LEFT JOIN tbl_branch c ON c.brID=a.branch
 				LEFT JOIN tbl_bank d ON d.bankID=a.bank
