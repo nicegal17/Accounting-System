@@ -20,9 +20,19 @@ class AssetController extends BaseController{
 		return response()->json($data);
 	}
 
+	public function getAssets(){
+		$data = Assets::getAssets();
+		return response()->json($data);
+	}
+
 	public function createAsset(Request $request){
 		$input = $request->all();
 		$data = Assets::createAsset($input);
+		return response()->json($data); 
+	}
+
+	public function getAssetItem(Request $request,$id){
+		$data = Assets::getAssetItem($id);
 		return response()->json($data);
 	}
 }

@@ -23,7 +23,7 @@ class Balances extends Model {
 
 		if($result){
 			$results['success'] = 'true';
-			$results['msg'] = 'Record Successfully Saved';
+			$results['msg'] = 'Beginning Balance Successfully Saved';
 		}else{
 			$results['success'] = 'false';
 			$results['msg'] = 'WARNING: Unknown error occur while saving the record';

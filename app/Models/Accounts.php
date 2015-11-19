@@ -31,11 +31,11 @@ class Accounts extends Model {
 		return $tbl_FS;
 	}
 
-	public static function getAccountTitles(){
-		$tbl_acctchart = DB::table('tbl_acctchart')->get();
+	// public static function getAccountTitles(){
+	// 	$tbl_acctchart = DB::table('tbl_acctchart')->get();
 
-		return $tbl_acctchart;
-	}
+	// 	return $tbl_acctchart;
+	// }
 
 	public static function createAccount($data){
 		$result = DB::insert('INSERT INTO tbl_acctchart(acctCode,acctTitle,acctTypeID,normsID,FSID,fundID) VALUES(?,?,?,?,?,?)',
@@ -49,5 +49,14 @@ class Accounts extends Model {
 			$results['msg'] = 'WARNING: Unknown error occur while saving the record';
 		}
 		return $results;
+	}
+
+	public static function getAccountChart(){
+		$tbl_acctchart = DB::table('tbl_acctchart')
+						->leftjoin('tbl_normalBalance', 'tbl_acctchart.normsID', '=', 'tbl_acctchart.normsID')
+						->leftjoin('tbl_acctGroup', 'tbl_acctchart.acctTypeID', '=', 'tbl_acctchart.acctTypeID')
+						->get();
+
+		return $tbl_acctchart;
 	}
 }				

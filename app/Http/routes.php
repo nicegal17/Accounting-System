@@ -51,7 +51,7 @@ Route::group(['prefix' => 'api/v1'],function(){
 	Route::group(['prefix' => 'branches'],function(){
 		Route::get('/','BranchController@getBranches');
 		Route::post('/','BranchController@createBranch');
-		Route::get('/{id}', 'BranchController@getBranchByID');
+		Route::get('/getBranchByID/{id}', 'BranchController@getBranchByID');
 		Route::put('/{id}', 'BranchController@updateBranch');
 		Route::get('/{data}', 'BranchController@searchBranch');
 		Route::delete('/{id}', 'BranchController@deleteBranch');
@@ -78,8 +78,8 @@ Route::group(['prefix' => 'api/v1'],function(){
 		Route::get('/getAcctTypes','AccountController@getAcctTypes');
 		Route::get('/getNorms','AccountController@getNorms');
 		Route::get('/getFS','AccountController@getFS');
-		Route::get('/getAccountTitles','AccountController@createAccount');
 		Route::post('/','AccountController@createAccount');
+		Route::get('/getAccountChart','AccountController@getAccountChart');
 	});	
 
 	Route::group(['prefix' => 'SubAccount'],function(){
@@ -93,8 +93,10 @@ Route::group(['prefix' => 'api/v1'],function(){
 
 	Route::group(['prefix' => 'Assets'],function(){
 		Route::get('/','AssetController@getCategories');
-		Route::get('/getPeriods','AssetController@getPeriods');
+		Route::get('/','AssetController@getPeriods');
 		Route::post('/','AssetController@createAsset');
+		Route::get('/','AssetController@getAssets');
+		Route::get('/{id}','AssetController@getAssetItem');
 	});	
 
 	Route::group(['prefix' => 'Balance'],function(){
@@ -191,7 +193,6 @@ Route::group(['prefix' => 'api/v1'],function(){
 		Route::get('/{id}','PODetController@getPODetails');
 		Route::get('/getPOItems/{id}','PODetController@getPOItems');
 		Route::get('/selectSUM/{id}','PODetController@selectSUM');
-		//Route::get('/{id}', 'PODetController@getPOID');
 		Route::put('/{id}', 'PODetController@approvePO');
 	});	
 
@@ -199,6 +200,11 @@ Route::group(['prefix' => 'api/v1'],function(){
 		Route::get('/','SeriesController@getSeriesNum');
 		Route::get('/getSeriesDet/{id}','SeriesController@getSeriesDet');
 		Route::put('/{id}','SeriesController@updateNumSeries');
+	});		
+
+	Route::group(['prefix' => 'OR'],function(){
+		Route::get('/','ORController@getPayer');
+		Route::post('/','ORController@saveOR');
 	});		
 });
 

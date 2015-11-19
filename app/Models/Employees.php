@@ -19,7 +19,7 @@ class Employees extends Model {
 
 		if($result){
 			$results['success'] = 'true';
-			$results['msg'] = 'Record Successfully Saved';
+			$results['msg'] = 'New Employee has been added to the system.';
 		}else{
 			$results['success'] = 'false';
 			$results['msg'] = 'WARNING: Unknown error occur while saving the record';
@@ -50,7 +50,7 @@ class Employees extends Model {
 
 		if($result){	
 			$results['success'] = 'true';
-			$results['msg'] = 'Record Successfully Updated';
+			$results['msg'] = 'Record SuccessfulEmployee Details has been updated';
 		}else{
 			$results['success'] = 'false';
 			$results['msg'] = 'WARNING: Unknown error occur while updating the record';

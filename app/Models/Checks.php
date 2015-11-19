@@ -8,11 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Checks extends Model {
 
 	public static function createCheck($data){
+		$check = $data['check'];
 		$userID = $data['userID'];
 
-		$result = DB::insert('INSERT INTO tbl_checks(Items, amount, check_date, userID) VALUES(?,?,?,?)',
-			array($data['Items'],$data['amount'],$data['dt'],$userID);
-
+		$result = DB::table('tbl_checks')->insert(['Items' => ($check['Items']), 'amount' => ($check['amount']), 'check_date' => ($check['dt']), 'userID' => $userID]);
 		if($result){
 			$results['success'] = 'true';
 			$results['msg'] = 'New record has been added';

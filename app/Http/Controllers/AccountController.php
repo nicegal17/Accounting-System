@@ -29,6 +29,11 @@ class AccountController extends BaseController{
 		$data = Accounts::getFS();
 		return response()->json($data);
 	}
+
+	public function getAccountChart(){
+		$data = Accounts::getAccountChart();
+		return response()->json($data);
+	}
 	
 	public function createAccount(Request $request){
 		$input = $request->all();

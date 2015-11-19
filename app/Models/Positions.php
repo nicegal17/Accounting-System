@@ -21,7 +21,7 @@ class Positions extends Model {
 	}
 
 	public static function getPosition(){
-		$tbl_position = DB::table('tbl_position')->get();
+		$tbl_position = DB::table('tbl_position')->skip(10)->take(4)->get();
 
 		return $tbl_position;
 	}

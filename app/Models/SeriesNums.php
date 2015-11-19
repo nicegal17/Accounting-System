@@ -28,7 +28,7 @@ class SeriesNums extends Model {
 
 		if($result){	
 			$results['success'] = 'true';
-			$results['msg'] = 'Record Successfully Updated';
+			$results['msg'] = 'Accounting Number Seris has been Successfully Updated';
 		}else{
 			$results['success'] = 'false';
 			$results['msg'] = 'WARNING: Unknown error occur while updating the record';

@@ -20,18 +20,29 @@ class Assets extends Model {
 		return $tbl_acctperiod;
 	}
 
-	public static function createAsset($data){
+	public static function getAssets() {
+		return DB::select('SELECT a.itemID, a.itemName, FORMAT(a.cost,2) AS cost, a.datePurchased, a.qty, b.desc FROM tbl_assetinfo a
+					LEFT JOIN tbl_category b ON b.categoryID=a.categoryID');
+	}
 
-		$result = DB::insert('INSERT INTO tbl_assetinfo(itemName,cost,datePurchased,estLife,qty,categoryID,idPeriod,postedDate) VALUES(?,?,?,?,?,?,?,NOW())',
-			array($data['itemName'],$data['cost'],$data['dt'],$data['estLife'],$data['qty'],$data['category'],$data['period']));
+	public static function createAsset($data){
+		$Asset = $data['asset'];
+		$userID = $data['userID'];
+		
+		$result = DB::insert('INSERT INTO tbl_assetinfo(itemName,cost,datePurchased,estLife,qty,categoryID,postedDate,postedBy) VALUES(?,?,?,?,?,?,?,?)',
+			[$Asset['itemName'],$Asset['cost'],$Asset['dt'],$Asset['estLife'],$Asset['qty'],$Asset['category'],Carbon::NOW(),$userID]);
 
 		if($result){
 			$results['success'] = 'true';
-			$results['msg'] = 'Record Successfully Saved';
-		}else{
+			$results['msg'] = 'New Asset Item has been added successfully.';
+		}else{	
 			$results['success'] = 'false';
 			$results['msg'] = 'WARNING: Unknown error occur while saving the record';
 		}
 		return $results;
+	}
+
+	public static function getAssetItem($id){
+		return DB::select('SELECT a.itemID, a.itemName, a.cost, a.datePurchased, a.estLife, a.qty, b.desc FROM tbl_assetinfo a LEFT JOIN tbl_category b ON b.categoryID=a.categoryID WHERE a.itemID=?', array($id));
 	}
 }				

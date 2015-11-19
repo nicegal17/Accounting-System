@@ -14,7 +14,7 @@ class Banks extends Model {
 
 		if($result){
 			$results['success'] = 'true';
-			$results['msg'] = 'Record Successfully Saved';
+			$results['msg'] = 'New Bank has been added.';
 		}else{
 			$results['success'] = 'false';
 			$results['msg'] = 'WARNING: Unknown error occur while saving the record';
@@ -44,7 +44,7 @@ class Banks extends Model {
 					]);
 		if($result){
 			$results['success'] = 'true';
-			$results['msg'] = 'Record Successfully Updated';
+			$results['msg'] = 'Record has been updated';
 		}else{
 			$results['success'] = 'false';
 			$results['msg'] = 'WARNING: Unknown error occur while updating the record';
