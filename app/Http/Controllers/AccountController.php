@@ -40,5 +40,17 @@ class AccountController extends BaseController{
 		$data = Accounts::createAccount($input);
 		return response()->json($data);
 	}
+
+	public function getAcctChartByID(Request $request,$id){
+		$data = Accounts::getAcctChartByID($id);
+		return response()->json($data);
+	}
+
+	public function updateAccount(Request $request, $id){
+		$input = $request->all();
+		$data = Accounts::updateAccount($id,$input);
+		return response()->json($data);
+	}
+
 }
 ?>

@@ -31,32 +31,66 @@ class Accounts extends Model {
 		return $tbl_FS;
 	}
 
-	// public static function getAccountTitles(){
-	// 	$tbl_acctchart = DB::table('tbl_acctchart')->get();
-
-	// 	return $tbl_acctchart;
-	// }
-
 	public static function createAccount($data){
-		$result = DB::insert('INSERT INTO tbl_acctchart(acctCode,acctTitle,acctTypeID,normsID,FSID,fundID) VALUES(?,?,?,?,?,?)',
-			array($data['acctCode'],$data['acctTitle'],$data['acctType'],$data['norm'],$data['statement'],$data['fund']));
+		$account = $data['account'];
+		$userID = $data['userID'];
 
-		if($result){
-			$results['success'] = 'true';
-			$results['msg'] = 'Record Successfully Saved';
+		$id = DB::table('tbl_acctchart')->insert(['acctCode' => $account['acctCode'], 'acctTitle' => $account['acctTitle'], 'acctTypeID' => $account['acctType'],
+				'normsID' => $account['normDesc'], 'FSID' => $account['FSDesc'], 'fundID' => $account['fundDesc'], 'postedBy' => $userID]);
+
+		if($id){
+			$ids['success'] = 'true';
+			$ids['msg'] = 'New Account Title has been added.';
 		}else{
-			$results['success'] = 'false';
-			$results['msg'] = 'WARNING: Unknown error occur while saving the record';
+			$ids['success'] = 'false';
+			$ids['msg'] = 'WARNING: Unknown error occur while saving the record';
 		}
-		return $results;
+		return $ids;
 	}
 
 	public static function getAccountChart(){
-		$tbl_acctchart = DB::table('tbl_acctchart')
-						->leftjoin('tbl_normalBalance', 'tbl_acctchart.normsID', '=', 'tbl_acctchart.normsID')
-						->leftjoin('tbl_acctGroup', 'tbl_acctchart.acctTypeID', '=', 'tbl_acctchart.acctTypeID')
-						->get();
+		return DB::select('SELECT a.idAcctTitle, a.acctCode, a.acctTitle, a.idParent, b.acctType, c.normDesc, d.fundDesc, e.FSDesc
+				FROM tbl_acctchart a 
+				LEFT JOIN tbl_acctGroup b ON b.acctTypeID=a.acctTypeID
+				LEFT JOIN tbl_normalBalance c ON c.normsID=a.normsID
+				LEFT JOIN tbl_fund d ON d.fundID=a.fundID
+				LEFT JOIN tbl_fs e ON e.FSID=a.FSID
+				WHERE a.depth = 1
+				ORDER BY a.acctTitle ASC');
+	}
 
-		return $tbl_acctchart;
+	public static function getAcctChartByID($id) {
+		return DB::select('SELECT a.idAcctTitle, a.acctCode, a.acctTitle, a.idParent, b.acctTypeID, b.acctType, c.normsID, c.normDesc, d.fundID, d.fundDesc, e.FSID, e.FSDesc
+				FROM tbl_acctchart a 
+				LEFT JOIN tbl_acctGroup b ON b.acctTypeID=a.acctTypeID
+				LEFT JOIN tbl_normalBalance c ON c.normsID=a.normsID
+				LEFT JOIN tbl_fund d ON d.fundID=a.fundID
+				LEFT JOIN tbl_fs e ON e.FSID=a.FSID
+				WHERE a.depth = 1 AND a.idAcctTitle=?', array($id));
+	}
+
+	public static function updateAccount($id,$data){
+		$account = $data['account'];
+		$userID = $data['userID'];
+
+		$result = DB::table('tbl_acctchart')->where('idAcctTitle', $id)
+					->update([
+						'acctCode' => $account['acctCode'],
+						'acctTitle' => $account['acctTitle'],
+						'acctTypeID' => $account['acctType'],
+						'normsID' => $account['normDesc'],
+						'FSID' => $account['FSDesc'],
+						'postedBy' => $userID,
+						'fundID' => $account['fundDesc'],
+					]);
+
+		if($result){	
+			$results['success'] = 'true';
+			$results['msg'] = 'Account Title has been updated.';
+		}else{
+			$results['success'] = 'false';
+			$results['msg'] = 'WARNING: Unknown error occur while updating the record';
+		}
+	 return $results;
 	}
 }				

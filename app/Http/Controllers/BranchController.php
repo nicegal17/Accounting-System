@@ -22,7 +22,7 @@ class BranchController extends BaseController{
 	}
 
 	public function getBranchByID(Request $request,$id){
-		$data = Branches::getBranchID($id);
+		$data = Branches::getBranchByID($id);
 		return response()->json($data);
 	}
 

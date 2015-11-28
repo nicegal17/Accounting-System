@@ -31,11 +31,6 @@ class PODetails extends Model {
 		return DB::select('SELECT FORMAT(SUM(total),2) AS totalAmt FROM tbl_po_items WHERE poID=?', array($id));
 	}
 
-	// public static function getPOID($id){
-	// 	$result = DB::select('SELECT * FROM tbl_po WHERE poID=?',array($id));
-	// 	return $result;
-	// }
-
 	public static function approvePO($id,$data){
 		$userID = $data['userID'];
 

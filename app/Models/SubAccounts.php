@@ -5,7 +5,6 @@ namespace App\Models;
 use DB;
 use Illuminate\Database\Eloquent\Model;
 
-// Filename is same sa class name dapat
 class SubAccounts extends Model {
 
 	public static function getAccountTitles(){
@@ -46,7 +45,7 @@ class SubAccounts extends Model {
 
 		if($result){
 			$results['success'] = 'true';
-			$results['msg'] = 'Record Successfully Saved';
+			$results['msg'] = 'New Sub Account has been added.';
 		}else{
 			$results['success'] = 'false';
 			$results['msg'] = 'WARNING: Unknown error occur while saving the record';

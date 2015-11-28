@@ -35,5 +35,11 @@ class AssetController extends BaseController{
 		$data = Assets::getAssetItem($id);
 		return response()->json($data);
 	}
+
+	public function updateFA(Request $request,$id){
+		$input = $request->all();
+		$data = Assets::updateFA($id,$input);
+		return response()->json($data);
+	}
 }
 ?>

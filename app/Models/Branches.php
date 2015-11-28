@@ -11,8 +11,8 @@ class Branches extends Model {
 		$branch = $data['branch'];
 		$userID = $data['userID'];
 
-		$result = DB::insert('INSERT INTO tbl_branch(brName,brManager,brAddress,tel,IP,code,userID) VALUES(?,?,?,?,?,?)',
-			array($branch['brName'],$branch['brManager'],$branch['brAddress'],$branch['tel'],$branch['IP'],$branch['code']),$userID);
+		$result = DB::insert('INSERT INTO tbl_branch(brName,brManager,brAddress,tel,IP,code,userID) VALUES(?,?,?,?,?,?,?)',
+			array($branch['brName'],$branch['brManager'],$branch['brAddress'],$branch['tel'],$branch['IP'],$branch['code'],$userID));
 
 		if($result){
 			$results['success'] = 'true';
@@ -30,7 +30,7 @@ class Branches extends Model {
 		return $tbl_branch;
 	}
 
-	public static function getBranchID($id){
+	public static function getBranchByID($id){
 		$result = DB::select('SELECT * FROM tbl_branch WHERE brID=?',array($id));
 		return $result;
 	}

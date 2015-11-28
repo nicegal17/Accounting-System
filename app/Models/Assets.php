@@ -21,7 +21,7 @@ class Assets extends Model {
 	}
 
 	public static function getAssets() {
-		return DB::select('SELECT a.itemID, a.itemName, FORMAT(a.cost,2) AS cost, a.datePurchased, a.qty, b.desc FROM tbl_assetinfo a
+		return DB::select('SELECT a.itemID, a.itemName, FORMAT(a.cost,2) AS cost, a.datePurchased, a.qty, b.categoryID, b.desc FROM tbl_assetinfo a
 					LEFT JOIN tbl_category b ON b.categoryID=a.categoryID');
 	}
 
@@ -43,6 +43,31 @@ class Assets extends Model {
 	}
 
 	public static function getAssetItem($id){
-		return DB::select('SELECT a.itemID, a.itemName, a.cost, a.datePurchased, a.estLife, a.qty, b.desc FROM tbl_assetinfo a LEFT JOIN tbl_category b ON b.categoryID=a.categoryID WHERE a.itemID=?', array($id));
+		return DB::select('SELECT a.itemID, a.itemName, a.cost, a.datePurchased, a.estLife, a.qty, b.desc, b.categoryID FROM tbl_assetinfo a LEFT JOIN tbl_category b ON b.categoryID=a.categoryID WHERE a.itemID=?', array($id));
 	}
+
+	public static function updateFA($id,$data) {
+		$Asset = $data['asset'];
+		$userID = $data['userID'];
+
+		$result = DB::table('tbl_assetinfo')->where('itemID', $id)
+					->update([
+						'itemName' => $Asset['itemName'],
+						'cost' => $Asset['cost'],
+						'datePurchased' => $Asset['dt'],
+						'estLife' => $Asset['estLife'],
+						'qty' => $Asset['qty'],
+						'categoryID' => $Asset['category'],
+						'postedBy' => $userID
+					]);
+
+		if($result){	
+			$results['success'] = 'true';
+			$results['msg'] = 'Fixed Asset Item has been updated';
+		}else{
+			$results['success'] = 'false';
+			$results['msg'] = 'WARNING: Unknown error occur while updating the record';
+		}
+		return $results;
+	} 
 }				

@@ -50,11 +50,10 @@ Route::group(['prefix' => 'api/v1'],function(){
 
 	Route::group(['prefix' => 'branches'],function(){
 		Route::get('/','BranchController@getBranches');
-		Route::post('/','BranchController@createBranch');
-		Route::get('/getBranchByID/{id}', 'BranchController@getBranchByID');
-		Route::put('/{id}', 'BranchController@updateBranch');
-		Route::get('/{data}', 'BranchController@searchBranch');
-		Route::delete('/{id}', 'BranchController@deleteBranch');
+	 	Route::get('/{id}', 'BranchController@getBranchByID');
+	 	Route::post('/', 'BranchController@createBranch');
+	 	Route::PUT('/{id}', 'BranchController@updateBranch');
+	 	Route::delete('{id}', 'BranchController@deleteBranch');
 	});
 
 	Route::group(['prefix' => 'users'],function(){
@@ -79,7 +78,9 @@ Route::group(['prefix' => 'api/v1'],function(){
 		Route::get('/getNorms','AccountController@getNorms');
 		Route::get('/getFS','AccountController@getFS');
 		Route::post('/','AccountController@createAccount');
-		Route::get('/getAccountChart','AccountController@getAccountChart');
+	    Route::get('/getAccountChart','AccountController@getAccountChart');
+		Route::get('/getAcctChartByID/{id}','AccountController@getAcctChartByID');
+		Route::put('/{id}', 'AccountController@updateAccount');
 	});	
 
 	Route::group(['prefix' => 'SubAccount'],function(){
@@ -92,11 +93,12 @@ Route::group(['prefix' => 'api/v1'],function(){
 	});	
 
 	Route::group(['prefix' => 'Assets'],function(){
-		Route::get('/','AssetController@getCategories');
+		Route::get('/getCategories','AssetController@getCategories');
 		Route::get('/','AssetController@getPeriods');
 		Route::post('/','AssetController@createAsset');
 		Route::get('/','AssetController@getAssets');
 		Route::get('/{id}','AssetController@getAssetItem');
+		route::put('/{id}', 'AssetController@updateFA');
 	});	
 
 	Route::group(['prefix' => 'Balance'],function(){
