@@ -10,7 +10,6 @@ class Assets extends Model {
 
 	public static function getCategories(){
 		$tbl_category = DB::table('tbl_category')->get();
-
 		return $tbl_category;
 	}
 
@@ -54,7 +53,7 @@ class Assets extends Model {
 					->update([
 						'itemName' => $Asset['itemName'],
 						'cost' => $Asset['cost'],
-						'datePurchased' => $Asset['dt'],
+						'datePurchased' => $Asset['datePurchased'],
 						'estLife' => $Asset['estLife'],
 						'qty' => $Asset['qty'],
 						'categoryID' => $Asset['category'],
