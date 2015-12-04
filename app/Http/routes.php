@@ -11,6 +11,10 @@
 |
 */
 
+Route::get('/',function(){
+	return view('welcome'); 
+});
+
 /*Route::get('/','loginController@getViewLogin');
 
 	
@@ -24,7 +28,7 @@ Route::group(['prefix' => 'auth'], function(){
 	});
 });*/
 
-Route::group(['prefix' => 'api/v1'],function(){
+Route::group(['before' => 'jwt-auth','prefix' => 'api/v1'],function(){
 
 	Route::group(['prefix' => 'auth'], function(){
 		Route::get('/logout', 'loginController@logoutAuth');

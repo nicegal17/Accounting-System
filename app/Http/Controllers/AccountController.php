@@ -7,12 +7,15 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Http\Request;
+use JWTAuth;
+use Tymon\JWTAuth\Exceptions\JWTException;
 
 class AccountController extends BaseController{ 
 
 	public function getFunds(){
+		$token = JWTAuth::parseToken('bearer', 'HTTP_AUTHORIZATION')->getToken();
 		$data = Accounts::getFunds();
-		return response()->json($data);
+		return response()->json($token);
 	}
 
 	public function getAcctTypes(){

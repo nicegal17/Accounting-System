@@ -40,12 +40,13 @@ class Handler extends ExceptionHandler
     public function render($request, Exception $e)
     {
         //https://mattstauffer.co/blog/laravel-5.0-custom-error-pages
-        if ($this->isHttpException($e))
-        {
+        if ($this->isHttpException($e)){
             return $this->renderHttpException($e);
-        }
-        else
-        {
+        }else if ($e instanceof Tymon\JWTAuth\Exceptions\TokenExpiredException) {
+            return response()->json(['token_expired'], $e->getStatusCode());
+        } else if ($e instanceof Tymon\JWTAuth\Exceptions\TokenInvalidException) {
+            return response()->json(['token_invalid'], $e->getStatusCode());
+        }else {
             return parent::render($request, $e);
         }
     }
