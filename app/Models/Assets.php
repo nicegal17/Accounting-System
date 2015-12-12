@@ -29,7 +29,7 @@ class Assets extends Model {
 		$userID = $data['userID'];
 		
 		$result = DB::insert('INSERT INTO tbl_assetinfo(itemName,cost,datePurchased,estLife,qty,categoryID,postedDate,postedBy) VALUES(?,?,?,?,?,?,?,?)',
-			[$Asset['itemName'],$Asset['cost'],$Asset['dt'],$Asset['estLife'],$Asset['qty'],$Asset['category'],Carbon::NOW(),$userID]);
+			[$Asset['itemName'],$Asset['cost'],$Asset['datePurchased'],$Asset['estLife'],$Asset['qty'],$Asset['category'],Carbon::NOW(),$userID]);
 
 		if($result){
 			$results['success'] = 'true';

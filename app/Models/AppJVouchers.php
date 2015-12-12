@@ -40,4 +40,20 @@ class AppJVouchers extends Model {
 	public static function denyJV($JID){
 		return DB::update('UPDATE tbl_gj SET status="DNY" WHERE JID=?', array($JID));
 	}
+
+	// public static function getGJ() {
+		// return DB::select('SELECT DISTINCT a.JID, a.JVNum, a.transDate, a.particulars, b.idAcctTitle, b.acctTitle, c.amount FROM tbl_gj a
+		// 			LEFT JOIN tbl_journalEntries c ON a.JID=c.JID
+		// 			LEFT JOIN tbl_acctchart b ON b.idAcctTitle=c.idAcctTitleDB OR b.idAcctTitle=c.idAcctTitleCR');
+
+		// return DB::select('SELECT a.JID, a.JVNum, a.transDate, a.particulars FROM tbl_gj a');
+	// }
+
+	public static function getGJEntries($dateParams) {
+		return DB::select('SELECT a.JID, a.JVNum, a.transDate, a.particulars, b.idAcctTitle, b.acctTitle, c.amount, c.idAcctTitleDB, c.idAcctTitleCR 
+					FROM tbl_gj a
+					LEFT JOIN tbl_journalEntries c ON a.JID=c.JID
+					LEFT JOIN tbl_acctchart b ON b.idAcctTitle=c.idAcctTitleDB OR b.idAcctTitle=c.idAcctTitleCR
+					WHERE a.transDate =?',array($dateParams));
+	}
 }	

@@ -15,8 +15,18 @@ class SearchCDVController extends BaseController{
 		return response()->json($data);
 	}
 
-	public function getAcctEntries($id){
-		$data = SearchCDVs::getAcctEntries($id);
+	public function getCDVDet($id){
+		$data = SearchCDVs::getCDVDet($id);
+		return response()->json($data);
+	}
+
+	public function getDBEntries($id){
+		$data = SearchCDVs::getDBEntries($id);
+		return response()->json($data);
+	}
+
+	public function getCREntries($id){
+		$data = SearchCDVs::getCREntries($id);
 		return response()->json($data);
 	}
 }

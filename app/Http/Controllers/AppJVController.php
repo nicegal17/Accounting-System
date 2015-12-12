@@ -31,5 +31,12 @@ class AppJVController extends BaseController{
 		$data = AppJVouchers::denyJV($id,$input);
 		return response()->json($data);
 	}
+
+	public function getGJEntries(Request $request, $dateParams){
+		// $data = AppJVouchers::getGJEntries($dtFrom);
+		$input = $request->all();
+		  $data = AppJVouchers::getGJEntries($dateParams,$input);
+		return response()->json($input);
+	}
 }
 ?>

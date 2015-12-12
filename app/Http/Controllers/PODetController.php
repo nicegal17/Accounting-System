@@ -16,6 +16,11 @@ class PODetController extends BaseController{
 		return response()->json($data);
 	}
 
+	public function getApprovingOfficer(Request $request,$id){
+		$data = PODetails::getApprovingOfficer($id);
+		return response()->json($data);
+	}
+
 	public function getPOItems(Request $request,$id){
 		$data = PODetails::getPOItems($id);
 		return response()->json($data);

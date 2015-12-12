@@ -128,7 +128,9 @@ Route::group(['prefix' => 'api/v1'],function(){
 
 	Route::group(['prefix' => 'Search'],function(){
 		Route::get('/','SearchCDVController@getCDVNo');
-		Route::get('/getAcctEntries/{id}','SearchCDVController@getAcctEntries');
+		 Route::get('/getCDVDet/{id}','SearchCDVController@getCDVDet');
+		Route::get('/getDBEntries/{id}','SearchCDVController@getDBEntries');
+		Route::get('/getCREntries/{id}','SearchCDVController@getCREntries');
 	});	
 	
 	Route::group(['prefix' => 'JV'],function(){
@@ -140,6 +142,7 @@ Route::group(['prefix' => 'api/v1'],function(){
 		Route::get('/','AppJVController@getJVNo');
 		Route::get('/getAcctEntries/{id}','AppJVController@getAcctEntries');
 		Route::put('/{id}','AppJVController@approveJV');
+		Route::post('/getGJEntries/{dateParams}', 'AppJVController@getGJEntries');
 	});	
 
 	Route::group(['prefix' => 'AuditJV'],function(){
@@ -196,6 +199,7 @@ Route::group(['prefix' => 'api/v1'],function(){
 		Route::get('/getPOItems/{id}','PODetController@getPOItems');
 		Route::get('/selectSUM/{id}','PODetController@selectSUM');
 		Route::put('/{id}', 'PODetController@approvePO');
+		Route::get('/getApprovingOfficer/{id}', 'PODetController@getApprovingOfficer');
 	});	
 
 	Route::group(['prefix' => 'series'],function(){

@@ -20,6 +20,14 @@ class PODetails extends Model {
 			WHERE a.poID=?', array($id));
 	}
 
+	public static function getApprovingOfficer($id) {
+		return DB::select('SELECT a.empName, g.poID
+			FROM tbl_po g
+			LEFT JOIN tbl_useracct h ON h.userID=g.approveBy
+			LEFT JOIN tbl_employee a ON a.empID=h.empID
+			WHERE g.poID=?', array($id));
+	}
+
 	public static function getPOItems($id){
 		return DB::select('SELECT a.poID, f.items, f.qty, f.unit, FORMAT(f.unit_price,2) AS unit_price, FORMAT(f.total,2) AS total
 			FROM tbl_po a
