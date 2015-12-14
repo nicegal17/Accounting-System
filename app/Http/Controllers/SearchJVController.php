@@ -14,9 +14,19 @@ class SearchJVController extends BaseController{
 		$data = SearchJVs::getJVNo();
 		return response()->json($data);
 	}
+	
+	public function getJVDet($id){
+		$data = SearchJVs::getJVDet($id);
+		return response()->json($data);
+	}
 
-	public function getAcctEntries($id){
-		$data = SearchJVs::getAcctEntries($id);
+	public function getDBEntries($id){
+		$data = SearchJVs::getDBEntries($id);
+		return response()->json($data);
+	}
+
+	public function getCREntries($id){
+		$data = SearchJVs::getCREntries($id);
 		return response()->json($data);
 	}
 }

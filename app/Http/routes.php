@@ -128,9 +128,10 @@ Route::group(['prefix' => 'api/v1'],function(){
 
 	Route::group(['prefix' => 'Search'],function(){
 		Route::get('/','SearchCDVController@getCDVNo');
-		 Route::get('/getCDVDet/{id}','SearchCDVController@getCDVDet');
+		Route::get('/getCDVDet/{id}','SearchCDVController@getCDVDet');
 		Route::get('/getDBEntries/{id}','SearchCDVController@getDBEntries');
 		Route::get('/getCREntries/{id}','SearchCDVController@getCREntries');
+		Route::get('/getDBSum/{id}','SearchCDVController@getDBSum');
 	});	
 	
 	Route::group(['prefix' => 'JV'],function(){
@@ -153,7 +154,9 @@ Route::group(['prefix' => 'api/v1'],function(){
 
 	Route::group(['prefix' => 'SearchJV'],function(){
 		Route::get('/','SearchJVController@getJVNo');
-		Route::get('/getAcctEntries/{id}','SearchJVController@getAcctEntries');
+		Route::get('/getJVDet/{id}','SearchJVController@getJVDet');
+		Route::get('/getDBEntries/{id}','SearchJVController@getDBEntries');
+		Route::get('/getCREntries/{id}','SearchJVController@getCREntries');
 	});	
 
 	Route::group(['prefix' => 'APV'],function(){

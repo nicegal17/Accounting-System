@@ -29,5 +29,10 @@ class SearchCDVController extends BaseController{
 		$data = SearchCDVs::getCREntries($id);
 		return response()->json($data);
 	}
+
+	public function getDBSum($id){
+		$data = SearchCDVs::getDBSum($id);
+		return response()->json($data);
+	}
 }
 ?>
