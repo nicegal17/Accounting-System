@@ -77,4 +77,11 @@ class JVoucher extends Model {
 		 }
 		return $ids;
 	}
+
+	public static function getGJEntries($dateParams, $dateparamsTO){
+		return DB::select('SELECT * FROM tbl_gj 
+					LEFT JOIN tbl_journalEntries ON tbl_gj.JID=tbl_journalEntries.JID
+					LEFT JOIN tbl_acctchart ON tbl_acctchart.idAcctTitle=tbl_journalEntries.idAcctTitleDB OR tbl_acctchart.idAcctTitle=tbl_journalEntries.idAcctTitleCR
+					WHERE transDate BETWEEN :dateParams AND :dateparamsTO', ['dateParams'=>$dateParams,'dateparamsTO'=>$dateparamsTO]);			
+	}
 }

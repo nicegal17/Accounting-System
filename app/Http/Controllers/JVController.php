@@ -20,5 +20,11 @@ class JVController extends BaseController{
 	    $data = JVoucher::createJV($input);
 		return response()->json($data);
 	}
+
+	public function getGJEntries(Request $request){
+		$input = $request->all();
+	    $data = JVoucher::getGJEntries($input['from'], $input['to']);
+		return response()->json($data);
+	}
 }
 ?>

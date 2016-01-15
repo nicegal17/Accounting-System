@@ -78,4 +78,11 @@ class APVs extends Model {
 		return $ids;
 	}
 
+	public static function getAPVEntries($dateParams, $dateparamsTO){
+		return DB::select('SELECT * FROM tbl_apv 
+					LEFT JOIN tbl_apventries ON tbl_apv.apvID=tbl_apventries.apvID
+					LEFT JOIN tbl_acctchart ON tbl_acctchart.idAcctTitle=tbl_apventries.idAcctTitleDB OR tbl_acctchart.idAcctTitle=tbl_apventries.idAcctTitleCR
+					WHERE transDate BETWEEN :dateParams AND :dateparamsTO', ['dateParams'=>$dateParams,'dateparamsTO'=>$dateparamsTO]);			
+	}
+
 }

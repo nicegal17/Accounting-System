@@ -20,5 +20,11 @@ class APVController extends BaseController{
 	    $data = APVs::createAPV($input);
 		return response()->json($data);
 	}
+
+	public function getAPVEntries(Request $request){
+		$input = $request->all();
+	    $data = APVs::getAPVEntries($input['from'], $input['to']);
+		return response()->json($data);
+	}
 }
 ?>

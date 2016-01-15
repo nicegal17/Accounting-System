@@ -86,4 +86,11 @@ class CheckDisbursements extends Model {
 
 		return $ids;
 	}
-}
+
+	public static function getCDVInfo($dateParams, $dateparamsTO){
+		return DB::select('SELECT * FROM tbl_cdv 
+					LEFT JOIN tbl_acctngentries ON tbl_cdv.cdvID=tbl_acctngentries.cdvID
+					LEFT JOIN tbl_acctchart ON tbl_acctchart.idAcctTitle=tbl_acctngEntries.idAcctTitleDB OR tbl_acctchart.idAcctTitle=tbl_acctngEntries.idAcctTitleCR
+					WHERE chkDate BETWEEN :dateParams AND :dateparamsTO', ['dateParams'=>$dateParams,'dateparamsTO'=>$dateparamsTO]);			
+	}
+}	

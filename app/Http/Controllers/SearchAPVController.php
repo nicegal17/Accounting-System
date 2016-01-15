@@ -15,8 +15,18 @@ class SearchAPVController extends BaseController{
 		return response()->json($data);
 	}
 
-	public function getAcctEntries($id){
-		$data = SearchAPVs::getAcctEntries($id);
+	public function getAPVDet($id){
+		$data = SearchAPVs::getAPVDet($id);
+		return response()->json($data);
+	}
+
+	public function getDBEntries($id){
+		$data = SearchAPVs::getDBEntries($id);
+		return response()->json($data);
+	}
+
+	public function getCREntries($id){
+		$data = SearchAPVs::getCREntries($id);
 		return response()->json($data);
 	}
 }

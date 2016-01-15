@@ -30,5 +30,11 @@ class CDVController extends BaseController{
 	    $data = CheckDisbursements::createCDV($input);
 		return response()->json($data);
 	}
+
+	public function getCDVInfo(Request $request){
+		$input = $request->all();
+	    $data = CheckDisbursements::getCDVInfo($input['from'], $input['to']);
+		return response()->json($data);
+	}
 }
 ?>

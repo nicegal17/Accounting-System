@@ -110,7 +110,8 @@ Route::group(['prefix' => 'api/v1'],function(){
 		Route::get('/','CDVController@getAcctTitles');
 		Route::post('/','CDVController@createCDV');
 		Route::get('/banks','CDVController@getBanks');  
-		Route::get('/cdvnum','CDVController@getCDVNum'); 
+		Route::get('/cdvnum','CDVController@getCDVNum');
+		Route::post('/getCDVInfo','CDVController@getCDVInfo'); 
 	});
 
 	Route::group(['prefix' => 'AppCDV'],function(){
@@ -137,13 +138,13 @@ Route::group(['prefix' => 'api/v1'],function(){
 	Route::group(['prefix' => 'JV'],function(){
 		Route::get('/','JVController@getAcctTitles');
 		Route::post('/','JVController@createJV');
+		Route::post('/getGJEntries','JVController@getGJEntries'); 
 	});	
 
 	Route::group(['prefix' => 'approveJV'],function(){
 		Route::get('/','AppJVController@getJVNo');
 		Route::get('/getAcctEntries/{id}','AppJVController@getAcctEntries');
 		Route::put('/{id}','AppJVController@approveJV');
-		Route::post('/getGJEntries/{dateParams}', 'AppJVController@getGJEntries');
 	});	
 
 	Route::group(['prefix' => 'AuditJV'],function(){
@@ -162,6 +163,7 @@ Route::group(['prefix' => 'api/v1'],function(){
 	Route::group(['prefix' => 'APV'],function(){
 		Route::get('/','APVController@getAcctTitles');
 		Route::post('/','APVController@createAPV');
+		Route::post('/getAPVEntries','APVController@getAPVEntries'); 
 	});	
 
 	Route::group(['prefix' => 'appAPV'],function(){
@@ -178,7 +180,9 @@ Route::group(['prefix' => 'api/v1'],function(){
 
 	Route::group(['prefix' => 'SearchAPV'],function(){
 		Route::get('/','SearchAPVController@getAPVNo');
-		Route::get('/getAcctEntries/{id}','SearchAPVController@getAcctEntries');
+		Route::get('/getAPVDet/{id}','SearchAPVController@getAPVDet');
+		Route::get('/getDBEntries/{id}','SearchAPVController@getDBEntries');
+		Route::get('/getCREntries/{id}','SearchAPVController@getCREntries');
 	});	
 
 	Route::group(['prefix' => 'check'],function(){
@@ -205,6 +209,10 @@ Route::group(['prefix' => 'api/v1'],function(){
 		Route::get('/getApprovingOfficer/{id}', 'PODetController@getApprovingOfficer');
 	});	
 
+	Route::group(['prefix' => 'soa'],function(){
+		Route::get('/{id}','SOAController@getInfo');
+	});	
+
 	Route::group(['prefix' => 'series'],function(){
 		Route::get('/','SeriesController@getSeriesNum');
 		Route::get('/getSeriesDet/{id}','SeriesController@getSeriesDet');
@@ -214,6 +222,11 @@ Route::group(['prefix' => 'api/v1'],function(){
 	Route::group(['prefix' => 'OR'],function(){
 		Route::get('/','ORController@getPayer');
 		Route::post('/','ORController@saveOR');
-	});		
+	});	
+
+	Route::group(['prefix' => 'general-journal'],function(){
+		Route::post('/{dateParams}', 'GJController@getGJEntries');
+	});
+
 });
 
