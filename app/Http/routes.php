@@ -33,11 +33,18 @@ Route::group(['prefix' => 'api/v1'],function(){
 	});
 
  	Route::group(['prefix' => 'employees'],function(){
+	// Route::group(['prefix' => 'employees', 'namespace' => 'Admin', 'middleware' => ['auth', 'acl']],function(){
 		Route::get('/','Controller@getEmployees');
- 		Route::post('/','Controller@createEmployee');
+ 		// Route::post('/','Controller@createEmployee');
+ 		Route::post('/', [
+			'middleware' => ['auth', 'roles'],
+			'uses' => 'Controller@createEmployee',
+			'roles' => ['super_admin', 'admin']
+		]);
+
  		Route::get('/{id}','Controller@getPosID');
  		Route::get('/{id}', 'Controller@getEmployeeID');
- 		Route::put('/{id}', 'Controller@updateEmployee');
+ 		// Route::put('/{id}', 'Controller@updateEmployee');
 	});
 
 	Route::group(['prefix' => 'position'],function(){

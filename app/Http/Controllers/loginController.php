@@ -63,4 +63,13 @@ class loginController extends BaseController
     	return response()->json($user);
     }
 
+    // public function getUserType(Request $request) {
+    //     if ($request->user()) {
+    //         $userType = $request->user->empPosition();
+    //     } else {
+    //         $userType = Auth::user();
+    //     }
+    //     return response()->json($user);
+    // }
+
 }
