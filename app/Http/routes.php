@@ -32,19 +32,34 @@ Route::group(['prefix' => 'api/v1'],function(){
 		Route::get('/user', 'loginController@getCurrentUser');
 	});
 
- 	Route::group(['prefix' => 'employees'],function(){
-	// Route::group(['prefix' => 'employees', 'namespace' => 'Admin', 'middleware' => ['auth', 'acl']],function(){
-		Route::get('/','Controller@getEmployees');
  		// Route::post('/','Controller@createEmployee');
- 		Route::post('/', [
-			'middleware' => ['auth', 'roles'],
-			'uses' => 'Controller@createEmployee',
-			'roles' => ['super_admin', 'admin']
-		]);
+	// Route::group(['prefix' => 'employees', 'namespace' => 'Admin', 'middleware' => ['auth', 'acl']],function() use ($router){
+	// Route::group(['prefix' => 'employees'],function(){
+ // 		Route::get('/', [
+ // 			'uses' => ['Controller@getEmployees'],
+ // 			'as' => 'admin.employees',
+ // 			'permission' => 'manage_employee (add/edit/delete)'
+ // 		]);
+ 			
+ // 		Route::post('/', [
+	// 		// 'middleware' => ['auth', 'roles'],
+	// 		'middleware' => ['auth', 'permissions.required'],
+	// 		'permissions' => ['access', 'admin'],
+	// 		'uses' => ['Controller@createEmployee'],
+	// 		//'roles' => ['super_admin', 'admin']
+	// 	]);
 
+ // 		Route::get('/{id}','Controller@getPosID');
+ // 		Route::get('/{id}', 'Controller@getEmployeeID');
+ // 		// Route::put('/{id}', 'Controller@updateEmployee');
+	// });
+
+	Route::group(['prefix' => 'employees'],function(){
+ 		Route::get('/','Controller@getEmployees');
+ 		Route::post('/','Controller@createEmployee');
  		Route::get('/{id}','Controller@getPosID');
  		Route::get('/{id}', 'Controller@getEmployeeID');
- 		// Route::put('/{id}', 'Controller@updateEmployee');
+ 		Route::put('/{id}', 'Controller@updateEmployee');
 	});
 
 	Route::group(['prefix' => 'position'],function(){
@@ -65,10 +80,13 @@ Route::group(['prefix' => 'api/v1'],function(){
 
 	Route::group(['prefix' => 'users'],function(){
 		Route::get('/','UserController@getAllUsers');
+		Route::get('/getEmployees','UserController@getEmployees');
+		Route::get('/getUserRoles','UserController@getUserRoles');
 		Route::post('/','UserController@createUser');
-		Route::get('/{id}','UserController@getUserID');
+		// Route::get('/getRolesPermission','UserController@getRolesPermission');
+		Route::get('/getUserID/{id}','UserController@getUserID');
 		Route::put('/{id}','UserController@updateUser');
-		Route::delete('/{id}','UserController@deleteUser');
+		// Route::delete('/{id}','UserController@deleteUser');
 	});	
 
 	Route::group(['prefix' => 'bank'],function(){
@@ -101,7 +119,7 @@ Route::group(['prefix' => 'api/v1'],function(){
 
 	Route::group(['prefix' => 'Assets'],function(){
 		Route::get('/getCategories','AssetController@getCategories');
-		Route::get('/','AssetController@getPeriods');
+		// Route::get('/','AssetController@getPeriods');
 		Route::post('/','AssetController@createAsset');
 		Route::get('/','AssetController@getAssets');
 		Route::get('/{id}','AssetController@getAssetItem');
@@ -114,11 +132,15 @@ Route::group(['prefix' => 'api/v1'],function(){
 	});	
 
 	Route::group(['prefix' => 'CDV'],function(){
-		Route::get('/','CDVController@getAcctTitles');
-		Route::post('/','CDVController@createCDV');
-		Route::get('/banks','CDVController@getBanks');  
-		Route::get('/cdvnum','CDVController@getCDVNum');
-		Route::post('/getCDVInfo','CDVController@getCDVInfo'); 
+		Route::get('/','CDVController@getCDV');
+		Route::get('/getBankName','CDVController@getBanks');  
+		Route::get('/getAcctTitles','CDVController@getAcctTitles');
+		route::get('/getCDVID/{id}', 'CDVController@getCDVID');
+		//Route::get('/{id}','CDVController@getPODetails');
+		// Route::post('/','CDVController@createCDV');
+		
+		// Route::get('/cdvnum','CDVController@getCDVNum');
+		// Route::post('/getCDVInfo','CDVController@getCDVInfo'); 
 	});
 
 	Route::group(['prefix' => 'AppCDV'],function(){

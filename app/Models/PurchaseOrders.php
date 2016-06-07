@@ -116,7 +116,7 @@ class PurchaseOrders extends Model {
 				LEFT JOIN tbl_branch c ON c.brID=a.branch
 				LEFT JOIN tbl_bank d ON d.bankID=a.bank
 				LEFT JOIN tbl_mop e ON e.id=a.mop
-				LEFT JOIN tbl_settings f On f.idsettings=a.branch');
+				LEFT JOIN tbl_settings f On f.idsettings=a.branch ORDER BY a.po_num ASC');
 	}
 }
 ?>

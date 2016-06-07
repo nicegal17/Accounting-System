@@ -2,6 +2,7 @@
 
 trait UserACL {
 
+  //checks permission
   public function can($perm = null) {
     if($perm) {
       return $this->checkPermission($this->getArray($perm)); 
@@ -29,11 +30,11 @@ trait UserACL {
   public function hasRole($role = null) {
     if(is_null($role)) return false;
 
-    return strtolower($this->role->roleSlug) == strtolower($role);
+    return strtolower($this->role->role_slug) == strtolower($role);
   }
 
   public function is($role) {
-     return $this->role->roleSlug == $role;
+     return $this->role->role_slug == $role;
   }
 
   public function hasRoute($routeName) {

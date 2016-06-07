@@ -50,7 +50,7 @@ class Banks extends Model {
 			$results['msg'] = 'WARNING: Unknown error occur while updating the record';
 		}
 
-		return $result;
+		return $results;
 	}
 
 	public static function deleteBank($id){

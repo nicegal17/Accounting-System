@@ -75,7 +75,7 @@ class JVoucher extends Model {
 			$ids['success'] = 'false';
 			$ids['msg'] = 'WARNING: Unknown error occur while saving the record';	
 		 }
-		return $ids;
+		return $ids; 
 	}
 
 	public static function getGJEntries($dateParams, $dateparamsTO){

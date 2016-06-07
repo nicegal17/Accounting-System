@@ -8,6 +8,10 @@ use Carbon\Carbon;
 
 class CheckDisbursements extends Model {
 
+	public static function getCDV(){
+		return DB::select('SELECT a.cdvID, a.CDVNo, a.payee, a.chkNo, a.amount, a.transDate, a.status FROM tbl_cdv a ORDER BY a.cdvID ASC');
+	}
+
 	public static function getBanks(){
 		$tbl_bank = DB::table('tbl_bank')->get();
 
@@ -16,16 +20,20 @@ class CheckDisbursements extends Model {
 
 	public static function getAcctTitles(){
 		$tbl_acctchart = DB::table('tbl_acctchart')
-							->where('depth', '=',2)
 							->orderBy('idAcctTitle','asc')
 							->get();
 
 		return $tbl_acctchart;
 	}
 
-	public static function getCDVNum(){
-		return DB::select('SELECT idNum, numSeries FROM tbl_series WHERE ABRV="CDV" ORDER BY idNum DESC LIMIT 1');
+	public static function getCDVID($id){
+		$result = DB::select('SELECT payee,address FROM tbl_cdv WHERE cdvID=?',array($id));
+		return $result;
 	}
+
+	// public static function getCDVNum(){
+	// 	return DB::select('SELECT idNum, numSeries FROM tbl_series WHERE ABRV="CDV" ORDER BY idNum DESC LIMIT 1');
+	// }
 
 	public static function CDVNumSeries(){
 		return DB::select("SELECT 

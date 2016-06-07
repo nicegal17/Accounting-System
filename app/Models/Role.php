@@ -3,14 +3,14 @@
 use Illuminate\Database\Eloquent\Model;
 
 class Role extends Model {
-	// protected $table = 'tbl_role';
+	//protected $table = 'tbl_roles';
 
 	public function users() {
 		return $this->hasMany('App\User');
 	}
 
 	public function permissions() {
-		return $this->belongsToMany('App\Models\Permission');
+		return $this->belongsToMany('App\Permission');
 	}
 }
 ?>

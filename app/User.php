@@ -7,12 +7,14 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
+use App\UserACL;
+use App\UserRelationShips;
 
 class User extends Model implements AuthenticatableContract, CanResetPasswordContract
 {
     use Authenticatable, CanResetPassword;
 
-    //use UserACL, UserRelationships;
+    use UserACL, UserRelationships;
 
     /**
      * The database table used by the model.
@@ -20,7 +22,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      * @var string
      */
     protected $table = 'tbl_useracct';
-    protected $primaryKey = 'userID';
+    protected $primaryKey = 'userID';   
 
     /**
      * The attributes that are mass assignable.
@@ -84,31 +86,19 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     // }
 
     //--------------------------------------------------------------
-    public function role() {
-        return $this->hasOne('App\Role', 'id', 'roleID');
-    }
+    // public function role() {
+    //     return $this->hasOne('App\Models\Role', 'role_id', 'roleID');
+    // }
 
-    public function hasRole($roles) {
-        $this->have_role = $this->getUserRole();
+    // public function can($perm = null) {
+    //     if(is_null($perm)) return false;
+    //     $perms = $this->role->permissions->fetch('permission_title');
+    //     return in_array($perm, $perms->toArray());
+    // }
 
-        if(is_array($roles)) {
-            foreach ($roles as $need_role) {
-               if($this->checkIfUserHasRole($need_role)) {
-                    return true;
-               }
-            }
-        }else {
-            return $this->checkIfUserHasRole($roles);
-        }
-        return false;
-    }
-
-    private function getUserRole() {
-        return $this->role()->getResults();
-    }
-
-    private function checkIfUserHasRole($need_role) {
-        return (strtolower($need_role)==strtolower($this->have_role->name)) ? true : false;
-    } 
+    //----------------------------------------------------------------------
+    // public function permissions() {
+    //     return $this->belongsToMany('App\Permission')->withTimestamps();
+    // }
 }
 

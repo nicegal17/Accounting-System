@@ -10,6 +10,11 @@ use Illuminate\Http\Request;
 
 class CDVController extends BaseController{ 
 	
+	public function getCDV(){
+		$data = CheckDisbursements::getCDV();
+		return response()->json($data);
+	}
+
 	public function getBanks(){
 		$data = CheckDisbursements::getBanks();
 		return response()->json($data);
@@ -20,10 +25,15 @@ class CDVController extends BaseController{
 		return response()->json($data);
 	}
 
-	public function getCDVNum(){
-		$data = CheckDisbursements::getCDVNum();
+	public function getCDVID(Request $request,$id){
+		$data = CheckDisbursements::getCDVID($id);
 		return response()->json($data);
 	}
+
+	// public function getCDVNum(){
+	// 	$data = CheckDisbursements::getCDVNum();
+	// 	return response()->json($data);
+	// }
 
 	public function createCDV(Request $request){
 		$input = $request->all();

@@ -17,7 +17,7 @@ class Checks extends Model {
 		$check = $data['check'];
 		$userID = $data['userID'];
 
-		$result = DB::table('tbl_checks')->insert(['Items' => ($check['Items']), 'amount' => ($check['amount']), 'check_date' => ($check['dt + 1']), 'userID' => $userID]);
+		$result = DB::table('tbl_checks')->insert(['Items' => ($check['Items']), 'amount' => ($check['amount']), 'check_date' => ($check['dt']), 'userID' => $userID]);
 		if($result){
 			$results['success'] = 'true';
 			$results['msg'] = 'New record has been added';

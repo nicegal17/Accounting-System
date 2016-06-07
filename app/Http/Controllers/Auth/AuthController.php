@@ -22,9 +22,16 @@ class AuthController extends Controller
     */
 
     public function authenticate() {
-        if (Auth::attempt(['UName' => $username, 'password' => $password])) {
-            return redirect()->intended('dashboard');
-        }
+       // $decrypt_pass = Crypt::decrypt($password);
+
+            // if (Auth::attempt(['username' => $username, 'password' => $decrypt_pass])) {
+            //     return redirect()->intended('dashboard');
+            // }
+
+        if (Auth::attempt(['username' => $username, 'password' => $password])) {
+                return redirect()->intended('dashboard');
+            }
+      
     }
      /*protected $redirectPath = '/dashboard';
 

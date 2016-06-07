@@ -22,6 +22,21 @@ class UserController extends BaseController{
 		return response()->json($data);
 	}
 
+	public function getEmployees() {
+		$data = Users::getEmployees();
+		return response()->json($data);
+	}
+
+	public function getUserRoles(){
+		$data = Users::getUserRoles();
+		return response()->json($data);
+	}
+
+	// public function getRolesPermission(){
+	// 	$data = Users::getRolesPermission();
+	// 	return response()->json($data);
+	// }
+
 	public function getUserID(Request $request,$id){
 		$data = Users::getUserID($id);
 		return response()->json($data);
@@ -37,6 +52,5 @@ class UserController extends BaseController{
 		$data = Users::deleteUser($id);
 		return response()->json($data);
 	}
-
 }
 ?>
