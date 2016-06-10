@@ -25,19 +25,35 @@ class CDVController extends BaseController{
 		return response()->json($data);
 	}
 
-	public function getCDVID(Request $request,$id){
-		$data = CheckDisbursements::getCDVID($id);
+	public function getCDVByID(Request $request,$id){
+		$data = CheckDisbursements::getCDVByID($id);
 		return response()->json($data);
 	}
 
-	// public function getCDVNum(){
-	// 	$data = CheckDisbursements::getCDVNum();
-	// 	return response()->json($data);
-	// }
+	public function getCDVDetails(Request $request,$id){
+		$data = CheckDisbursements::getCDVDetails($id);
+		return response()->json($data);
+	}
+
+	public function getCDVEntries(Request $request,$id){
+		$data = CheckDisbursements::getCDVEntries($id);
+		return response()->json($data);
+	}
+
+	public function getCDVNum(){
+		$data = CheckDisbursements::getCDVNum();
+		return response()->json($data);
+	}
 
 	public function createCDV(Request $request){
 		$input = $request->all();
 	    $data = CheckDisbursements::createCDV($input);
+		return response()->json($data);
+	}
+
+	public function updateCDV(Request $request,$id){
+		$input = $request->all();
+		$data = CheckDisbursements::updateCDV($id,$input);
 		return response()->json($data);
 	}
 

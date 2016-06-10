@@ -9,13 +9,11 @@ use Carbon\Carbon;
 class CheckDisbursements extends Model {
 
 	public static function getCDV(){
-		return DB::select('SELECT a.cdvID, a.CDVNo, a.payee, a.chkNo, a.amount, a.transDate, a.status FROM tbl_cdv a ORDER BY a.cdvID ASC');
+		return DB::select('SELECT a.cdvID, a.CDVNo, a.payee, a.chkNo, FORMAT(a.amount,2) AS amount, a.transDate, a.status FROM tbl_cdv a ORDER BY a.cdvID ASC');
 	}
 
 	public static function getBanks(){
-		$tbl_bank = DB::table('tbl_bank')->get();
-
-		return $tbl_bank;	
+		return DB::select('SELECT bankID, bankName, acctNum FROM tbl_bank');
 	}
 
 	public static function getAcctTitles(){
@@ -26,14 +24,25 @@ class CheckDisbursements extends Model {
 		return $tbl_acctchart;
 	}
 
-	public static function getCDVID($id){
-		$result = DB::select('SELECT payee,address FROM tbl_cdv WHERE cdvID=?',array($id));
-		return $result;
+	public static function getCDVByID($id){
+		return DB::select('SELECT a.cdvID, a.CDVNo, a.payee, a.chkNo, FORMAT(a.amount,2) AS amount, a.particular, b.empName FROM tbl_cdv a
+					LEFT JOIN tbl_useracct c ON c.userID=a.prepBy
+					LEFT JOIN tbl_employee b ON b.empID=c.empID
+					WHERE a.cdvID=?', array($id));
 	}
 
-	// public static function getCDVNum(){
-	// 	return DB::select('SELECT idNum, numSeries FROM tbl_series WHERE ABRV="CDV" ORDER BY idNum DESC LIMIT 1');
-	// }
+	public static function getCDVDetails($id){
+		return DB::select('SELECT a.cdvID, a.CDVNo, a.payee, a.address, a.chkDate, b.bankID, b.bankName, b.acctNum, FORMAT(a.amount,2) AS amount, a.chkNO, a.particular FROM tbl_cdv a
+					LEFT JOIN tbl_bank b ON b.bankID=a.bankID WHERE a.cdvID=?', array($id));
+	}
+
+	public static function getCDVEntries($CDVNo) {
+		return DB::select('CALL SP_CDVEntries(?)', array($CDVNo));
+	}
+
+	public static function getCDVNum(){
+		return DB::select('SELECT idNum, numSeries FROM tbl_series WHERE ABRV="CDV" ORDER BY idNum DESC LIMIT 1');
+	}
 
 	public static function CDVNumSeries(){
 		return DB::select("SELECT 
@@ -50,18 +59,18 @@ class CheckDisbursements extends Model {
 	}
 
 	public static function createCDV($data){
-		$cdv = $data['CDV'];
+		$CDV = $data['CDV'];
 		$entries = json_decode($data['entries']);
 		$userID = $data['userID'];
-		$JVNumSeries = CheckDisbursements::CDVNumSeries();	
+		$CDVNumSeries = CheckDisbursements::CDVNumSeries();	
 		$CDVNo = CheckDisbursements::getCDVNum();	
 		$ID = $CDVNo[0]->idNum;
 		$Voucher = $CDVNo[0]->numSeries + 1;
 		
 		DB::table('tbl_series')->where('idNum',$ID)->update(['numSeries' => ($Voucher)]);
 
-		$id = DB::table('tbl_cdv')->insertGetId(['CDVNo' => $JVNumSeries[0]->CDV,'payee' => ($cdv['payee']),'address' => ($cdv['address']),'chkDate' => ($cdv['dt']),
-			'bankID' => ($cdv['bank']),'amount' => ($cdv['amount']),'chkNO' => ($cdv['chkNO']),'particular' => ($cdv['particular']),
+		$id = DB::table('tbl_cdv')->insertGetId(['CDVNo' => $CDVNumSeries[0]->CDV,'payee' => ($CDV['payee']),'address' => ($CDV['address']),'chkDate' => ($CDV['dt']),
+			'bankID' => ($CDV['bank']),'amount' => ($CDV['amount']),'chkNO' => ($CDV['chkNO']),'particular' => ($CDV['particular']),
 			'transDate' => Carbon::NOW(), 'prepBy' => $userID ]);
 
 		for ($i=0; $i < count($entries); $i++) { 
@@ -86,13 +95,40 @@ class CheckDisbursements extends Model {
 
 		if($id){
 			$ids['success'] = 'true';
-			$ids['msg'] = 'Record Successfully Saved';
+			$ids['msg'] = 'New CDV has been saved';
 		}else{
 			$ids['success'] = 'false';
-			$ids['msg'] = 'WARNING: Unknown error occur while saving the record';	
+			$ids['msg'] = 'WARNING: Unknown error occur while creatting CDV';	
 		 }
 
 		return $ids;
+	}
+
+	public static function updateCDV($id,$data) {
+		$CDV = $data['CDV'];
+		$userID = $data['userID'];
+
+		$result = DB::table('tbl_cdv')->where('cdvID',$id)
+					 ->update([
+					 		'payee' => $CDV['payee'],
+					 		'address' => $CDV['address'],
+					 		'chkDate' => $CDV['dt'],
+					 		'bankID' => $CDV['bank'],
+					 		'amount' => $CDV['amount'],
+					 		'chkNO' => $CDV['chkNO'],
+					 		'particular' => $CDV['particular'],
+					 		'transDate' => Carbon::NOW(),
+					 		'prepBy' => $userID
+					 	]);
+
+		if($result){	
+			$results['success'] = 'true';
+			$results['msg'] = 'Check Disbursement Voucher has been updated.';
+		}else{
+			$results['success'] = 'false';
+			$results['msg'] = 'WARNING: Unknown error occur while updating CDV.';
+		}
+		return $results;
 	}
 
 	public static function getCDVInfo($dateParams, $dateparamsTO){
@@ -100,5 +136,28 @@ class CheckDisbursements extends Model {
 					LEFT JOIN tbl_acctngentries ON tbl_cdv.cdvID=tbl_acctngentries.cdvID
 					LEFT JOIN tbl_acctchart ON tbl_acctchart.idAcctTitle=tbl_acctngEntries.idAcctTitleDB OR tbl_acctchart.idAcctTitle=tbl_acctngEntries.idAcctTitleCR
 					WHERE chkDate BETWEEN :dateParams AND :dateparamsTO', ['dateParams'=>$dateParams,'dateparamsTO'=>$dateparamsTO]);			
+	}
+
+	public static function approveCDV($CDVNo,$data){
+		$userID = $data['userID'];
+
+		$result = DB::table('tbl_cdv')->where('cdvID', $CDVNo)
+					->update([
+						'status' => "APR",
+						'approveBy' => $userID
+					]);
+
+		if($result){	
+			$results['success'] = 'true';
+			$results['msg'] = 'Record Successfully Updated';
+		}else{
+			$results['success'] = 'false';
+			$results['msg'] = 'WARNING: Unknown error occur while updating the record';
+		}
+	 return $results;
+	}
+
+	public static function denyCDV($CDVNo){
+		return DB::update('UPDATE tbl_cdv SET status="DNY" WHERE cdvID=?', array($CDVNo));
 	}
 }	

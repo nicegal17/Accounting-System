@@ -133,13 +133,18 @@ Route::group(['prefix' => 'api/v1'],function(){
 
 	Route::group(['prefix' => 'CDV'],function(){
 		Route::get('/','CDVController@getCDV');
-		Route::get('/getBankName','CDVController@getBanks');  
+		Route::get('/getBanks','CDVController@getBanks');  
 		Route::get('/getAcctTitles','CDVController@getAcctTitles');
-		route::get('/getCDVID/{id}', 'CDVController@getCDVID');
+		Route::get('/getCDVByID/{id}', 'CDVController@getCDVByID');
+		Route::get('/getCDVDetails/{id}', 'CDVController@getCDVDetails');
+		Route::get('/getCDVEntries/{id}','CDVController@getCDVEntries');
+		Route::get('/getCDVNum','CDVController@getCDVNum');
+		Route::post('/','CDVController@createCDV');	
+		Route::put('/{id}', 'CDVController@updateCDV');
 		//Route::get('/{id}','CDVController@getPODetails');
-		// Route::post('/','CDVController@createCDV');
 		
-		// Route::get('/cdvnum','CDVController@getCDVNum');
+		
+		
 		// Route::post('/getCDVInfo','CDVController@getCDVInfo'); 
 	});
 
