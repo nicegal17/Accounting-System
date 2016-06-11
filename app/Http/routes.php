@@ -141,19 +141,9 @@ Route::group(['prefix' => 'api/v1'],function(){
 		Route::get('/getCDVNum','CDVController@getCDVNum');
 		Route::post('/','CDVController@createCDV');	
 		Route::put('/{id}', 'CDVController@updateCDV');
-		//Route::get('/{id}','CDVController@getPODetails');
-		
-		
-		
-		// Route::post('/getCDVInfo','CDVController@getCDVInfo'); 
+		Route::put('/approveCDV/{id}','CDVController@approveCDV');
+		Route::get('/previewCDV/{id}','CDVController@previewCDV');
 	});
-
-	Route::group(['prefix' => 'AppCDV'],function(){
-		Route::get('/','AppCDVController@getCDVNo');
-		Route::get('/getAcctEntries/{id}','AppCDVController@getAcctEntries');
-		Route::put('/{id}','AppCDVController@appCDV');
-		Route::put('/denyCDV/{id}','AppCDVController@denyCDV');
-	});	
 
 	Route::group(['prefix' => 'Audit'],function(){
 		Route::get('/','AuditCDVController@getCDVNo');

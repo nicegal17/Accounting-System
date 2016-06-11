@@ -25,7 +25,7 @@ class CheckDisbursements extends Model {
 	}
 
 	public static function getCDVByID($id){
-		return DB::select('SELECT a.cdvID, a.CDVNo, a.payee, a.chkNo, FORMAT(a.amount,2) AS amount, a.particular, b.empName FROM tbl_cdv a
+		return DB::select('SELECT a.cdvID, a.CDVNo, a.payee, a.chkNO, FORMAT(a.amount,2) AS amount, a.particular, b.empName FROM tbl_cdv a
 					LEFT JOIN tbl_useracct c ON c.userID=a.prepBy
 					LEFT JOIN tbl_employee b ON b.empID=c.empID
 					WHERE a.cdvID=?', array($id));
@@ -149,15 +149,23 @@ class CheckDisbursements extends Model {
 
 		if($result){	
 			$results['success'] = 'true';
-			$results['msg'] = 'Record Successfully Updated';
+			$results['msg'] = 'Check Disbursement Voucher has been approved.';
 		}else{
 			$results['success'] = 'false';
-			$results['msg'] = 'WARNING: Unknown error occur while updating the record';
+			$results['msg'] = 'WARNING: Unknown error occur while approving CDV.';
 		}
 	 return $results;
 	}
 
 	public static function denyCDV($CDVNo){
 		return DB::update('UPDATE tbl_cdv SET status="DNY" WHERE cdvID=?', array($CDVNo));
+	}
+
+	public static function previewCDV($id){
+		return DB::select('SELECT a.cdvID, a.CDVNo, a.payee, a.address,a.chkDate, d.bankName, a.chkNO, a.particular, b.empName FROM tbl_cdv a
+					LEFT JOIN tbl_useracct c ON c.userID=a.prepBy
+					LEFT JOIN tbl_employee b ON b.empID=c.empID
+					LEFT JOIN tbl_bank d ON d.bankID=a.bankID
+					WHERE a.cdvID=?', array($id));
 	}
 }	

@@ -76,9 +76,7 @@
     <script src ="scripts/controllers/branchctrl.js"></script>
     <script src ="scripts/controllers/cdvctrl.js"></script>
     <script src ="scripts/controllers/positionctrl.js"></script>
-    <script src ="scripts/controllers/appCDVctrl.js"></script>
     <script src ="scripts/controllers/auditCDVctrl.js"></script>
-    <script src ="scripts/controllers/searchCDVctrl.js"></script>
     <script src ="scripts/controllers/appJVctrl.js"></script>
     <script src ="scripts/controllers/JVctrl.js"></script>
     <script src ="scripts/controllers/checkctrl.js"></script>
@@ -103,9 +101,7 @@
     <script src ="scripts/services/cdv.js"></script>
     <script src ="scripts/services/positions.js"></script>
     <script src ="scripts/services/jv.js"></script>
-    <script src ="scripts/services/appCDV.js"></script>
     <script src ="scripts/services/auditCDV.js"></script>
-    <script src ="scripts/services/searchCDV.js"></script>
     <script src ="scripts/services/appJV.js"></script>
     <script src ="scripts/services/users.js"></script>
     <script src ="scripts/services/banks.js"></script>

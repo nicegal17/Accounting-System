@@ -57,6 +57,23 @@ class CDVController extends BaseController{
 		return response()->json($data);
 	}
 
+	public function approveCDV(Request $request,$id){
+		$input = $request->all();
+		$data = CheckDisbursements::approveCDV($id,$input);
+		return response()->json($data);
+	}
+
+	public function denyCDV(Request $request,$id){
+		$input = $request->all();
+		$data = CheckDisbursements::denyCDV($id,$input);
+		return response()->json($data);
+	}
+
+	public function previewCDV(Request $request,$id){
+		$data = CheckDisbursements::previewCDV($id);
+		return response()->json($data);
+	}
+
 	public function getCDVInfo(Request $request){
 		$input = $request->all();
 	    $data = CheckDisbursements::getCDVInfo($input['from'], $input['to']);
