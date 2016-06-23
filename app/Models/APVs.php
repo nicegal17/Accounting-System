@@ -8,13 +8,12 @@ use Carbon\Carbon;
 
 class APVs extends Model {
 
-	public static function getAcctTitles(){
-		$tbl_acctchart = DB::table('tbl_acctchart')
-							->where('depth', '=',2)
-							->orderBy('idAcctTitle','asc')
-							->get();
+	public static function getAPV(){
+		return DB::select('SELECT * FROM tbl_apv');
+	}
 
-		return $tbl_acctchart;	
+	public static function getAcctTitles(){
+		return DB::select('SELECT * FROM tbl_acctchart ORDER BY idAcctTitle ASC');	
 	}
 
 	public static function getAPVNum(){
@@ -70,19 +69,93 @@ class APVs extends Model {
 
 		if($id){
 			$ids['success'] = 'true';
-			$ids['msg'] = 'Record Successfully Saved';
+			$ids['msg'] = 'Account Payable Voucher has been Successfully Saved.';
 		}else{
 			$ids['success'] = 'false';
-			$ids['msg'] = 'WARNING: Unknown error occur while saving the record';	
+			$ids['msg'] = 'WARNING: Unknown error occur while saving new record.';	
 		 }
 		return $ids;
 	}
 
-	public static function getAPVEntries($dateParams, $dateparamsTO){
-		return DB::select('SELECT * FROM tbl_apv 
-					LEFT JOIN tbl_apventries ON tbl_apv.apvID=tbl_apventries.apvID
-					LEFT JOIN tbl_acctchart ON tbl_acctchart.idAcctTitle=tbl_apventries.idAcctTitleDB OR tbl_acctchart.idAcctTitle=tbl_apventries.idAcctTitleCR
-					WHERE transDate BETWEEN :dateParams AND :dateparamsTO', ['dateParams'=>$dateParams,'dateparamsTO'=>$dateparamsTO]);			
+	public static function getAPVDetails($id) {
+		return DB::select('CALL SP_APVEntries(?)', array($id));
 	}
+
+	public static function updateAPV($id,$data) {
+		$apv = $data['APV'];
+		$userID = $data['userID'];
+
+		$result = DB::table('tbl_apv')->where('apvID',$id)
+					 ->update([
+					 		'transDate' => Carbon::NOW(),
+					 		'particulars' => $apv['particulars'],
+					 		'prepBy' => $userID
+					 	]);
+
+		if($result){	
+			$results['success'] = 'true';
+			$results['msg'] = 'Account Payable Voucher has been updated.';
+		}else{
+			$results['success'] = 'false';
+			$results['msg'] = 'WARNING: Unknown error occur while updating APV.';
+		}
+		return $results;
+	}
+
+	public static function approveAPV($id,$data){
+		$userID = $data['userID'];
+
+		$result = DB::table('tbl_apv')->where('apvID', $id)->update(['tranStatus' => "APR",'approveBy' => $userID]);
+
+		if($result){	
+			$results['success'] = 'true';
+			$results['msg'] = 'Account Payable Voucher has been approved.';
+		}else{
+			$results['success'] = 'false';
+			$results['msg'] = 'WARNING: Unknown error occur while approving APV.';
+		}
+	 return $results;
+	}
+
+	public static function cancelAPV($id,$data){
+		$userID = $data['userID'];
+
+		$result = DB::table('tbl_apv')->where('apvID', $id)->update(['tranStatus' => "CAN",'prepBy' => $userID]);
+
+		if($result){	
+			$results['success'] = 'true';
+			$results['msg'] = 'Account Payable Voucher has been cancelled.';
+		}else{
+			$results['success'] = 'false';
+			$results['msg'] = 'WARNING: Unknown error occur while cancelling APV.';
+		}
+	 return $results;
+	}
+
+	public static function previewAPV($id) {
+		return DB::select('CALL SP_APVEntries(?)', array($id));
+	}
+
+	public static function auditAPV($id,$data){
+		$userID = $data['userID'];
+
+		$result = DB::table('tbl_apv')->where('apvID', $id)->update(['tranStatus' => "AUD",'auditedBy' => $userID]);
+
+		if($result){	
+			$results['success'] = 'true';
+			$results['msg'] = 'Account Payable Voucher has been audited.';
+		}else{
+			$results['success'] = 'false';
+			$results['msg'] = 'WARNING: Unknown error occur while auditing APV.';
+		}
+	 return $results;
+	}
+
+	// public static function getAPVEntries($dateParams, $dateparamsTO){
+	// 	return DB::select('SELECT * FROM tbl_apv 
+	// 				LEFT JOIN tbl_apventries ON tbl_apv.apvID=tbl_apventries.apvID
+	// 				LEFT JOIN tbl_acctchart ON tbl_acctchart.idAcctTitle=tbl_apventries.idAcctTitleDB OR tbl_acctchart.idAcctTitle=tbl_apventries.idAcctTitleCR
+	// 				WHERE transDate BETWEEN :dateParams AND :dateparamsTO', ['dateParams'=>$dateParams,'dateparamsTO'=>$dateparamsTO]);			
+	// }
 
 }

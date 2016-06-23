@@ -57,26 +57,37 @@ class CDVController extends BaseController{
 		return response()->json($data);
 	}
 
+	public function previewCDV(Request $request,$id){
+		$data = CheckDisbursements::previewCDV($id);
+		return response()->json($data);
+	}
+
 	public function approveCDV(Request $request,$id){
 		$input = $request->all();
 		$data = CheckDisbursements::approveCDV($id,$input);
 		return response()->json($data);
 	}
 
-	public function denyCDV(Request $request,$id){
+	public function cancelCDV(Request $request,$id){
 		$input = $request->all();
-		$data = CheckDisbursements::denyCDV($id,$input);
+		$data = CheckDisbursements::cancelCDV($id,$input);
 		return response()->json($data);
 	}
 
-	public function previewCDV(Request $request,$id){
-		$data = CheckDisbursements::previewCDV($id);
+	public function auditCDV(Request $request,$id){
+		$input = $request->all();
+		$data = CheckDisbursements::auditCDV($id,$input);
 		return response()->json($data);
 	}
 
-	public function getCDVInfo(Request $request){
-		$input = $request->all();
-	    $data = CheckDisbursements::getCDVInfo($input['from'], $input['to']);
+	// public function getCDVInfo(Request $request){
+	// 	$input = $request->all();
+	//     $data = CheckDisbursements::getCDVInfo($input['from'], $input['to']);
+	// 	return response()->json($data);
+	// }
+
+	public function editCDVEntries(Request $request, $id){
+	    $data = CheckDisbursements::editCDVEntries($id,$input);
 		return response()->json($data);
 	}
 }

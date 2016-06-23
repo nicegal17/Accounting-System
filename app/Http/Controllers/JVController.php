@@ -21,6 +21,45 @@ class JVController extends BaseController{
 		return response()->json($data);
 	}
 
+	public function getJVs(){
+		$data = JVoucher::getJVs();
+		return response()->json($data);
+	}
+
+	public function getJVDetails(Request $request,$id){
+		$data = JVoucher::getJVDetails($id);
+		return response()->json($data);
+	}
+
+	public function updateJV(Request $request,$id){
+		$input = $request->all();
+		$data = JVoucher::updateJV($id,$input);
+		return response()->json($data);
+	}
+
+	public function approveJV(Request $request,$id){
+		$input = $request->all();
+		$data = JVoucher::approveJV($id,$input);
+		return response()->json($data);
+	}
+
+	public function cancelJV(Request $request,$id){
+		$input = $request->all();
+		$data = JVoucher::cancelJV($id,$input);
+		return response()->json($data);
+	}
+
+	public function auditJV(Request $request,$id){
+		$input = $request->all();
+		$data = JVoucher::auditJV($id,$input);
+		return response()->json($data);
+	}
+
+	public function previewJV(Request $request,$id){
+		$data = JVoucher::previewJV($id);
+		return response()->json($data);
+	}
+
 	public function getGJEntries(Request $request){
 		$input = $request->all();
 	    $data = JVoucher::getGJEntries($input['from'], $input['to']);

@@ -9,12 +9,7 @@ use Carbon\Carbon;
 class JVoucher extends Model {
 
 	public static function getAcctTitles(){
-		$tbl_acctchart = DB::table('tbl_acctchart')
-							->where('depth', '=',2)
-							->orderBy('idAcctTitle','asc')
-							->get();
-
-		return $tbl_acctchart;	
+		return DB::select('SELECT * FROM tbl_acctchart ORDER BY idAcctTitle ASC');
 	}
 
 	public static function getJVNum(){
@@ -70,12 +65,84 @@ class JVoucher extends Model {
 
 		if($id){
 			$ids['success'] = 'true';
-			$ids['msg'] = 'Record Successfully Saved';
+			$ids['msg'] = 'New Journal Voucher Entry has been saved.';
 		}else{
 			$ids['success'] = 'false';
 			$ids['msg'] = 'WARNING: Unknown error occur while saving the record';	
 		 }
 		return $ids; 
+	}
+
+	public static function getJVs() {
+		return DB::select('SELECT * FROM tbl_gj ORDER BY JID ASC');
+	}
+
+	public static function getJVDetails($id){
+		return DB::select('CALL SP_JVEntries(?)', array($id));
+	}
+
+	public static function updateJV($id,$data){
+		$userID = $data['userID'];
+
+		$result = DB::table('tbl_gj')->where('JID', $id)->update(['status' => "APR",'approveBy' => $userID]);
+
+		if($result){	
+			$results['success'] = 'true';
+			$results['msg'] = 'Journal Voucher has been approved.';
+		}else{
+			$results['success'] = 'false';
+			$results['msg'] = 'WARNING: Unknown error occur while approving JV.';
+		}
+	 return $results;
+	}
+
+	public static function approveJV($id,$data){
+		$userID = $data['userID'];
+
+		$result = DB::table('tbl_gj')->where('JID', $id)->update(['status' => "APR",'approveBy' => $userID]);
+
+		if($result){	
+			$results['success'] = 'true';
+			$results['msg'] = 'Journal Voucher has been approved.';
+		}else{
+			$results['success'] = 'false';
+			$results['msg'] = 'WARNING: Unknown error occur while approving JV.';
+		}
+	 return $results;
+	}
+
+	public static function cancelJV($id,$data){
+		$userID = $data['userID'];
+
+		$result = DB::table('tbl_gj')->where('JID', $id)->update(['status' => "CAN",'prepBy' => $userID]);
+
+		if($result){	
+			$results['success'] = 'true';
+			$results['msg'] = 'Journal Voucher has been cancelled.';
+		}else{
+			$results['success'] = 'false';
+			$results['msg'] = 'WARNING: Unknown error occur while cancelling JV.';
+		}
+	 return $results;
+	}
+
+	public static function auditJV($id,$data){
+		$userID = $data['userID'];
+
+		$result = DB::table('tbl_gj')->where('JID', $id)->update(['status' => "AUD",'auditedBy' => $userID]);
+
+		if($result){	
+			$results['success'] = 'true';
+			$results['msg'] = 'Journal Voucher has been audited.';
+		}else{
+			$results['success'] = 'false';
+			$results['msg'] = 'WARNING: Unknown error occur while auditing JV.';
+		}
+	 return $results;
+	}
+
+	public static function previewJV($id) {
+		return DB::select('CALL SP_JVEntries(?)', array($id));
 	}
 
 	public static function getGJEntries($dateParams, $dateparamsTO){

@@ -140,73 +140,38 @@ Route::group(['prefix' => 'api/v1'],function(){
 		Route::get('/getCDVEntries/{id}','CDVController@getCDVEntries');
 		Route::get('/getCDVNum','CDVController@getCDVNum');
 		Route::post('/','CDVController@createCDV');	
+		Route::get('/previewCDV/{id}','CDVController@previewCDV');
 		Route::put('/{id}', 'CDVController@updateCDV');
 		Route::put('/approveCDV/{id}','CDVController@approveCDV');
-		Route::get('/previewCDV/{id}','CDVController@previewCDV');
+		Route::put('/auditCDV/{id}', 'CDVController@auditCDV');
+		Route::put('/cancelCDV/{id}', 'CDVController@cancelCDV');
+		Route::get('/editCDVEntries/{id}', 'CDVController@editCDVEntries');
 	});
-
-	Route::group(['prefix' => 'Audit'],function(){
-		Route::get('/','AuditCDVController@getCDVNo');
-		Route::get('/getAcctEntries/{id}','AuditCDVController@getAcctEntries');
-		Route::put('/{id}','AuditCDVController@auditCDV');
-	});	
-
-	Route::group(['prefix' => 'Search'],function(){
-		Route::get('/','SearchCDVController@getCDVNo');
-		Route::get('/getCDVDet/{id}','SearchCDVController@getCDVDet');
-		Route::get('/getDBEntries/{id}','SearchCDVController@getDBEntries');
-		Route::get('/getCREntries/{id}','SearchCDVController@getCREntries');
-		Route::get('/getDBSum/{id}','SearchCDVController@getDBSum');
-	});	
 	
 	Route::group(['prefix' => 'JV'],function(){
 		Route::get('/','JVController@getAcctTitles');
 		Route::post('/','JVController@createJV');
-		Route::post('/getGJEntries','JVController@getGJEntries'); 
-	});	
-
-	Route::group(['prefix' => 'approveJV'],function(){
-		Route::get('/','AppJVController@getJVNo');
-		Route::get('/getAcctEntries/{id}','AppJVController@getAcctEntries');
-		Route::put('/{id}','AppJVController@approveJV');
-	});	
-
-	Route::group(['prefix' => 'AuditJV'],function(){
-		Route::get('/','AuditJVController@getJVNo');
-		Route::get('/getAcctEntries/{id}','AuditJVController@getAcctEntries');
-		Route::put('/{id}','AuditJVController@auditJV');
-	});	
-
-	Route::group(['prefix' => 'SearchJV'],function(){
-		Route::get('/','SearchJVController@getJVNo');
-		Route::get('/getJVDet/{id}','SearchJVController@getJVDet');
-		Route::get('/getDBEntries/{id}','SearchJVController@getDBEntries');
-		Route::get('/getCREntries/{id}','SearchJVController@getCREntries');
+		Route::get('/getJVs', 'JVController@getJVs');
+		Route::put('/{id}', 'JVController@updateJV');
+		Route::get('/getJVDetails/{id}', 'JVController@getJVDetails');
+		Route::put('/approveJV/{id}', 'JVController@approveJV');
+		Route::put('/cancelJV/{id}', 'JVController@cancelJV');
+		Route::put('/auditJV/{id}', 'JVController@auditJV');
+		Route::get('/previewJV/{id}', 'JVController@previewJV');
+		// Route::post('/getGJEntries','JVController@getGJEntries'); 
 	});	
 
 	Route::group(['prefix' => 'APV'],function(){
-		Route::get('/','APVController@getAcctTitles');
+		Route::get('/','APVController@getAPV');
+		Route::get('/getAcctTitles', 'APVController@getAcctTitles');
 		Route::post('/','APVController@createAPV');
-		Route::post('/getAPVEntries','APVController@getAPVEntries'); 
-	});	
-
-	Route::group(['prefix' => 'appAPV'],function(){
-		Route::get('/','AppAPVController@getAPVNo');
-		Route::get('/getAcctEntries/{id}','AppAPVController@getAcctEntries');
-		Route::put('/{id}','AppAPVController@approveAPV');
-	});	
-
-	Route::group(['prefix' => 'AuditAPV'],function(){
-		Route::get('/','AuditAPVController@getAPV');
-		Route::get('/getAcctEntries/{id}','AuditAPVController@getAcctEntries');
-		Route::put('/{id}','AuditAPVController@auditAPV');
-	});	
-
-	Route::group(['prefix' => 'SearchAPV'],function(){
-		Route::get('/','SearchAPVController@getAPVNo');
-		Route::get('/getAPVDet/{id}','SearchAPVController@getAPVDet');
-		Route::get('/getDBEntries/{id}','SearchAPVController@getDBEntries');
-		Route::get('/getCREntries/{id}','SearchAPVController@getCREntries');
+		Route::get('/getAPVDetails/{id}', 'APVController@getAPVDetails');
+		Route::put('/{id}', 'APVController@updateAPV');
+		Route::put('/approveAPV/{id}', 'APVController@approveAPV');
+		Route::get('/previewAPV/{id}', 'APVController@previewAPV');
+		Route::put('/cancelAPV/{id}', 'APVController@cancelAPV');
+		Route::put('/auditAPV/{id}', 'APVController@auditAPV');
+		// Route::post('/getAPVEntries','APVController@getAPVEntries'); 
 	});	
 
 	Route::group(['prefix' => 'check'],function(){

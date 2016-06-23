@@ -44,6 +44,17 @@ class CheckDisbursements extends Model {
 		return DB::select('SELECT idNum, numSeries FROM tbl_series WHERE ABRV="CDV" ORDER BY idNum DESC LIMIT 1');
 	}
 
+	public function editCDVEntries($ID) {
+		// $str_arr = explode("-", $ID);
+		// return DB::select('SELECT a.idAcctTitle, a.acctTitle, b.amount FROM tbl_acctchart a
+		// 			LEFT JOIN tbl_acctngentries b ON a.idAcctTitle=b.idAcctTitleDB OR a.idAcctTitle=b.idAcctTitleCR
+		// 			WHERE :a.idAcctTitle AND :a.cdvID', ['a.idAcctTitle'=>$str_arr[0], 'a.cdvID'=>$str_arr[1]]);
+
+		return DB::select('SELECT a.idAcctTitle, a.acctTitle, b.amount FROM tbl_acctchart a
+					LEFT JOIN tbl_acctngentries b ON a.idAcctTitle=b.idAcctTitleDB OR a.idAcctTitle=b.idAcctTitleCR
+					WHERE a.idAcctTitle=?',array($ID));
+	}
+
 	public static function CDVNumSeries(){
 		return DB::select("SELECT 
 						CASE WHEN (SELECT COUNT(*) FROM tbl_series) = 0 THEN
@@ -138,14 +149,14 @@ class CheckDisbursements extends Model {
 					WHERE chkDate BETWEEN :dateParams AND :dateparamsTO', ['dateParams'=>$dateParams,'dateparamsTO'=>$dateparamsTO]);			
 	}
 
+	public static function previewCDV($id){
+		return DB::select('CALL SP_CDVPreview(?)', array($id));
+	}
+
 	public static function approveCDV($CDVNo,$data){
 		$userID = $data['userID'];
 
-		$result = DB::table('tbl_cdv')->where('cdvID', $CDVNo)
-					->update([
-						'status' => "APR",
-						'approveBy' => $userID
-					]);
+		$result = DB::table('tbl_cdv')->where('cdvID', $CDVNo)->update(['status' => "APR",'approveBy' => $userID]);
 
 		if($result){	
 			$results['success'] = 'true';
@@ -157,15 +168,33 @@ class CheckDisbursements extends Model {
 	 return $results;
 	}
 
-	public static function denyCDV($CDVNo){
-		return DB::update('UPDATE tbl_cdv SET status="DNY" WHERE cdvID=?', array($CDVNo));
+	public static function cancelCDV($CDVNo, $data) {
+		$userID = $data['userID'];
+
+		$result = DB::table('tbl_cdv')->where('cdvID', $CDVNo)->update(['status' => "CAN",'prepBy' => $userID]);
+
+		if($result){	
+			$results['success'] = 'true';
+			$results['msg'] = 'Check Disbursement Voucher has been cancelled.';
+		}else{
+			$results['success'] = 'false';
+			$results['msg'] = 'WARNING: Unable to cancel CDV.';
+		}
+	 return $results;
 	}
 
-	public static function previewCDV($id){
-		return DB::select('SELECT a.cdvID, a.CDVNo, a.payee, a.address,a.chkDate, d.bankName, a.chkNO, a.particular, b.empName FROM tbl_cdv a
-					LEFT JOIN tbl_useracct c ON c.userID=a.prepBy
-					LEFT JOIN tbl_employee b ON b.empID=c.empID
-					LEFT JOIN tbl_bank d ON d.bankID=a.bankID
-					WHERE a.cdvID=?', array($id));
+	public static function auditCDV($CDVNo, $data) {
+		$userID = $data['userID'];
+
+		$result = DB::table('tbl_cdv')->where('cdvID', $CDVNo)->update(['status' => "AUD",'auditedBy' => $userID]);
+
+		if($result){	
+			$results['success'] = 'true';
+			$results['msg'] = 'Check Disbursement Voucher has been audited.';
+		}else{
+			$results['success'] = 'false';
+			$results['msg'] = 'WARNING: Unable to audit CDV.';
+		}
+	 return $results;
 	}
 }	

@@ -10,6 +10,11 @@ use Illuminate\Http\Request;
 
 class APVController extends BaseController{ 
 	
+	public function getAPV(){
+		$data = APVs::getAPV();
+		return response()->json($data);
+	}
+
 	public function getAcctTitles(){
 		$data = APVs::getAcctTitles();
 		return response()->json($data);
@@ -21,10 +26,39 @@ class APVController extends BaseController{
 		return response()->json($data);
 	}
 
-	public function getAPVEntries(Request $request){
-		$input = $request->all();
-	    $data = APVs::getAPVEntries($input['from'], $input['to']);
+	public function getAPVDetails(Request $request,$id){
+		$data = APVs::getAPVDetails($id);
 		return response()->json($data);
 	}
+
+	public function updateAPV(Request $request,$id){
+		$input = $request->all();
+		$data = APVs::updateAPV($id,$input);
+		return response()->json($data);
+	}
+
+	public function approveAPV(Request $request,$id){
+		$input = $request->all();
+		$data = APVs::approveAPV($id,$input);
+		return response()->json($data);
+	}
+
+	public function cancelAPV(Request $request,$id){
+		$input = $request->all();
+		$data = APVs::cancelAPV($id,$input);
+		return response()->json($data);
+	}
+
+	public function auditAPV(Request $request,$id){
+		$input = $request->all();
+		$data = APVs::auditAPV($id,$input);
+		return response()->json($data);
+	}
+
+	public function previewAPV(Request $request,$id){
+		$data = APVs::previewAPV($id);
+		return response()->json($data);
+	}
+
 }
 ?>
