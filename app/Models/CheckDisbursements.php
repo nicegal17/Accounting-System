@@ -44,16 +44,16 @@ class CheckDisbursements extends Model {
 		return DB::select('SELECT idNum, numSeries FROM tbl_series WHERE ABRV="CDV" ORDER BY idNum DESC LIMIT 1');
 	}
 
-	public function editCDVEntries($ID) {
-		// $str_arr = explode("-", $ID);
-		// return DB::select('SELECT a.idAcctTitle, a.acctTitle, b.amount FROM tbl_acctchart a
-		// 			LEFT JOIN tbl_acctngentries b ON a.idAcctTitle=b.idAcctTitleDB OR a.idAcctTitle=b.idAcctTitleCR
-		// 			WHERE :a.idAcctTitle AND :a.cdvID', ['a.idAcctTitle'=>$str_arr[0], 'a.cdvID'=>$str_arr[1]]);
+	// public function editCDVEntries($ID) {
+	// 	// $str_arr = explode("-", $ID);
+	// 	// return DB::select('SELECT a.idAcctTitle, a.acctTitle, b.amount FROM tbl_acctchart a
+	// 	// 			LEFT JOIN tbl_acctngentries b ON a.idAcctTitle=b.idAcctTitleDB OR a.idAcctTitle=b.idAcctTitleCR
+	// 	// 			WHERE :a.idAcctTitle AND :a.cdvID', ['a.idAcctTitle'=>$str_arr[0], 'a.cdvID'=>$str_arr[1]]);
 
-		return DB::select('SELECT a.idAcctTitle, a.acctTitle, b.amount FROM tbl_acctchart a
-					LEFT JOIN tbl_acctngentries b ON a.idAcctTitle=b.idAcctTitleDB OR a.idAcctTitle=b.idAcctTitleCR
-					WHERE a.idAcctTitle=?',array($ID));
-	}
+	// 	return DB::select('SELECT a.idAcctTitle, a.acctTitle, b.amount FROM tbl_acctchart a
+	// 				LEFT JOIN tbl_acctngentries b ON a.idAcctTitle=b.idAcctTitleDB OR a.idAcctTitle=b.idAcctTitleCR
+	// 				WHERE a.idAcctTitle=?',array($ID));
+	// }
 
 	public static function CDVNumSeries(){
 		return DB::select("SELECT 

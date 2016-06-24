@@ -145,6 +145,12 @@ class JVoucher extends Model {
 		return DB::select('CALL SP_JVEntries(?)', array($id));
 	}
 
+	// public static function editJVEntries($idAcctTitle) {
+	// 	return DB::select('SELECT a.idAcctTitle, a.acctTitle, b.amount FROM tbl_acctchart a
+	// 			LEFT JOIN tbl_acctngentries b ON a.idAcctTitle=b.idAcctTitleDB OR a.idAcctTitle=b.idAcctTitleCR
+	// 			WHERE a.idAcctTitle=?', array($idAcctTitle));
+	// }
+
 	public static function getGJEntries($dateParams, $dateparamsTO){
 		return DB::select('SELECT * FROM tbl_gj 
 					LEFT JOIN tbl_journalEntries ON tbl_gj.JID=tbl_journalEntries.JID

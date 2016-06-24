@@ -145,7 +145,7 @@ Route::group(['prefix' => 'api/v1'],function(){
 		Route::put('/approveCDV/{id}','CDVController@approveCDV');
 		Route::put('/auditCDV/{id}', 'CDVController@auditCDV');
 		Route::put('/cancelCDV/{id}', 'CDVController@cancelCDV');
-		Route::get('/editCDVEntries/{id}', 'CDVController@editCDVEntries');
+		
 	});
 	
 	Route::group(['prefix' => 'JV'],function(){
@@ -158,6 +158,7 @@ Route::group(['prefix' => 'api/v1'],function(){
 		Route::put('/cancelJV/{id}', 'JVController@cancelJV');
 		Route::put('/auditJV/{id}', 'JVController@auditJV');
 		Route::get('/previewJV/{id}', 'JVController@previewJV');
+		// Route::get('editJVEntries/{id}', 'JVController@editJVEntries');
 		// Route::post('/getGJEntries','JVController@getGJEntries'); 
 	});	
 
