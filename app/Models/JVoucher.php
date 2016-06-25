@@ -41,7 +41,7 @@ class JVoucher extends Model {
 
 		DB::table('tbl_series')->where('idNum',$ID)->update(['numSeries' => ($Voucher)]);
 	
-		$id = DB::table('tbl_gj')->insertGetId(['JVNum' => $JVNo[0]->JV,'transDate' => Carbon::NOW(), 'prepBy' => $userID, 'particulars' => ($jv['particular'])]);
+		$id = DB::table('tbl_gj')->insertGetId(['JVNum' => $JVNo[0]->JV,'transDate' => Carbon::NOW(), 'prepBy' => $userID, 'particulars' => ($jv['particulars'])]);
 
 		for ($i=0; $i < count($entries); $i++) { 
 			$var = $entries[$i];
@@ -145,12 +145,20 @@ class JVoucher extends Model {
 		return DB::select('CALL SP_JVEntries(?)', array($id));
 	}
 
-	// public static function editJVEntries($idAcctTitle) {
-	// 	return DB::select('SELECT a.idAcctTitle, a.acctTitle, b.amount FROM tbl_acctchart a
-	// 			LEFT JOIN tbl_acctngentries b ON a.idAcctTitle=b.idAcctTitleDB OR a.idAcctTitle=b.idAcctTitleCR
-	// 			WHERE a.idAcctTitle=?', array($idAcctTitle));
-	// }
+	public static function updateJVEntries($id,$data){
+		// $userID = $data['userID'];
 
+		$result = DB::table('tbl_journalEntries')->where('JID', $id)->update(['status' => "APR",'approveBy' => $userID]);
+
+		if($result){	
+			$results['success'] = 'true';
+			$results['msg'] = 'Journal Voucher has been approved.';
+		}else{
+			$results['success'] = 'false';
+			$results['msg'] = 'WARNING: Unknown error occur while approving JV.';
+		}
+	 return $results;
+	}
 	public static function getGJEntries($dateParams, $dateparamsTO){
 		return DB::select('SELECT * FROM tbl_gj 
 					LEFT JOIN tbl_journalEntries ON tbl_gj.JID=tbl_journalEntries.JID
