@@ -60,6 +60,17 @@ class JVController extends BaseController{
 		return response()->json($data);
 	}
 
+	public function getJVPK(Request $request,$id){
+		$data = JVoucher::getJVPK($id);
+		return response()->json($data);
+	}
+
+	public function updateJVEntries(Request $request,$id){
+		$input = $request->all();
+		$data = JVoucher::updateJVEntries($id,$input);
+		return response()->json($data);
+	}
+
 	public function getGJEntries(Request $request){
 		$input = $request->all();
 	    $data = JVoucher::getGJEntries($input['from'], $input['to']);
