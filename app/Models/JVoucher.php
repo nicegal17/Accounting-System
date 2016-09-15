@@ -73,27 +73,58 @@ class JVoucher extends Model {
 		return $ids; 
 	}
 
+	public static function getJVPK($id){
+		return DB::select('SELECT a.PK, a.JID, b.idAcctTitle, b.acctTitle, a.amount FROM tbl_journalentries a LEFT JOIN tbl_acctchart b ON b.idAcctTitle=a.idAcctTitleDB OR b.idAcctTitle=a.idAcctTitleCR
+					WHERE a.PK=?', array($id));
+	}
+
+	public static function updateJVEntries($id,$data){	
+	$entries = json_decode($data['entries']);
+
+		// $result = DB::table('tbl_journalentries')->where('PK', $id)
+		// 			->update([
+		// 				'idAcctTitleDB' => $data['IDTest'],
+		// 				'amount' => $data['amount']
+		// 			]);
+				
+		// return DB::table('tbl_gj')->where('JID', $id)->update(['particulars' => ($jv['particulars'])]);
+
+		for ($i=0; $i < count($entry); $i++) { 
+			$var = $entry[$i];
+
+			$amount = (isset($var->DB) && ($var->DB > 0)) ? $var->DB : $var->CR;
+
+			if(isset($var->DB) && !empty($var->DB)){
+				$ID = $var->title;
+			}else{
+				$ID = null;
+			}
+
+			if (isset($var->CR) && !empty($var->CR)) {
+				$ID2 = $var->title;
+			}else{
+				$ID2 = null;
+			}
+
+			$result= DB::table('tbl_journalEntries')->where('JID', $id)->update(['idAcctTitleDB' => ($ID),'idAcctTitleCR' => ($ID2),'amount' => ($amount)]);			
+		}
+
+		if($result){
+			$results['success'] = 'true';
+			$results['msg'] = 'New Journal Voucher Entry has been saved.';
+		}else{
+			$results['success'] = 'false';
+			$results['msg'] = 'WARNING: Unknown error occur while saving the record';	
+		 }
+		return $results; 
+	}
+
 	public static function getJVs() {
 		return DB::select('SELECT * FROM tbl_gj ORDER BY JID ASC');
 	}
 
 	public static function getJVDetails($id){
 		return DB::select('CALL SP_JVEntries(?)', array($id));
-	}
-
-	public static function updateJV($id,$data){
-		$userID = $data['userID'];
-
-		$result = DB::table('tbl_gj')->where('JID', $id)->update(['status' => "APR",'approveBy' => $userID]);
-
-		if($result){	
-			$results['success'] = 'true';
-			$results['msg'] = 'Journal Voucher has been approved.';
-		}else{
-			$results['success'] = 'false';
-			$results['msg'] = 'WARNING: Unknown error occur while approving JV.';
-		}
-	 return $results;
 	}
 
 	public static function approveJV($id,$data){
@@ -145,44 +176,6 @@ class JVoucher extends Model {
 		return DB::select('CALL SP_JVEntries(?)', array($id));
 	}
 
-	public static function getJVPK($id){
-		return DB::select('SELECT a.PK, a.JID, b.acctTitle, a.amount FROM tbl_journalentries a LEFT JOIN tbl_acctchart b ON b.idAcctTitle=a.idAcctTitleDB OR b.idAcctTitle=a.idAcctTitleCR
-					WHERE a.PK=?', array($id));
-	}
-
-	public static function updateJVEntries($id,$data){	
-		$entries = json_decode($data['entries']);
-
-		for ($i=0; $i < count($entries); $i++) { 
-			$var = $entries[$i];
-
-			$amount = (isset($var->DB) && ($var->DB > 0)) ? $var->DB : $var->CR;
-
-			if(isset($var->DB) && !empty($var->DB)){
-				$ID = $var->idAcctTitle;
-			}else{
-				$ID = null;
-			}
-
-			if (isset($var->CR) && !empty($var->CR)) {
-				$ID2 = $var->idAcctTitle;
-			}else{
-				$ID2 = null;
-			}
-
-			$result = DB::table('tbl_journalEntries')->where('PK', $id)
-							->update(['idAcctTitleDB' => $ID,'idAcctTitleCR' => $ID2, 'amount' => $amount]);
-
-			if($result){	
-				$results['success'] = 'true';
-				$results['msg'] = 'Journal Voucher Entry has been updated.';
-			}else{
-				$results['success'] = 'false';
-				$results['msg'] = 'WARNING: Unknown error occur while updating JV entry.';
-			}
-	 		return $results;
-		}
-	}
 
 	public static function getGJEntries($dateParams, $dateparamsTO){
 		return DB::select('SELECT * FROM tbl_gj 

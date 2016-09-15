@@ -39,10 +39,6 @@ class Users extends Model {
 		return DB::select('SELECT roleID, role_title FROM tbl_roles');
 	}
 
-	// public static function getRolesPermission() {
-	// 	return DB::select('SELECT * FROM tbl_permissions');
-	// }
-
 	public static function getUserID($id){
 		return DB::select('SELECT b.userID, a.empID, a.empName, b.username, b.password, c.roleID, c.role_title FROM tbl_employee a 
 			LEFT JOIN tbl_useracct b ON a.empID=b.empID 

@@ -50,7 +50,7 @@ class Employees extends Model {
 
 		if($result){	
 			$results['success'] = 'true';
-			$results['msg'] = 'Record SuccessfulEmployee Details has been updated';
+			$results['msg'] = 'Employee Details has been updated';
 		}else{
 			$results['success'] = 'false';
 			$results['msg'] = 'WARNING: Unknown error occur while updating the record';
