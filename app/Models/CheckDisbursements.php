@@ -44,17 +44,6 @@ class CheckDisbursements extends Model {
 		return DB::select('SELECT idNum, numSeries FROM tbl_series WHERE ABRV="CDV" ORDER BY idNum DESC LIMIT 1');
 	}
 
-	// public function editCDVEntries($ID) {
-	// 	// $str_arr = explode("-", $ID);
-	// 	// return DB::select('SELECT a.idAcctTitle, a.acctTitle, b.amount FROM tbl_acctchart a
-	// 	// 			LEFT JOIN tbl_acctngentries b ON a.idAcctTitle=b.idAcctTitleDB OR a.idAcctTitle=b.idAcctTitleCR
-	// 	// 			WHERE :a.idAcctTitle AND :a.cdvID', ['a.idAcctTitle'=>$str_arr[0], 'a.cdvID'=>$str_arr[1]]);
-
-	// 	return DB::select('SELECT a.idAcctTitle, a.acctTitle, b.amount FROM tbl_acctchart a
-	// 				LEFT JOIN tbl_acctngentries b ON a.idAcctTitle=b.idAcctTitleDB OR a.idAcctTitle=b.idAcctTitleCR
-	// 				WHERE a.idAcctTitle=?',array($ID));
-	// }
-
 	public static function CDVNumSeries(){
 		return DB::select("SELECT 
 						CASE WHEN (SELECT COUNT(*) FROM tbl_series) = 0 THEN
@@ -142,12 +131,12 @@ class CheckDisbursements extends Model {
 		return $results;
 	}
 
-	public static function getCDVInfo($dateParams, $dateparamsTO){
-		return DB::select('SELECT * FROM tbl_cdv 
-					LEFT JOIN tbl_acctngentries ON tbl_cdv.cdvID=tbl_acctngentries.cdvID
-					LEFT JOIN tbl_acctchart ON tbl_acctchart.idAcctTitle=tbl_acctngEntries.idAcctTitleDB OR tbl_acctchart.idAcctTitle=tbl_acctngEntries.idAcctTitleCR
-					WHERE chkDate BETWEEN :dateParams AND :dateparamsTO', ['dateParams'=>$dateParams,'dateparamsTO'=>$dateparamsTO]);			
-	}
+	// public static function getCDVInfo($dateParams, $dateparamsTO){
+	// 	return DB::select('SELECT * FROM tbl_cdv 
+	// 				LEFT JOIN tbl_acctngentries ON tbl_cdv.cdvID=tbl_acctngentries.cdvID
+	// 				LEFT JOIN tbl_acctchart ON tbl_acctchart.idAcctTitle=tbl_acctngEntries.idAcctTitleDB OR tbl_acctchart.idAcctTitle=tbl_acctngEntries.idAcctTitleCR
+	// 				WHERE chkDate BETWEEN :dateParams AND :dateparamsTO', ['dateParams'=>$dateParams,'dateparamsTO'=>$dateparamsTO]);			
+	// }
 
 	public static function previewCDV($id){
 		return DB::select('CALL SP_CDVPreview(?)', array($id));
@@ -196,5 +185,9 @@ class CheckDisbursements extends Model {
 			$results['msg'] = 'WARNING: Unable to audit CDV.';
 		}
 	 return $results;
+	}
+
+	public static function getCDVInfo($sdate1){
+		return DB::select('SELECT CDVNo, chkDate, payee, particular FROM tbl_cdv WHERE chkDate=?', $sdate1);			
 	}
 }	

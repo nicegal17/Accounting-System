@@ -80,10 +80,14 @@ class CDVController extends BaseController{
 		return response()->json($data);
 	}
 
-	// public function getCDVInfo(Request $request){
-	// 	$input = $request->all();
-	//     $data = CheckDisbursements::getCDVInfo($input['from'], $input['to']);
-	// 	return response()->json($data);
-	// }
+	public function getCDVInfo(Request $request,$sdate1){
+
+		// $sSQL = $request->$sSQL();
+	 //    $data = CheckDisbursements::getCDVInfo($sdate1,$sSQL); 
+		// return response()->json($data);
+
+		// $data = CheckDisbursements::getCDVInfo($input['dateParams']);
+	     // $dateParams = $request->input('dateParams')
+	}
 }
 ?>

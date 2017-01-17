@@ -144,22 +144,23 @@ Route::group(['prefix' => 'api/v1'],function(){
 		Route::put('/{id}', 'CDVController@updateCDV');
 		Route::put('/approveCDV/{id}','CDVController@approveCDV');
 		Route::put('/auditCDV/{id}', 'CDVController@auditCDV');
-		Route::put('/cancelCDV/{id}', 'CDVController@cancelCDV');	
+		Route::put('/cancelCDV/{id}', 'CDVController@cancelCDV');
+		Route::put('/getCDVInfo/{dateval}','CDVController@getCDVInfo');	
 	});
 	
 	Route::group(['prefix' => 'JV'],function(){
 		Route::get('/','JVController@getAcctTitles');
 		Route::post('/','JVController@createJV');
 		Route::get('/getJVs', 'JVController@getJVs');
-		Route::put('/{id}', 'JVController@updateJV');
+		// Route::put('/{id}', 'JVController@updateJV');
 		Route::get('/getJVDetails/{id}', 'JVController@getJVDetails');
+		Route::put('/updateJVEntries/{id}', 'JVController@updateJVEntries');
 		Route::put('/approveJV/{id}', 'JVController@approveJV');
 		Route::put('/cancelJV/{id}', 'JVController@cancelJV');
 		Route::put('/auditJV/{id}', 'JVController@auditJV');
 		Route::get('/previewJV/{id}', 'JVController@previewJV');
 		Route::get('/getJVPK/{id}', 'JVController@getJVPK');
-		Route::put('/updateJVEntries/{id}', 'JVController@updateJVEntries');
-		// Route::post('/getGJEntries','JVController@getGJEntries'); 
+		// Route::get('/getCDVInfo/{datefr}', 'JVController@getCDVInfo');
 	});	
 
 	Route::group(['prefix' => 'APV'],function(){

@@ -79,15 +79,8 @@ class JVoucher extends Model {
 	}
 
 	public static function updateJVEntries($id,$data){	
-	$entries = json_decode($data['entries']);
+	$entry = json_decode($data['entry']);
 
-		// $result = DB::table('tbl_journalentries')->where('PK', $id)
-		// 			->update([
-		// 				'idAcctTitleDB' => $data['IDTest'],
-		// 				'amount' => $data['amount']
-		// 			]);
-				
-		// return DB::table('tbl_gj')->where('JID', $id)->update(['particulars' => ($jv['particulars'])]);
 
 		for ($i=0; $i < count($entry); $i++) { 
 			$var = $entry[$i];
@@ -95,18 +88,18 @@ class JVoucher extends Model {
 			$amount = (isset($var->DB) && ($var->DB > 0)) ? $var->DB : $var->CR;
 
 			if(isset($var->DB) && !empty($var->DB)){
-				$ID = $var->title;
+				$ID = $var->acctTitle;
 			}else{
 				$ID = null;
 			}
 
 			if (isset($var->CR) && !empty($var->CR)) {
-				$ID2 = $var->title;
+				$ID2 = $var->acctTitle;
 			}else{
 				$ID2 = null;
 			}
 
-			$result= DB::table('tbl_journalEntries')->where('JID', $id)->update(['idAcctTitleDB' => ($ID),'idAcctTitleCR' => ($ID2),'amount' => ($amount)]);			
+			 $result= DB::table('tbl_journalEntries')->where('JID', $id)->update(['idAcctTitleDB' => ($ID)]);			
 		}
 
 		if($result){
