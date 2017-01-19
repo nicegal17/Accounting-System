@@ -188,6 +188,6 @@ class CheckDisbursements extends Model {
 	}
 
 	public static function getCDVInfo($sdate1){
-		return DB::select('SELECT CDVNo, chkDate, payee, particular FROM tbl_cdv WHERE chkDate=?', $sdate1);			
+		return DB::select('SELECT CDVNo, chkDate, payee, particular FROM tbl_cdv WHERE chkDate=?', array($sdate1));			
 	}
 }	

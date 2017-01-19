@@ -7,6 +7,7 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Http\Request;
+use Barryvdh\Debugbar;
 
 class CDVController extends BaseController{ 
 	
@@ -81,7 +82,17 @@ class CDVController extends BaseController{
 	}
 
 	public function getCDVInfo(Request $request){
-		$sdate1 = Input::get('sdate1');
+		// $sdate1 = Input::get('sdate1');\\
+
+		// $sdate1 = $request->input('sdate1');
+		$sdate1 = $request->query('sdate1');
+		Debugbar::info($sdate1);
+		Debugbar::startMeasure('render','Time for rendering');
+		try {
+   			 throw new Exception('foobar');
+		} catch (Exception $e) {
+    		Debugbar::addException($e);
+		}
 		$data = CheckDisbursements::getCDVInfo($sdate1);
 		return response()->json($data);
 	}
