@@ -145,12 +145,7 @@ Route::group(['prefix' => 'api/v1'],function(){
 		Route::put('/approveCDV/{id}','CDVController@approveCDV');
 		Route::put('/auditCDV/{id}', 'CDVController@auditCDV');
 		Route::put('/cancelCDV/{id}', 'CDVController@cancelCDV');
-
-		// Route::get('/getCDVInfo{sdate1?}','CDVController@getCDVInfo');	
-
-		Route::get('/getCDVInfo', function() {
-			return Input::get("sdate1");
-		});
+		Route::get('/getCDVInfo','CDVController@getCDVInfo');	
 	});
 	
 	Route::group(['prefix' => 'JV'],function(){

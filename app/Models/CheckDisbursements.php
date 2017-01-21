@@ -131,13 +131,6 @@ class CheckDisbursements extends Model {
 		return $results;
 	}
 
-	// public static function getCDVInfo($dateParams, $dateparamsTO){
-	// 	return DB::select('SELECT * FROM tbl_cdv 
-	// 				LEFT JOIN tbl_acctngentries ON tbl_cdv.cdvID=tbl_acctngentries.cdvID
-	// 				LEFT JOIN tbl_acctchart ON tbl_acctchart.idAcctTitle=tbl_acctngEntries.idAcctTitleDB OR tbl_acctchart.idAcctTitle=tbl_acctngEntries.idAcctTitleCR
-	// 				WHERE chkDate BETWEEN :dateParams AND :dateparamsTO', ['dateParams'=>$dateParams,'dateparamsTO'=>$dateparamsTO]);			
-	// }
-
 	public static function previewCDV($id){
 		return DB::select('CALL SP_CDVPreview(?)', array($id));
 	}
@@ -187,17 +180,9 @@ class CheckDisbursements extends Model {
 	 return $results;
 	}
 
-	public static function getCDVInfo($sdate1){
-		return DB::select('SELECT CDVNo, chkDate, payee, particular FROM tbl_cdv WHERE chkDate=?',$sdate1);		
+	public static function getCDVInfo($sdate1,$sdate2){
+		// return DB::select('SELECT CDVNo, payee, chkDate, chkNO, particular, FORMAT(amount,2) AS amount FROM tbl_cdv WHERE chkDate BETWEEN :sdate1 AND :sdate2 ORDER BY chkDate ASC', ['sdate1' => $sdate1, 'sdate2'=> $sdate2]);	
+
+		return DB::select('CALL SP_CDVSummary()', ['sdate1' => $sdate1, 'sdate2'=> $sdate2] );
 	}
-
-	// public static function getCDVInfo($sdate1){
-	// 	$tbl_cdv = DB::table('tbl_cdv')
-	// 						->where('chkDate=?', $sdate1)
-	// 						->orderBy('cdvID','asc')
-	// 						->get();
-
-	// 	return $tbl_cdv;
-	// 	echo $tbl_cdv;
-	// }
 }	
