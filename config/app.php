@@ -139,7 +139,6 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
         Barryvdh\Cors\ServiceProvider::class,
-        Barryvdh\Debugbar\ServiceProvider::class,
         Tymon\JWTAuth\Providers\JWTAuthServiceProvider::class,
 
        // Illuminate\Html\HtmlServiceProvider::class,
@@ -200,7 +199,6 @@ return [
         'View'      => Illuminate\Support\Facades\View::class,
         'JWTAuth'   => Tymon\JWTAuth\Facades\JWTAuth::class,
         'JWTFactory' => Tymon\JWTAuth\Facades\JWTFactory::class,
-        'Debugbar'   => Barryvdh\Debugbar\Facades::class,
         /*'Form'     => Illuminate\Html\FormFacade::class,
         'Html'     => Illuminate\Html\HtmlFacade::class,*/
 

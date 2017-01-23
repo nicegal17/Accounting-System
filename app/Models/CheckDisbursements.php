@@ -183,6 +183,6 @@ class CheckDisbursements extends Model {
 	public static function getCDVInfo($sdate1,$sdate2){
 		// return DB::select('SELECT CDVNo, payee, chkDate, chkNO, particular, FORMAT(amount,2) AS amount FROM tbl_cdv WHERE chkDate BETWEEN :sdate1 AND :sdate2 ORDER BY chkDate ASC', ['sdate1' => $sdate1, 'sdate2'=> $sdate2]);	
 
-		return DB::select('CALL SP_CDVSummary()', ['sdate1' => $sdate1, 'sdate2'=> $sdate2] );
+		return DB::select('CALL SP_CDVSummary(?,?)', array($sdate1, $sdate2));
 	}
 }	

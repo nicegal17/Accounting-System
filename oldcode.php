@@ -1,0 +1,2 @@
+
+        Barryvdh\Debugbar\ServiceProvider::class,
