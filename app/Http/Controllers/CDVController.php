@@ -87,5 +87,12 @@ class CDVController extends BaseController{
 		$data = CheckDisbursements::getCDVInfo($sdate1,$sdate2);
 		return response()->json($data);
 	}
+
+	public function getCDVTotal(Request $request){
+		$sdate1 = $request->query('sdate1');
+		$sdate2 = $request->query('sdate2');
+		$data = CheckDisbursements::getCDVTotal($sdate1,$sdate2);
+		return response()->json($data);
+	}
 }
 ?>

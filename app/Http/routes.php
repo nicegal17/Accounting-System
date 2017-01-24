@@ -146,6 +146,7 @@ Route::group(['prefix' => 'api/v1'],function(){
 		Route::put('/auditCDV/{id}', 'CDVController@auditCDV');
 		Route::put('/cancelCDV/{id}', 'CDVController@cancelCDV');
 		Route::get('/getCDVInfo','CDVController@getCDVInfo');	
+		Route::get('/getCDVTotal','CDVController@getCDVTotal');	
 	});
 	
 	Route::group(['prefix' => 'JV'],function(){
